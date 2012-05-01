@@ -18,9 +18,15 @@ then
   source ~/.localrc
 fi
 
+if [ -f `brew --prefix`/etc/autojump ]; then
+  . `brew --prefix`/etc/autojump
+fi
+
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 compinit
 
 # load every completion after autocomplete loads
 for config_file ($ZSH/**/completion.sh) source $config_file
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
