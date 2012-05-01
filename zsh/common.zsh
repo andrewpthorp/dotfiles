@@ -1,5 +1,5 @@
 export GHI_PAGER=less
-export EDITOR=vim
+export EDITOR="subl -w"
 
 alias cls="clear"
 alias lastfm="shell-fm"
