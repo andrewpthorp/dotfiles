@@ -1,0 +1,30 @@
+" color neon
+" color darkspectrum
+" color two2tango
+color Kellys
+
+hi Normal guifg=#efefef guibg=#202020
+hi NonText guibg=#202020
+" hi LineNr guibg=#202020
+
+"color torte
+highlight NonText guifg=#444444
+highlight SpecialKey guifg=#444444
+
+set guifont=Anonymous\ Pro:h14
+set guioptions-=T 
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬,trail:·
+
+" Enable special characters by default
+set list
+
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <D-t> <Plug>PeepOpen
+end
+
+set showtabline=2
+
+set vb
