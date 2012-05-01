@@ -1,5 +1,5 @@
 export GHI_PAGER=less
-export GIT_SANDBOX=~/Projects/sandbox
+export GIT_SANDBOX=~/Development/Sandbox
 
 hub_path=$(which hub)
 if [[ -f $hub_path ]]
@@ -8,20 +8,6 @@ then
 fi
 
 alias g='git'
-
-# Git flow
-alias gff='git flow feature'
-alias gffs='git flow feature start'
-alias gfff='git flow feature finish'
-alias gfr='git flow release'
-alias gfrs='git flow release start'
-alias gfrf='git flow release finish'
-alias gfh='git flow hotfix'
-alias gfhs='git flow hotfix start'
-alias gfhf='git flow hotfix finish'
-alias gfs='git flow support'
-alias gfss='git flow support start'
-
 alias gst='git status'
 
 # Pairing
