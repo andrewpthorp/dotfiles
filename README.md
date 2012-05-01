@@ -1,3 +1,3 @@
 # My own personal dotfiles #
 
-Forked from @pengwynn's dotfiles.
+Forked Wynn Netherland's dotfiles.
