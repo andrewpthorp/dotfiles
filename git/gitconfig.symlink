@@ -12,7 +12,6 @@
   mergeit = "!f() { CURRENT=`git symbolic-ref HEAD`; CURR_SHORT=${CURRENT#refs/heads/}; UPSTREAM=`git config branch.$CURR_SHORT.merge`; UPSTREAM_SHORT=${UPSTREAM#refs/heads/}; REMOTE=`git config branch.$CURR_SHORT.remote`; git merge $REMOTE/$UPSTREAM_SHORT; }; f"
 [github]
   user = andrewpthorp
-  token = 1bead7213b74de3584b5189e7dfd031b
 [help]
   format = web
 [color]
