@@ -1,4 +1,4 @@
-export EDITOR="subl -w"
+export EDITOR="vim"
 
 alias cls="clear"
 alias lastfm="shell-fm"
