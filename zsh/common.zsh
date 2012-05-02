@@ -1,4 +1,3 @@
-export GHI_PAGER=less
 export EDITOR="subl -w"
 
 alias cls="clear"

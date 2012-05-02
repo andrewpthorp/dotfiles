@@ -1,4 +1,3 @@
-export GHI_PAGER=less
 export GIT_SANDBOX=~/Development/sandbox
 
 hub_path=$(which hub)
