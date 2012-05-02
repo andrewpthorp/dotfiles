@@ -1,6 +1,6 @@
 "let g:solarized_termcolors=16
 "color solarized
-color freya
+"color freya
 
 set autoread
 set expandtab
