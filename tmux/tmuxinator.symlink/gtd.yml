@@ -1,0 +1,7 @@
+# ~/.tmuxinator/gtd.yml
+# you can make as many tabs as you wish...
+
+project_name: Tasks
+project_root: ~/Dropbox/TaskPaper/
+tabs:
+  - tasks: vim
