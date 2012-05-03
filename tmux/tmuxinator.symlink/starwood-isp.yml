@@ -1,0 +1,14 @@
+# ~/.tmuxinator/starwood-isp.yml
+# you can make as many tabs as you wish...
+
+pre: unset TMPDIR
+project_name: Starwood ISP
+project_root: ~/Development/polysonics/starwood-isp
+tabs:
+  - editor:
+    - vim
+  - guard:
+    - bguard
+  - server:
+    - cd www
+    - nserver

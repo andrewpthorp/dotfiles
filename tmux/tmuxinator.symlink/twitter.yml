@@ -3,6 +3,6 @@
 
 project_name: Twitter
 project_root: ~/
-rvm: 1.9.2
+rvm: 1.9.3
 tabs:
   - stream: earthquake
