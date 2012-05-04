@@ -6,3 +6,5 @@ Necessary things to install:
 
 * todo.sh (todotxt.com)
 * grc (brew install grc)
+* tmux (brew install tmux)
+* earthquake (gem install earthquake)
