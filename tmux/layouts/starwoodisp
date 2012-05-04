@@ -12,13 +12,14 @@ function load_session() {
     tmux new-window -n zsh -t $SESSION
     tmux new-window -n guard -t $SESSION
     tmux new-window -n server -t $SESSION
-    
+
     tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
     tmux send-keys -t $SESSION:2 'git pull && bundle install' C-m
     tmux send-keys -t $SESSION:3 'sleep 30 && bundle exec guard' C-m
     tmux send-keys -t $SESSION:4 'cd ~/Development/polysonics/starwood-isp/www && nserver' C-m
 
     tmux select-window -t $SESSION:1
+    tmux split-window -t $SESSION:1 -p 25
   fi
 
   tmux attach -t $SESSION

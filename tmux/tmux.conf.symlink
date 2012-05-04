@@ -46,6 +46,11 @@ bind-key r      source-file ~/.tmux.conf; display-message " Reloaded!"
 bind-key R      refresh-client
 bind-key a      send-key C-a
 
+unbind {
+bind-key {      swap-pane -U
+unbind }
+bind-key }      swap-pane -D
+
 ## messages
 set-option -g message-fg colour2
 set-option -g message-bg colour0
@@ -54,7 +59,7 @@ set-option -g display-time 1500
 
 ## set status bar
 set-option -g status-utf8 on
-set-option -g status-interval 60
+set-option -g status-interval 1
 set-option -g status-fg colour0
 set-option -g status-bg default
 
