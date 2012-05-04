@@ -1,22 +1,36 @@
-## keybindings
+#># keybindings
 unbind C-b
 unbind C-a
+unbind C-t
 unbind ,
 unbind .
 unbind n
-unbind p
-unbind [
-unbind '"'
-unbind l
-unbind &
-unbind "'"
+unbind Right
+unbind Up
+unbind Left
+unbind Down
+unbind =
 
 set-option -g prefix C-a # C-a for prefix just like screen
 
-bind-key C-a    last-window
+# Split window 75/25
+bind-key C-t    split-window -p 25
 bind-key |      split-window -h
 bind-key \      split-window -h
 bind-key -      split-window -v
+
+# Cycle Panes
+# -r: can be repeated without pressing prefix#     again (500ms after last '-r' action or prefix)
+bind-key C-a    select-pane -t :.-
+
+# Resize Panes
+bind-key Up     resize-pane -U 4
+bind-key Down   resize-pane -D 4
+bind-key Left   resize-pane -L 8
+bind-key Right  resize-pane -R 8
+bind-key =      select-layout tiled
+
+# Misc
 bind-key x      kill-pane
 bind-key X      kill-window
 bind-key q      confirm-before kill-session
@@ -28,18 +42,9 @@ bind-key >      swap-window -t :+
 bind-key n      command-prompt 'rename-window %%'
 bind-key N      command-prompt 'rename-session %%'
 bind-key Escape copy-mode -u
-bind-key Up     copy-mode -u
 bind-key r      source-file ~/.tmux.conf; display-message " Reloaded!"
 bind-key R      refresh-client
 bind-key a      send-key C-a
-bind-key C-h    resize-pane -L 5
-bind-key C-l    resize-pane -R 5
-bind-key C-j    resize-pane -D 5
-bind-key C-k    resize-pane -U 5
-# -r: can be repeated without pressing prefix#     again (500ms after last '-r' action or prefix)
-bind-key -r h   select-pane -t :.-
-bind-key -r l   select-pane -t :.+
-
 
 ## messages
 set-option -g message-fg colour2
@@ -66,7 +71,7 @@ set-option -g status-bg default
 
 set-option -g status-left '#[fg=250]'
 #set-option -g status-right '#(whoami)@#H ★ %Y-%m-%d %H:%M'
-set-option -g status-right '#[fg=yellow]#S#[fg=default] ∫ %Y-%m-%d %H:%M'
+set-option -g status-right '#[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(battery Discharging; battery Charging)'
 
 set-option -g status-right-length 100
 set-option -g status-left-length 120
