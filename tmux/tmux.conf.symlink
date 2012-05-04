@@ -71,7 +71,7 @@ set-option -g status-bg default
 
 set-option -g status-left '#[fg=250]'
 #set-option -g status-right '#(whoami)@#H ★ %Y-%m-%d %H:%M'
-set-option -g status-right '#[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(battery Discharging; battery Charging)'
+set-option -g status-right '#[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red] #(wifi-signal-strength) #(battery Discharging; battery Charging)'
 
 set-option -g status-right-length 100
 set-option -g status-left-length 120

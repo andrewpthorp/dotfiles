@@ -118,6 +118,6 @@ fi
 if [ -n "$CUTE_BATTERY_INDICATOR" ]; then
     echo `cutinate $BATTERY_STATUS`
 else
-    echo [ ${CHARGE_INDICATOR} ${BATTERY_STATUS}% ]
+    echo #[fg=white]∫ #[fg=red] ${CHARGE_INDICATOR} ${BATTERY_STATUS}% ]
 fi
 
