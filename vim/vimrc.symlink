@@ -24,6 +24,9 @@ set showmode
 " Yank from cursor to end of line
 nnoremap Y y$
 
+" Space bar to turn off highlighting
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 " Pathogen Initialization
 " =======================
 
