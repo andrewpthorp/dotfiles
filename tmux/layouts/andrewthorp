@@ -19,7 +19,6 @@ function load_session() {
     tmux send-keys -t $SESSION:4 'rails s' C-m
 
     tmux select-window -t $SESSION:1
-    tmux split-window -t $SESSION:1 -p 25
   fi
 
   tmux attach -t $SESSION
