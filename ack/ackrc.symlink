@@ -8,9 +8,9 @@
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
+--pager=less -R
 --sort-files
 --color
 --follow
 --group
 --context=3
---pager=less
