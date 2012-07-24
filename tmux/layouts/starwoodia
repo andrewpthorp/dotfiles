@@ -14,7 +14,7 @@ function load_session() {
     tmux new-window -n logs -t $SESSION
 
     tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
-    tmux send-keys -t $SESSION:2 'git pull && bundle install && ant buildcycle' C-m
+    tmux send-keys -t $SESSION:2 'git pull && bundle install && tomcatstart' C-m
     tmux send-keys -t $SESSION:3 'sleep 15 && bundle exec guard' C-m
     tmux send-keys -t $SESSION:4 'cd ~/Development/java/tomcat/logs && tail -f catalina.out' C-m
     # Setup logger in logs window
