@@ -13,6 +13,7 @@
 * Dropbox (http://www.dropbox.com)
 * Sublime Text 2 (http://www.sublimetext.com/2)
 * Solarized (http://ethanschoonover.com/solarized)
+* 1Password (https://agilebits.com/onepassword)
 
 ## After installing XCode
 
@@ -31,6 +32,11 @@ rake install
 ```shell
 brew install git postgresql gist hub coda-cli redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace
 ```
+
+* Mail Accounts
+* Clone Projects
+* Setup Moom (CMD+SHIFT+L, CMD+SHIFT+R, CMD+SHIFT+&rarr;)
+* Setup Alfred App
 
 ## Extra software:
 
