@@ -19,10 +19,12 @@
 * Setup SSH
 * Clone dotfiles
 
-    git clone git@github.com:andrewpthorp/dotfiles ~/.dotfiles
-    cd ~/.dotfiles
-    git submodule init
-    git submodule update
+```shell
+git clone git@github.com:andrewpthorp/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+git submodule init
+git submodule update
+```
 
 
 ## Extra software:
