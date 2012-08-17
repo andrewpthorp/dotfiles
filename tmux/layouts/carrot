@@ -15,7 +15,7 @@ function load_session() {
 
     tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
     tmux send-keys -t $SESSION:3 'nserver' C-m
-    tmux send-keys -t $SESSION:4 'sass --watch css/sass:css -r ./css/sass/bourbon/lib/bourbon.rb' C-m
+    tmux send-keys -t $SESSION:4 'sass --watch css/sass:css -r ./css/sass/bourbon/lib/bourbon.rb --style expanded' C-m
 
     tmux select-window -t $SESSION:1
   fi
