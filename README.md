@@ -17,3 +17,9 @@ Forked Wynn Netherland's dotfiles.
 # Homebrew Formulae
 
     brew install git postgresql gist hub coda-cli redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace
+
+# To Install
+
+    git submodule init
+    git submodule update
+    rake install
