@@ -13,6 +13,7 @@ Forked Wynn Netherland's dotfiles.
 * AppZapper
 * 1Password
 * Browsers (Chrome, Firefox)
+* MacVim
 
 # Homebrew Formulae
 
