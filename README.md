@@ -6,6 +6,12 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 * https://github.com/holman/dotfiles
 * https://github.com/pengwynn/dotfiles
 
+# Prerequisites
+
+* Xcode
+* Xcode Command Line Tools
+* SSH
+
 # Apps to Remember
 
 * Alfred (http://www.alfredapp.com/)
@@ -24,8 +30,10 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 
     brew install git postgresql gist hub coda-cli redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace
 
-# To Install
+# Installation
 
+    git clone git@github.com:andrewpthorp/dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles
     git submodule init
     git submodule update
     rake install
