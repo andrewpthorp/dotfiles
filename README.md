@@ -1,19 +1,24 @@
 # My own personal dotfiles #
 
-Forked Wynn Netherland's dotfiles.
+Forked Wynn Netherland's dotfiles. Inspiration came from the following:
+
+* http://dotfiles.github.com/
+* https://github.com/holman/dotfiles
+* https://github.com/pengwynn/dotfiles
 
 # Apps to Remember
 
-* Alfred (**NOT** from App Store)
-* Rdio
-* Homebrew
-* HipChat
-* iTerm2
-* Dropbox
-* AppZapper
-* 1Password
-* Browsers (Chrome, Firefox)
-* MacVim
+* Alfred (http://www.alfredapp.com/)
+* Rdio (http://www.rdio.com/)
+* Homebrew (http://mxcl.github.com/homebrew/)
+* HipChat (http://www.hipchat.com/)
+* iTerm2 (http://www.iterm2.com/)
+* Dropbox (http://www.dropbox.com/)
+* AppZapper (http://appzapper.com/)
+* MacVim (http://code.google.com/p/macvim/)
+* Solarized (http://ethanschoonover.com/solarized)
+* Chrome (http://chrome.google.com/)
+* Firefox (http://getfirefox.com/)
 
 # Homebrew Formulae
 
