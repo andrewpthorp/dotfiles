@@ -6,9 +6,6 @@ then
   alias git=$hub_path
 fi
 
-alias g='git'
-alias gst='git status'
-
 # Pairing
 hitch() {
   command hitch "$@"
