@@ -2,7 +2,6 @@ autoload colors && colors
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}[ "
 ZSH_THEME_GIT_PROMPT_SUFFIX=" %{$fg[blue]%}] "
 ZSH_THEME_GIT_PROMPT_DIRTY=": %{$fg[red]%}✗"
