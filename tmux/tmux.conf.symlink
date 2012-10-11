@@ -74,8 +74,9 @@ set-option -g status-bg default
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
 
+#set-option -g status-left '#[fg=200]#H# //'
+#set-option -g status-left '#[fg=white]★'
 set-option -g status-left '#[fg=250]'
-#set-option -g status-right '#(whoami)@#H ★ %Y-%m-%d %H:%M'
 set-option -g status-right '#[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(wifi-signal-strength) #(battery Discharging; battery Charging)'
 
 set-option -g status-right-length 100
@@ -87,8 +88,8 @@ set-option -g window-status-bg default
 set-option -g window-status-attr dim
 
 ## highlight active window
-set-option -g window-status-current-fg colour1
-set-option -g window-status-current-bg colour0
+set-option -g window-status-current-fg colour0
+set-option -g window-status-current-bg colour4
 set-option -g window-status-current-attr bright
 set-option -g window-status-current-format '#[bold][ #I #W ]'
 
