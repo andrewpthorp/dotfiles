@@ -26,3 +26,22 @@ function minutes_since_last_commit {
 function sandbox() {
   cd $GIT_SANDBOX && git clone $1 && cd `last_modified`
 }
+
+# Git Aliases
+
+alias g='git'
+alias gs='git status --branch --short'
+alias ga='git add'
+alias gc='git commit'
+alias gco='git checkout'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbr'git browse'
+alias gd='git diff'
+alias gr='git rebase'
+alias gm='git merge'
+alias gps='git push'
+alias gpl='git pull'
+alias gfp='git fetch --prune'
+alias gpr='git remote prune origin'
+
