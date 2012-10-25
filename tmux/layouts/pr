@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Running some commands to prep the project before launching tmux
-cd ~/Development/work/pc-rewards
+cd ~/Development/work/rewards
 
 # Setup and run function to setup new tmux session
 function load_session() {
-  local SESSION=pc-rewards
+  local SESSION=pure-charity-rewards
 
   if ! tmux has-session -t $SESSION; then
     tmux new-session -s $SESSION -n vim -d
