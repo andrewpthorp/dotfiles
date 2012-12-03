@@ -26,9 +26,13 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 * Chrome (http://chrome.google.com/)
 * Firefox (http://getfirefox.com/)
 
+# Required Gems
+
+    trollop
+
 # Homebrew Formulae
 
-    brew install git postgresql gist hub coda-cli redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace
+    brew install git postgresql gist hub coda-cli redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace mwget
 
 # Installation
 
