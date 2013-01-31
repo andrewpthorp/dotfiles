@@ -29,3 +29,9 @@ compinit
 
 # load every completion after autocomplete loads
 for config_file ($ZSH/**/completion.sh) source $config_file
+
+# add rbenv to path
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# enable shims and autocompletion for rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
