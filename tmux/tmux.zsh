@@ -5,3 +5,6 @@ function mx() {
     tmux new-session -s $1
   fi
 }
+
+# Aliases
+alias tks='tmux kill-server'
