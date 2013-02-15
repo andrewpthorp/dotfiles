@@ -16,3 +16,7 @@
   format = web
 [color]
   ui = auto
+[web]
+	browser = googlechrome
+[browser "googlechrome"]
+	cmd = "open -a /Applications/Google\\ Chrome.app"
