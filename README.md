@@ -29,6 +29,10 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 
     brew install git postgresql gist hub redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build
 
+# Problems
+
+Any problems I encounter will be documented in `PROBLEMS.md` so I can recall them next time.
+
 # Installation
 
     git clone git@github.com:andrewpthorp/dotfiles.git ~/.dotfiles
