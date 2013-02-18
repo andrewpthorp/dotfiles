@@ -27,7 +27,7 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 
 # Homebrew Formulae
 
-    brew install git postgresql gist hub redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace rbenv rbenv-gemset
+    brew install git postgresql gist hub redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build
 
 # Installation
 
