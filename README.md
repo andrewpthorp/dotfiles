@@ -8,8 +8,7 @@ Forked Wynn Netherland's dotfiles. Inspiration came from the following:
 
 # Prerequisites
 
-* Xcode
-* Xcode Command Line Tools
+* osx-gcc-installer (https://github.com/kennethreitz/osx-gcc-installer)
 * SSH
 
 # Apps to Remember
