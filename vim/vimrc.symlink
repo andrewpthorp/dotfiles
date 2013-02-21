@@ -66,7 +66,7 @@ let g:ctrlp_open_new_file = 't'
 let g:ctrlp_open_multi = '1t'
 
 " Use git's knowledge of files
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files -cdmo']
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files -cdo']
 
 " Syntax
 " ======
