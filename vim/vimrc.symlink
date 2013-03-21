@@ -53,6 +53,8 @@ set clipboard=unnamed           " Use system clipboard
 set hidden                      " Buffers can exist in the background
 set splitright                  " Opens vertical split right of current window
 set splitbelow                  " Opens horizontal split below current window
+set colorcolumn=81              " Put a mark at the 81st column for text
+set textwidth=0                 " Hack the textwidth so the colorcolumn won't force us to the next line
 "set shortmess=filnxtToOI       " see :help shortmess
                                 " http://items.sjbach.com/319/configuring-vim-right
 
