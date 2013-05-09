@@ -78,6 +78,7 @@ syntax enable
 set t_Co=256
 colorscheme solarized
 set background=dark
+call togglebg#map("<F5>")
 
 " Mouse
 " ======
