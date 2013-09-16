@@ -67,19 +67,6 @@ set colorcolumn=81              " Put a mark at the 81st column for text
 set textwidth=0                 " Hack the textwidth so the colorcolumn won't force us to the next line
 "set shortmess=filnxtToOI       " see :help shortmess
                                 " http://items.sjbach.com/319/configuring-vim-right
-
-" CtrlP Config
-" ============
-
-let g:ctrlp_custom_ignore = 'sass_cache\|DS_Store\|git'   " CtrlP Ignores
-
-" Use tabs by default
-let g:ctrlp_open_new_file = 't'
-let g:ctrlp_open_multi = '1t'
-
-" Use git's knowledge of files
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files -cdo']
-
 " Syntax
 " ======
 
