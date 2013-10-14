@@ -18,7 +18,7 @@ function load_session() {
     tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
     tmux send-keys -t $SESSION:2 'git pull && bundle install' C-m
     tmux send-keys -t $SESSION:3 'sleep 10 && foreman start' C-m
-    tmux send-keys -t $SESSION:4 'sleep 10 && bundle exec guard' C-m
+    tmux send-keys -t $SESSION:4 'sleep 10 && foreman run bundle exec guard' C-m
     tmux send-keys -t $SESSION:5 'tail -f log/development.log' C-m
     tmux send-keys -t $SESSION:6 'sleep 10 && foreman run bundle exec rails console' C-m
 
