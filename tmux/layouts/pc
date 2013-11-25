@@ -15,7 +15,7 @@ function load_session() {
     tmux new-window -n logs -t $SESSION
     tmux new-window -n cap -t $SESSION
 
-    tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
+    tmux send-keys -t $SESSION:1 'vim && :NERDTreeToggle' C-m
     tmux send-keys -t $SESSION:2 'git pull && bundle install' C-m
     tmux send-keys -t $SESSION:3 'sleep 10 && foreman start' C-m
     #tmux send-keys -t $SESSION:4 'sleep 10 && rake spec' C-m
