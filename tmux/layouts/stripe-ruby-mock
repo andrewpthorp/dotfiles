@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Running some commands to prep the project before launching tmux
+cd ~/Development/personal/gems/stripe-ruby-mock
+
+# Setup and run function to setup new tmux session
+function load_session() {
+  local SESSION=stripe-ruby-mock
+
+  if ! tmux has-session -t $SESSION; then
+    tmux new-session -s $SESSION -n vim -d
+    tmux new-window -n zsh -t $SESSION
+    tmux new-window -n guard -t $SESSION
+
+    tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
+    tmux send-keys -t $SESSION:2 'git pull && bundle install' C-m
+    tmux send-keys -t $SESSION:3 'sleep 10 && bundle exec guard' C-m
+
+    tmux select-window -t $SESSION:1
+  fi
+
+  tmux attach -t $SESSION
+}
+load_session
