@@ -199,6 +199,11 @@ endfunction
 
 map <Leader>p :call Privatize()<CR>
 
+" Airline Config
+" =============
+
+let g:airline_theme='bubblegum'
+
 " Automatically Pretty XML
 " =============
 
