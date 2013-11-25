@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'espn'
+require 'bitly'
+
+Bitly.configure do |config|
+  config.api_version = 3
+  config.login = 'andrewpthorp'
+  config.api_key = ENV['BITLY_API_KEY']
+end
+
+begin
+  client = ESPN::Client.new
+  client.api_key = ENV['ESPN_API_KEY']
+  bitly = Bitly.client
+
+  headline = client.headlines(:nfl, teams: 21).first
+  link = bitly.shorten(headline.links.web.href)
+
+  result = "Updated at #{Time.now.strftime('%l:%M:%S')}"
+
+  if headline.type == 'Recap'
+    result += " - #{headline.linkText}"
+  else
+    result += " - #{headline.title}"
+  end
+
+  result += " - #{link.short_url}"
+  puts result
+
+rescue Exception => e
+  puts e.message
+end
