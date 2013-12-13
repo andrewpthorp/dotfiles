@@ -20,7 +20,8 @@ bind-key \      split-window -h
 bind-key -      split-window -v
 
 # Cycle Panes
-# -r: can be repeated without pressing prefix#     again (500ms after last '-r' action or prefix)
+# -r: can be repeated without pressing prefix
+#     again (500ms after last '-r' action or prefix)
 bind-key C-a    select-pane -t :.-
 
 # Resize Panes
