@@ -9,12 +9,15 @@ Bitly.configure do |config|
   config.api_key = ENV['BITLY_API_KEY']
 end
 
+ESPN.configure do |config|
+  config.api_key = ENV['ESPN_API_KEY']
+end
+
 begin
-  client = ESPN::Client.new
-  client.api_key = ENV['ESPN_API_KEY']
+  espn = ESPN::Client.new
   bitly = Bitly.client
 
-  headline = client.headlines(:nfl, teams: 21).first
+  headline = espn.headlines(:nfl, teams: 21).first
   link = bitly.shorten(headline.links.web.href)
 
   result = "Updated at #{Time.now.strftime('%l:%M:%S')}"
