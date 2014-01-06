@@ -14,6 +14,7 @@ export DOTFILES=$HOME/.dotfiles
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Development/
 export JAVA_HOME=/Library/Java/Home
+export Q_TASKS_DIR=~/Dropbox/Personal/
 
 # source every .zsh file in this rep
 for config_file ($ZSH/**/*.zsh) source $config_file
