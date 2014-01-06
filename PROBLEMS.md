@@ -1,7 +1,1 @@
-# Problems and Solutions encountered during last install:
-
-**Problem:**
-
-**NONE**
-
-**Solution:**
+No problems during last install.
