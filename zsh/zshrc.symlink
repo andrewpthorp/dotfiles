@@ -5,6 +5,8 @@ export PATH="$PATH:$HOME/stripe/henson/bin"
 export PATH="$PATH:$HOME/Development/go/bin"
 export GOPATH="$HOME/Development/go"
 
+alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
+
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # shortcut to this dotfiles path is $ZSH
@@ -13,7 +15,7 @@ export DOTFILES=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Development/
-export JAVA_HOME=/Library/Java/Home
+# export JAVA_HOME=/Library/Java/Home
 export Q_TASKS_DIR=~/Dropbox/Personal/
 
 # source every .zsh file in this rep
