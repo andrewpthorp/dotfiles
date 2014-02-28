@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Running some commands to prep the project before launching tmux
+cd ~/Development/go/src/github.com/andrewpthorp/q-web
+
+# Setup and run function to setup new tmux session
+function load_session() {
+  local SESSION=q-web
+
+  if ! tmux has-session -t $SESSION; then
+    tmux new-session -s $SESSION -n vim -d
+    tmux new-window -n shell -t $SESSION
+    tmux new-window -n gulp -t $SESSION
+    tmux new-window -n serve -t $SESSION
+    tmux new-window -n psql -t $SESSION
+
+    tmux send-keys -t $SESSION:1 'vim' C-m ':NERDTreeToggle' C-m
+    tmux send-keys -t $SESSION:2 'git pull && bundle install' C-m
+    tmux send-keys -t $SESSION:3 'gulp' C-m
+    tmux send-keys -t $SESSION:4 'script/serve' C-m
+    tmux send-keys -t $SESSION:5 'psql q' C-m
+
+    tmux select-window -t $SESSION:1
+  fi
+
+  tmux attach -t $SESSION
+}
+load_session
