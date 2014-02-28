@@ -18,3 +18,7 @@
 	browser = googlechrome
 [browser "googlechrome"]
 	cmd = "open -a /Applications/Google\\ Chrome.app"
+[push]
+  default = upstream
+[pull]
+  rebase = true
