@@ -47,3 +47,6 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
+bindkey '^p'  history-beginning-search-backward
+bindkey '^n'  history-beginning-search-forward
