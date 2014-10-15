@@ -78,7 +78,7 @@ set-option -g status-bg default
 #set-option -g status-left '#[fg=200]#H# //'
 #set-option -g status-left '#[fg=white]★'
 set-option -g status-left '#[fg=250]'
-set-option -g status-right '#[fg=white] #(q count) tasks ∫ #[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(wifi-signal-strength) #(battery Discharging; battery Charging)'
+set-option -g status-right '#[fg=white] Do not let your hearts be troubled and do not be afraid. John 14:27 ∫ #[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(wifi-signal-strength) #(battery Discharging; battery Charging)'
 
 set-option -g status-right-length 200
 set-option -g status-left-length 120
