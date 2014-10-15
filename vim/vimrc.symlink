@@ -104,6 +104,7 @@ au BufRead,BufNewFile *.jeco setf html
 au BufRead,BufNewFile *.jss set filetype=css
 au BufRead,BufNewFile *.hbs set filetype=mustache
 au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.jade set filetype=jade
 
 " Search Settings
 " ===============
