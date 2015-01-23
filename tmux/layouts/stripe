@@ -10,14 +10,14 @@ function load_session() {
   if ! tmux has-session -t $SESSION; then
     tmux new-session -s $SESSION -n vim -d
     tmux new-window -n shell -t $SESSION
-    tmux new-window -n rsync -t $SESSION
+    tmux new-window -n vagrant-shell -t $SESSION
     tmux new-window -n server -t $SESSION
     tmux new-window -n tests -t $SESSION
 
     tmux send-keys -t $SESSION:1 'vim' C-m
-    tmux send-keys -t $SESSION:3 'scripts/bin/devbox.rb --skip-servs mine' C-m
-    tmux send-keys -t $SESSION:4 'ssh qa-dev32' C-m
-    tmux send-keys -t $SESSION:5 'ssh qa-dev32' C-m
+    tmux send-keys -t $SESSION:3 'vagrant ssh' C-m
+    tmux send-keys -t $SESSION:4 'vagrant ssh' C-m
+    tmux send-keys -t $SESSION:5 'vagrant ssh' C-m
 
     tmux select-window -t $SESSION:1
   fi
