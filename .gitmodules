@@ -88,3 +88,6 @@
 [submodule "vim/vim.symlink/bundle/syntastic"]
 	path = vim/vim.symlink/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/vim.symlink/bundle/ag"]
+	path = vim/vim.symlink/bundle/ag
+	url = https://github.com/rking/ag.vim
