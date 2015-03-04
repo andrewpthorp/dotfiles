@@ -8,17 +8,13 @@ Inspiration came from the following:
 
 # Apps to Remember
 
-* Alfred (http://www.alfredapp.com/)
-* Rdio (http://www.rdio.com/)
-* Homebrew (http://mxcl.github.com/homebrew/)
-* HipChat (http://www.hipchat.com/)
 * iTerm2 (http://www.iterm2.com/)
 * MacVim (http://code.google.com/p/macvim/)
 * Solarized (http://ethanschoonover.com/solarized)
 
 # Homebrew Formulae
 
-    brew install git postgresql gist hub redis imagemagick sphinx sqlite node mysql autojump grc todo-txt tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build
+    brew install git postgresql gist redis hub sqlite node mysql autojump grc tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build
 
 # Problems
 
