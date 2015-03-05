@@ -43,7 +43,7 @@ bind-key >      swap-window -t :+
 bind-key n      command-prompt 'rename-window %%'
 bind-key N      command-prompt 'rename-session %%'
 bind-key Escape copy-mode -u
-bind-key r      source-file ~/.tmux.conf; display-message " Reloaded!"
+bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded!"
 bind-key R      refresh-client
 bind-key a      send-key C-a
 
@@ -92,7 +92,7 @@ set-option -g window-status-attr dim
 set-option -g window-status-current-fg colour0
 set-option -g window-status-current-bg colour4
 set-option -g window-status-current-attr bright
-set-option -g window-status-current-format '#[bold][ #I #W ]'
+set-option -g window-status-current-format '#[bold] #I #W '
 
 ## set window notifications
 set-option -g visual-activity on
