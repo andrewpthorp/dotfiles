@@ -19,7 +19,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Toggle paste
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
-set showmode
 
 " Yank from cursor to end of line
 nnoremap Y y$
@@ -28,10 +27,10 @@ nnoremap Y y$
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " redraw!
-nnoremap <leader>rr :redraw!<cr>
+nnoremap <leader>rr :redraw!<CR>
 
 " reload .vimrc
-nnoremap <leader>r :source ~/.vimrc<cr>:echo 'Reloaded ~/.vimrc'<cr>
+nnoremap <leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 
 " custom grep
 command! -nargs=+ CustomGrep :execute "silent grep! -r <args>" | copen | redraw!
