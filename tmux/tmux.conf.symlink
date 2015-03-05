@@ -59,10 +59,9 @@ set-option -g message-attr bright
 set-option -g display-time 1500
 
 ## set status bar
+set-option -g status on
 set-option -g status-utf8 on
-set-option -g status-interval 5
-set-option -g status-fg colour0
-set-option -g status-bg default
+set-option -g status-interval 60
 
 # "I' == current window index
 # 'H' == Hostname
@@ -75,10 +74,9 @@ set-option -g status-bg default
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
 
-#set-option -g status-left '#[fg=200]#H# //'
-#set-option -g status-left '#[fg=white]★'
-set-option -g status-left '#[fg=250]'
-set-option -g status-right '#[fg=white] Do not let your hearts be troubled and do not be afraid. John 14:27 ∫ #[fg=yellow]#S#[fg=white] ∫ #[fg=red]%Y-%m-%d %H:%M #[fg=white]∫ #[fg=red]#(wifi-signal-strength) #(battery Discharging; battery Charging)'
+# Set status
+set-option -g status-left '#[fg=colour12]#H #[fg=white]♆ '
+set-option -g status-right '#[fg=colour12] Do not let your hearts be troubled and do not be afraid. John 14:27 #[fg=white]♆ #[fg=colour75]#S#[fg=white] ♆ #[fg=colour9]%Y-%m-%d %H:%M #[fg=white]♆ #[fg=colour9]#(wifi-signal-strength) #(battery Discharging; battery Charging)'
 
 set-option -g status-right-length 200
 set-option -g status-left-length 120
@@ -107,7 +105,7 @@ set-option -g automatic-rename off
 
 ## tmux window titling for X
 set-option -g set-titles on
-set-option -g set-titles-string '[#I] #W'
+set-option -g set-titles-string 'tmux #W'
 set-option -g automatic-rename on
 set-option -g window-status-format ' #I #W '
 set-option -g window-status-attr bold
