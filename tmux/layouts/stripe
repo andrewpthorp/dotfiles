@@ -14,10 +14,8 @@ function load_session() {
     tmux new-window -n server -t $SESSION
     tmux new-window -n tests -t $SESSION
 
-    tmux send-keys -t $SESSION:1 'vim' C-m
-    tmux send-keys -t $SESSION:3 'vagrant ssh' C-m
-    tmux send-keys -t $SESSION:4 'vagrant ssh' C-m
-    tmux send-keys -t $SESSION:5 'vagrant ssh' C-m
+    tmux send-keys -t $SESSION:1 '$EDITOR' C-m
+    tmux send-keys -t $SESSION:3 'vagrant up' C-m
 
     tmux select-window -t $SESSION:1
   fi
