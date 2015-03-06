@@ -1,3 +1,4 @@
 *_private.zsh
 *_creds.zsh
 .netrwhist
+vim/vim.symlink/bundle/**
