@@ -36,14 +36,43 @@ nnoremap <leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 command! -nargs=+ CustomGrep :execute "silent grep! -r <args>" | copen | redraw!
 nnoremap <leader>g :CustomGrep
 
-" Pathogen Initialization
-" =======================
+" Vundle Config
+" =============
 
-" This loads all the plugins in ~/.vim/bundle
-" Use tpope's pathogen plugin to manage all other plugins
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Additional Plugins
+Plugin 'vim-scripts/L9'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'mattn/gist-vim'
+Plugin 'tpope/vim-surround'
+Plugin 'mattn/webapi-vim'
+Plugin 'gregsexton/gitv'
+Plugin 'tpope/vim-commentary'
+Plugin 'vim-scripts/php.vim'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'bling/vim-airline'
+Plugin 'slim-template/vim-slim'
+Plugin 'fatih/vim-go'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'rking/ag.vim'
+
+call vundle#end()
 
 " General Config
 " ==============
@@ -140,8 +169,7 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
 set nowrap                            " Don't wrap lines
