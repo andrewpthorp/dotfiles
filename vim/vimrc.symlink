@@ -70,7 +70,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 
