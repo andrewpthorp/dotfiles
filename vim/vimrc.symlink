@@ -71,6 +71,9 @@ Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
 
 call vundle#end()
 
@@ -214,8 +217,17 @@ set sidescroll=1
 
 "let g:airline_theme='molokai'
 let g:airline_theme='murmur'
-let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1     " airline tabline (buffers)
+"let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+"let g:airline_symbols.branch = '⎇ '
+
+let g:airline#extensions#branch#format = 'CustomBranch'
+function! CustomBranch(name)
+  return '[' . a:name .']'
+endfunction
 
 " Automatically Pretty XML
 " =============
