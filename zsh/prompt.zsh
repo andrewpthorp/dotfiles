@@ -167,7 +167,7 @@ function notes_prompt() {
 export PROMPT='%{$fg[blue]%}%c \
 $(git_prompt_info)\
 $(git_time_since_commit)%{$reset_color%} \
-%{$fg[white]%}%(!.#.∫)%{$reset_color%} '
+%{$fg[white]%}%(!.#.♆)%{$reset_color%}  '
 
 set_prompt () {
   #export RPROMPT="$(notes_prompt TODO) %{$fg_bold[yellow]%}$(notes_prompt HACK)%{$reset_color%} %{$fg_bold[red]%}$(notes_prompt FIXME)%{$reset_color%} %{$fg_bold[white]%}$(todo_prompt +next)%{$reset_color%}"
