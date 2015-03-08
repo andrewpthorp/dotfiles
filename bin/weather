@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'forecast_io'
+rescue LoadError
+  system("gem install forecast_io")
+  Gem.clear_paths
+end
+
+ForecastIO.api_key = ENV['FORECAST_IO_API_KEY']
+currently = ForecastIO.forecast(36.0893, -87.0026).currently
+puts "#{currently.summary} - #{currently.temperature.to_i}°"
