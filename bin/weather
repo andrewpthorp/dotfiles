@@ -7,6 +7,19 @@ rescue LoadError
   Gem.clear_paths
 end
 
-ForecastIO.api_key = ENV['FORECAST_IO_API_KEY']
-currently = ForecastIO.forecast(36.0893, -87.0026).currently
+key = ENV['FORECAST_API_KEY']
+if key == '' || key.nil?
+  puts 'You need to set the environment variable FORECAST_API_KEY.'
+  exit(1)
+end
+
+ForecastIO.api_key = key
+
+begin
+  currently = ForecastIO.forecast(36.0893, -87.0026).currently
+rescue Exception => e
+  puts e.message
+  exit(1)
+end
+
 puts "#{currently.summary} - #{currently.temperature.to_i}°"
