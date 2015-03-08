@@ -48,7 +48,7 @@ nnoremap Y y$
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " reload .vimrc
-map <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
+nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 
 " Vundle Config
 " =============
