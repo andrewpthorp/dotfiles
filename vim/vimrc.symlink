@@ -74,6 +74,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
+Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
 
