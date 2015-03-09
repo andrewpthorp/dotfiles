@@ -1,4 +1,4 @@
-" Vim
+" Vim ----- {{{
 " ===
 
 " source ~/.vimrc.before if it exists
@@ -9,10 +9,10 @@ endif
 " use Vim settings, rather then Vi settings (much better!)
 " this must be first, because it changes other options as a side effect
 set nocompatible
+" }}}
 
-" General Config
+" General Config ----- {{{
 " ==============
-
 let mapleader=','
 set encoding=utf-8
 set number                      " Line numbers are good
@@ -35,12 +35,10 @@ set textwidth=0                 " Hack the textwidth so the colorcolumn won't fo
 augroup personal
   autocmd!
 
-  " automatically reload vimrc when it's saved
   autocmd! BufWritePost vimrc.symlink :source ~/.vimrc
-
-  " strip whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
-
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim setlocal foldenable
 augroup END
 
 " toggle paste
@@ -55,10 +53,10 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " reload .vimrc
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
+" }}}
 
-" Vundle Config
+" Vundle Config ----- {{{
 " =============
-
 " required for Vundle
 filetype off
 
@@ -99,20 +97,20 @@ Plugin 'godlygeek/tabular'
 Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
+" }}}
 
-" Syntax
+" Syntax ----- {{{
 " ======
-
 syntax on
 syntax enable
 set t_Co=256
 colorscheme solarized
 set background=dark
 call togglebg#map("<F5>")
+" }}}
 
-" Mouse
+" Mouse ----- {{{
 " ======
-
 " send more characters for redraws
 set ttyfast
 
@@ -122,10 +120,10 @@ set mouse=a
 " set this to the name of your terminal that supports mouse codes.
 " must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 set ttymouse=xterm2
+" }}}
 
-" Filetype overrides
+" Filetype overrides ----- {{{
 " ==================
-
 autocmd! BufRead,BufNewFile *.jbuilder,Gemfile,Rakefile,Procfile,Guardfile setf ruby
 au BufRead,BufNewFile /^[A-Z]+\w*file$/ setf ruby
 au BufRead,BufNewFile *.thor set filetype=ruby
@@ -138,34 +136,34 @@ au BufRead,BufNewFile *.jss set filetype=css
 au BufRead,BufNewFile *.hbs set filetype=mustache
 au BufRead,BufNewFile *.go set filetype=go
 au BufRead,BufNewFile *.jade set filetype=jade
+" }}}
 
-" Search Settings
+" Search Settings ----- {{{
 " ===============
-
 set incsearch        " Find the next match as we type the search
 set hlsearch         " Hilight searches by default
 set viminfo='100,f1  " Save up to 100 marks, enable capital marks
+" }}}
 
-" Turn Off Swap Files
+" Turn Off Swap Files ----- {{{
 " ===================
-
 set noswapfile
 set nobackup
 set nowritebackup
+" }}}
 
-" Persistent Undo
+" Persistent Undo ----- {{{
 " ===============
-
 " keep undo history across sessions, by storing in file
 " only works in MacVim (gui) mode
 if has('gui_running')
   set undodir=~/.vim/backups
   set undofile
 endif
+" }}}
 
-" Indentation and Display
+" Indentation and Display ----- {{{
 " =======================
-
 set autoindent
 set smartindent
 set smarttab
@@ -179,44 +177,43 @@ filetype plugin indent on
 set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
 set nowrap                            " Don't wrap lines
 set linebreak                         " Wrap lines at convenient points
+" }}}
 
-" Folds
+" Folds ----- {{{
 " =====
-
 set foldmethod=indent   " Fold based on indent
 set foldnestmax=3       " Deepest fold is 3 levels
 set nofoldenable        " Don't fold by default
+" }}}
 
-" Completion
+" Completion ----- {{{
 " ==========
-
 set wildmode=list:longest
 set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
 set wildignore+=*vim/backups*
+" }}}
 
-" Scrolling
+" Scrolling ----- {{{
 " =========
-
 " start scrolling when we're getting close to margins
 set scrolloff=10
 set sidescrolloff=15
 set sidescroll=1
+" }}}
 
-" Status Line
+" Status Line ----- {{{
 " ===========
-
 "set statusline=                                 " Override default
 "set statusline+=%{fugitive#statusline()[4:-2]}  " Show fugitive git info
 "set statusline+=\ %f\ %m\ %r                    " Show filename/path
 "set statusline+=%=                              " Set right-side status info after this line
 "set statusline+=%l/%L:%v                        " Set <line number>/<total lines>:<column>
 "set statusline+=\                               " Set ending space
+" }}}
 
-
-" Airline Config
-" =============
-
+" Airline Config ----- {{{
+" ==============
 "let g:airline_theme='molokai'
 let g:airline_theme='murmur'
 "let g:airline_powerline_fonts = 1
@@ -230,10 +227,10 @@ let g:airline#extensions#branch#format = 'CustomBranch'
 function! CustomBranch(name)
   return '[' . a:name .']'
 endfunction
+" }}}
 
-" Automatically Pretty XML
-" =============
-
+" Pretty XML ----- {{{
+" ==========
 function! DoPrettyXML()
   " save the filetype so we can restore it later
   let l:origft = &ft
@@ -263,3 +260,4 @@ function! DoPrettyXML()
 endfunction
 
 command! PrettyXML call DoPrettyXML()
+" }}}
