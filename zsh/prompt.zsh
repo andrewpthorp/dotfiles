@@ -2,10 +2,10 @@ autoload colors && colors
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}[ "
-ZSH_THEME_GIT_PROMPT_SUFFIX=" %{$fg[blue]%}] "
-ZSH_THEME_GIT_PROMPT_DIRTY=": %{$fg[red]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN=": %{$fg[cyan]%}✔"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}) "
+ZSH_THEME_GIT_PROMPT_DIRTY=": %{$fg[red]%}dirty"
+ZSH_THEME_GIT_PROMPT_CLEAN=": %{$fg[green]%}clean"
 
 # Colors vary depending on time lapsed.
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[cyan]%}"
