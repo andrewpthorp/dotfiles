@@ -77,7 +77,7 @@ set-option -g status-bg default
 # number to specify the maximum length, in this line "#10W'.
 
 # Set status
-set-option -g status-left ' #[fg=white]♆ '
+set-option -g status-left ' #[fg=white]⚒'
 set-option -g status-right '#[fg=colour12] Do not let your hearts be troubled... John 14:27  #[fg=white]♆  #[fg=colour12]#(weather)  #[fg=white]♆  #[fg=colour75]#S#[fg=white]  ♆  #[fg=colour9]%Y-%m-%d %H:%M  #[fg=white]♆  #(battery -o tmux)'
 
 set-option -g status-right-length 200
