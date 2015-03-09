@@ -1,8 +1,13 @@
 " Vim
 " ===
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" source ~/.vimrc.before if it exists
+if filereadable(expand('~/.vimrc.before'))
+  source ~/.vimrc.before
+endif
+
+" use Vim settings, rather then Vi settings (much better!)
+" this must be first, because it changes other options as a side effect
 set nocompatible
 
 " General Config
@@ -26,25 +31,26 @@ set colorcolumn=81              " Put a mark at the 81st column for text
 set textwidth=0                 " Hack the textwidth so the colorcolumn won't force us to the next line
 "set shortmess=filnxtToOI       " see :help shortmess
 
-" Automatically reload vimrc when it's saved
-autocmd! BufWritePost vimrc.symlink so ~/.vimrc
+" wrap autocmd in a group to prevent duplicates
+augroup personal
+  autocmd!
 
-" Source ~/.vimrc.before if it exists
-if filereadable(expand('~/.vimrc.before'))
-  source ~/.vimrc.before
-endif
+  " automatically reload vimrc when it's saved
+  autocmd! BufWritePost vimrc.symlink :source ~/.vimrc
 
-" Strip whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+  " strip whitespace on save
+  autocmd BufWritePre * :%s/\s\+$//e
 
-" Toggle paste
+augroup END
+
+" toggle paste
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 
-" Yank from cursor to end of line
+" yank from cursor to end of line
 nnoremap Y y$
 
-" Space bar to turn off highlighting
+" space bar to turn off highlighting
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " reload .vimrc
@@ -53,7 +59,9 @@ nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 " Vundle Config
 " =============
 
+" required for Vundle
 filetype off
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -61,7 +69,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Additional Plugins
+" additional plugins
 Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/ZoomWin'
@@ -105,14 +113,14 @@ call togglebg#map("<F5>")
 " Mouse
 " ======
 
-" Send more characters for redraws
+" send more characters for redraws
 set ttyfast
 
-" Enable mouse use in all modes
+" enable mouse use in all modes
 set mouse=a
 
-" Set this to the name of your terminal that supports mouse codes.
-" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+" set this to the name of your terminal that supports mouse codes.
+" must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 set ttymouse=xterm2
 
 " Filetype overrides
@@ -148,8 +156,8 @@ set nowritebackup
 " Persistent Undo
 " ===============
 
-" Keep undo history across sessions, by storing in file
-" Only works in MacVim (gui) mode
+" keep undo history across sessions, by storing in file
+" only works in MacVim (gui) mode
 if has('gui_running')
   set undodir=~/.vim/backups
   set undofile
@@ -190,7 +198,7 @@ set wildignore+=*vim/backups*
 " Scrolling
 " =========
 
-" Start scrolling when we're getting close to margins
+" start scrolling when we're getting close to margins
 set scrolloff=10
 set sidescrolloff=15
 set sidescroll=1
@@ -235,7 +243,7 @@ function! DoPrettyXML()
   " without creating invalid xml.
   1s/<?xml .*?>//e
   " insert fake tags around the entire document.
-  " This will permit us to pretty-format excerpts of
+  " this will permit us to pretty-format excerpts of
   " XML that may contain multiple top-level elements.
   0put ='<PrettyXML>'
   $put ='</PrettyXML>'
