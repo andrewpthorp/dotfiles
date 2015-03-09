@@ -28,56 +28,6 @@ parse_git_dirty() {
   fi
 }
 
-# Checks if there are commits ahead from remote
-function git_prompt_ahead() {
-  if $(echo "$(git log origin/$(current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-    echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
-  fi
-}
-
-# Formats prompt string for current git commit short SHA
-function git_prompt_short_sha() {
-  SHA=$(git rev-parse --short HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
-}
-
-# Formats prompt string for current git commit long SHA
-function git_prompt_long_sha() {
-  SHA=$(git rev-parse HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
-}
-
-# Get the status of the working tree
-git_prompt_status() {
-  INDEX=$(git status --porcelain 2> /dev/null)
-  STATUS=""
-  if $(echo "$INDEX" | grep '^?? ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^A  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
-  fi
-  echo $STATUS
-}
-
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
 function git_time_since_commit() {
@@ -124,53 +74,12 @@ function git_time_since_commit() {
   fi
 }
 
-# This keeps the number of todos always available the right hand side of my
-# command line. I filter it to only count those tagged as "+next", so it's more
-# of a motivation to clear out the list.
-todo_count(){
-  if $(which todo &> /dev/null)
-  then
-    num=$(echo $(todo ls $1 | wc -l))
-    let todos=num-2
-    echo "$todos"
-  fi
-}
-
-function todo_prompt() {
-  local COUNT=$(todo_count $1);
-  if [ $COUNT != 0 ]; then
-    echo "$1: $COUNT";
-  else
-    echo "";
-  fi
-}
-
-function notes_count() {
-  if [[ -z $1 ]]; then
-    local NOTES_PATTERN="TODO|FIXME|HACK";
-  else
-    local NOTES_PATTERN=$1;
-  fi
-  grep -ERn "\b($NOTES_PATTERN)\b" {app,config,lib,spec,test,www} 2>/dev/null | wc -l | sed 's/ //g'
-}
-
-function notes_prompt() {
-  local COUNT=$(notes_count $1);
-  if [ $COUNT != 0 ]; then
-    echo "$1: $COUNT";
-  else
-    echo "";
-  fi
-}
-
-
 export PROMPT='%{$fg[blue]%}%c \
 $(git_prompt_info)\
 $(git_time_since_commit)%{$reset_color%} \
 %{$fg_bold[green]%}%(!.#.∴)%{$reset_color%} '
 
 set_prompt () {
-  #export RPROMPT="$(notes_prompt TODO) %{$fg_bold[yellow]%}$(notes_prompt HACK)%{$reset_color%} %{$fg_bold[red]%}$(notes_prompt FIXME)%{$reset_color%} %{$fg_bold[white]%}$(todo_prompt +next)%{$reset_color%}"
   export RPROMPT=""
 }
 
