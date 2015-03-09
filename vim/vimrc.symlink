@@ -1,5 +1,10 @@
-" Vim ----- {{{
-" ===
+" Vim Config
+" ==========
+
+" Just because I will definitely forget this:
+" za toggles a fold
+" zm closes all folds
+" zr opens all folds
 
 " source ~/.vimrc.before if it exists
 if filereadable(expand('~/.vimrc.before'))
@@ -9,10 +14,10 @@ endif
 " use Vim settings, rather then Vi settings (much better!)
 " this must be first, because it changes other options as a side effect
 set nocompatible
-" }}}
 
-" General Config ----- {{{
-" ==============
+" General Config {{{
+" ==================
+
 let mapleader=','
 set encoding=utf-8
 set number                      " Line numbers are good
@@ -31,6 +36,29 @@ set colorcolumn=81              " Put a mark at the 81st column for text
 set textwidth=0                 " Hack the textwidth so the colorcolumn won't force us to the next line
 "set shortmess=filnxtToOI       " see :help shortmess
 
+" turn off swap files
+set noswapfile
+set nobackup
+set nowritebackup
+
+" start scrolling when we're getting close to margins
+set scrolloff=10
+set sidescrolloff=15
+set sidescroll=1
+
+" custom mappings
+nnoremap <F6> :set invpaste paste?<CR>
+set pastetoggle=<F6>
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
+
+" keep undo history across sessions, by storing in file
+" only works in MacVim (gui) mode
+if has('gui_running')
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
 " wrap autocmd in a group to prevent duplicates
 augroup personal
   autocmd!
@@ -40,24 +68,11 @@ augroup personal
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldenable
 augroup END
-
-" toggle paste
-nnoremap <F6> :set invpaste paste?<CR>
-set pastetoggle=<F6>
-
-" yank from cursor to end of line
-nnoremap Y y$
-
-" space bar to turn off highlighting
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" reload .vimrc
-nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 " }}}
 
-" Vundle Config ----- {{{
-" =============
-" required for Vundle
+" Vundle {{{
+" ==========
+
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -99,121 +114,9 @@ Plugin 'Lokaltog/vim-easymotion'
 call vundle#end()
 " }}}
 
-" Syntax ----- {{{
-" ======
-syntax on
-syntax enable
-set t_Co=256
-colorscheme solarized
-set background=dark
-call togglebg#map("<F5>")
-" }}}
-
-" Mouse ----- {{{
-" ======
-" send more characters for redraws
-set ttyfast
-
-" enable mouse use in all modes
-set mouse=a
-
-" set this to the name of your terminal that supports mouse codes.
-" must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-set ttymouse=xterm2
-" }}}
-
-" Filetype overrides ----- {{{
-" ==================
-autocmd! BufRead,BufNewFile *.jbuilder,Gemfile,Rakefile,Procfile,Guardfile setf ruby
-au BufRead,BufNewFile /^[A-Z]+\w*file$/ setf ruby
-au BufRead,BufNewFile *.thor set filetype=ruby
-au BufRead,BufNewFile Guardfile set filetype=ruby
-au BufRead,BufNewFile */nginx/*.conf set filetype=nginx
-au BufRead,BufNewFile *.zsh-theme set ft=zsh
-au BufRead,BufNewFile *.jbuilder setf ruby
-au BufRead,BufNewFile *.jeco setf html
-au BufRead,BufNewFile *.jss set filetype=css
-au BufRead,BufNewFile *.hbs set filetype=mustache
-au BufRead,BufNewFile *.go set filetype=go
-au BufRead,BufNewFile *.jade set filetype=jade
-" }}}
-
-" Search Settings ----- {{{
-" ===============
-set incsearch        " Find the next match as we type the search
-set hlsearch         " Hilight searches by default
-set viminfo='100,f1  " Save up to 100 marks, enable capital marks
-" }}}
-
-" Turn Off Swap Files ----- {{{
-" ===================
-set noswapfile
-set nobackup
-set nowritebackup
-" }}}
-
-" Persistent Undo ----- {{{
-" ===============
-" keep undo history across sessions, by storing in file
-" only works in MacVim (gui) mode
-if has('gui_running')
-  set undodir=~/.vim/backups
-  set undofile
-endif
-" }}}
-
-" Indentation and Display ----- {{{
-" =======================
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-
-filetype plugin indent on
-
-set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
-set nowrap                            " Don't wrap lines
-set linebreak                         " Wrap lines at convenient points
-" }}}
-
-" Folds ----- {{{
-" =====
-set foldmethod=indent   " Fold based on indent
-set foldnestmax=3       " Deepest fold is 3 levels
-set nofoldenable        " Don't fold by default
-" }}}
-
-" Completion ----- {{{
-" ==========
-set wildmode=list:longest
-set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-" }}}
-
-" Scrolling ----- {{{
-" =========
-" start scrolling when we're getting close to margins
-set scrolloff=10
-set sidescrolloff=15
-set sidescroll=1
-" }}}
-
-" Status Line ----- {{{
+" Airline {{{
 " ===========
-"set statusline=                                 " Override default
-"set statusline+=%{fugitive#statusline()[4:-2]}  " Show fugitive git info
-"set statusline+=\ %f\ %m\ %r                    " Show filename/path
-"set statusline+=%=                              " Set right-side status info after this line
-"set statusline+=%l/%L:%v                        " Set <line number>/<total lines>:<column>
-"set statusline+=\                               " Set ending space
-" }}}
 
-" Airline Config ----- {{{
-" ==============
 "let g:airline_theme='molokai'
 let g:airline_theme='murmur'
 "let g:airline_powerline_fonts = 1
@@ -229,8 +132,75 @@ function! CustomBranch(name)
 endfunction
 " }}}
 
-" Pretty XML ----- {{{
-" ==========
+" Display (Syntax, Indentation, Filetypes, etc) {{{
+" =================================================
+
+syntax on
+syntax enable
+set t_Co=256
+colorscheme solarized
+set background=dark
+call togglebg#map("<F5>")
+
+set incsearch        " Find the next match as we type the search
+set hlsearch         " Hilight searches by default
+set viminfo='100,f1  " Save up to 100 marks, enable capital marks
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+
+filetype plugin indent on
+
+set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
+set nowrap                            " Don't wrap lines
+set linebreak                         " Wrap lines at convenient points
+
+" filetype overrides
+autocmd! BufRead,BufNewFile *.jbuilder,Gemfile,Rakefile,Procfile,Guardfile setf ruby
+au BufRead,BufNewFile /^[A-Z]+\w*file$/ setf ruby
+au BufRead,BufNewFile *.thor set filetype=ruby
+au BufRead,BufNewFile Guardfile set filetype=ruby
+au BufRead,BufNewFile */nginx/*.conf set filetype=nginx
+au BufRead,BufNewFile *.zsh-theme set ft=zsh
+au BufRead,BufNewFile *.jbuilder setf ruby
+au BufRead,BufNewFile *.jeco setf html
+au BufRead,BufNewFile *.jss set filetype=css
+au BufRead,BufNewFile *.hbs set filetype=mustache
+au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.jade set filetype=jade
+" }}}
+
+" Mouse {{{
+" =========
+
+" send more characters for redraws
+set ttyfast
+
+" enable mouse use in all modes
+set mouse=a
+
+" set this to the name of your terminal that supports mouse codes.
+" must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+set ttymouse=xterm2
+" }}}
+
+" Completion {{{
+" ==============
+
+set wildmode=list:longest
+set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+" }}}
+
+" Custom Functions {{{
+" ====================
+
 function! DoPrettyXML()
   " save the filetype so we can restore it later
   let l:origft = &ft
