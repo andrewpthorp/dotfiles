@@ -52,6 +52,13 @@ set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 
+" force my brain to stop using arrows and esc
+map <Left> <nop>
+map <Right> <nop>
+map <Up> <nop>
+map <Down> <nop>
+imap <esc> <nop>
+
 " keep undo history across sessions, by storing in file
 " only works in MacVim (gui) mode
 if has('gui_running')
