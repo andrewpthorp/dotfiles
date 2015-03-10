@@ -14,7 +14,7 @@ Inspiration came from the following:
 
 # Homebrew Formulae
 
-    brew install git postgresql gist redis hub sqlite node mysql autojump grc tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build gawk
+    brew install git postgresql gist redis hub sqlite node mysql autojump grc tmux reattach-to-user-namespace rbenv rbenv-gemset ruby-build gawk ctags
 
 # Problems
 
