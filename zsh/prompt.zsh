@@ -74,7 +74,8 @@ function git_time_since_commit() {
   fi
 }
 
-export PROMPT='%{$fg[blue]%}%c \
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+export PROMPT='%{$fg[blue]%}%~ \
 $(git_prompt_info)\
 $(git_time_since_commit)%{$reset_color%} \
 %{$fg_bold[green]%}%(!.#.∴)%{$reset_color%} '
