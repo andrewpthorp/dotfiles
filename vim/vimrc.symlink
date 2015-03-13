@@ -57,7 +57,7 @@ map <Left> <nop>
 map <Right> <nop>
 map <Up> <nop>
 map <Down> <nop>
-imap <esc> <nop>
+" imap <esc> <nop>
 
 " keep undo history across sessions, by storing in file
 " only works in MacVim (gui) mode
