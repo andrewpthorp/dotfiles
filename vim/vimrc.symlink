@@ -117,6 +117,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'elixir-lang/vim-elixir'
 
 call vundle#end()
 " }}}
