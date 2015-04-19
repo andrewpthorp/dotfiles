@@ -4,6 +4,7 @@ export PATH="$PATH:$HOME/stripe/space-commander/bin"
 export PATH="$PATH:$HOME/stripe/henson/bin"
 export PATH="$PATH:$HOME/Development/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/Development/bin"
 export GOPATH="$HOME/Development/go"
 
 alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
