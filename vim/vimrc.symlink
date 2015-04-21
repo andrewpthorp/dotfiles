@@ -93,7 +93,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/ZoomWin'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'carlson-erik/wolfpack'
+Plugin 'ajh17/Spacegray.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kchmck/vim-coffee-script'
@@ -146,9 +148,9 @@ endfunction
 syntax on
 syntax enable
 set t_Co=256
-colorscheme solarized
-set background=dark
-call togglebg#map("<F5>")
+colorscheme spacegray
+"set background=dark
+"call togglebg#map("<F5>")
 
 set incsearch        " Find the next match as we type the search
 set hlsearch         " Hilight searches by default
