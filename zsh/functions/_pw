@@ -1,7 +1,7 @@
 #compdef pw
 
 _pw_passwords() {
-  passwords=(`pw list`)
+  passwords=(`pw ls`)
 }
 
 local -a _1st_arguments
@@ -21,7 +21,7 @@ if (( CURRENT == 2 )); then
 fi
 
 case "$words[2]" in
-  get|rm)
+  g|get|r|rm)
     _pw_passwords
     _wanted passwords expl 'all passwords' compadd -a passwords ;;
 esac
