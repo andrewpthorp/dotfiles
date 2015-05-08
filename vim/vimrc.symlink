@@ -120,6 +120,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'jimenezrick/vimerl'
 
 call vundle#end()
 " }}}
