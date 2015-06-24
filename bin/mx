@@ -1,0 +1,96 @@
+#!/usr/bin/env sh
+
+# mx
+# version 0.3
+
+# Contributors:
+#   Wynn Netherland - http://github.com/pengwynn
+#   Adam Jahnke - http://github.com/adamyonk
+
+# Usage:
+#   mx [session]
+
+# To 'auto-launch' projects, you'll need a $PROJECT_PATHS array which holds a
+# number of paths that contain your projects, like so:
+#   PROJECT_PATHS=( ~/code/personal/ ~/code/work/ )
+# where the repos would be inside of either of the paths in $PROJECT_PATHS.
+#
+# So, a typical workflow would look like
+#   $ hub clone pengwynn/octonaut ${PROJECT_PATHS[0]}/octonaut
+#   $ mx octonaut
+
+# If `mx` is called with a <session> name, and there is no valid repo inside
+# any of the paths in $PROJECT_PATHS, a new tmux session will be initialized in
+# the current working directory with a name of <session>
+
+# If the target directory has a .tmux file, that file will be executed
+# (and sent the <session> name as the first argument) instead of the default
+# window setup (explained below). An example .tmux file may look like
+# so:
+#   #!/usr/bin/env sh
+#   SESSION="$1"
+#   cd ~/.dotfiles
+#   tmux new-session -s "$SESSION" -n editor -d
+#   tmux send-keys 'e' C-m ':CtrlP' C-m
+#   tmux new-window -n shell -t "$SESSION"
+#   tmux select-window -t "$SESSION":1
+
+# If there is no .tmux file, the default window setup is as follows:
+# editor  - runs $EDITOR right away
+# shell   - empty shell
+# console - if script/console is available
+# server  - if script/server is available
+
+set -e
+
+PROJECT_PATHS=(
+  ~/stripe/
+  ~/Development/elixir/
+  ~/Development/personal/
+  ~/Development/go/src/github.com/andrewpthorp/
+)
+
+if [ -z "$1" ]; then
+  SESSION="${PWD##*/}"
+else
+  SESSION="$1"
+fi
+
+# tmux 1.9a+ doesn't like .'s in session names
+SESSION="${SESSION//./_}"
+
+_safe_window() {
+  if [ -x "$2" ]; then
+    tmux new-window -n "$1" -t "$SESSION"
+    tmux send-keys "$2" C-m
+  fi
+}
+
+if ! (tmux list-sessions | cut -d':' -f1 | grep -q ^"$SESSION"\$); then
+
+  # Check to see if the project exists in any of the PROJECT_PATHS
+  for path in "${PROJECT_PATHS[@]}"
+  do
+    if [ -d "$path"/"$SESSION" ]; then
+      cd "$path"/"$SESSION"
+    fi
+  done
+
+  if [ -x "$PWD"/.tmux ]; then
+    "$PWD"/.tmux "$SESSION"
+  else
+    tmux new-session -s "$SESSION" -n editor -d
+    tmux send-keys "$EDITOR" C-m #':CtrlP' C-m
+    tmux new-window -n shell -t "$SESSION"
+    _safe_window console script/console
+    _safe_window server script/server
+
+    tmux select-window -t "$SESSION":1
+  fi
+fi
+
+if [ -z "$TMUX" ]; then
+  tmux attach -t "$SESSION"
+else
+  tmux switch-client -t "$SESSION"
+fi
