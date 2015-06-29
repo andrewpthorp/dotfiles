@@ -287,7 +287,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1029 168 678 412 0 0 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1415 635 924 485 0 0 2560 1417 </string>
+	<string>861 471 924 485 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1088 967 384 129 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
@@ -295,9 +295,9 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>227 829 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 17 1704 1160 0 0 1920 1177 </string>
+	<string>2 11 955 1160 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>852 4 850 1413 0 0 2560 1417 </string>
+	<string>3 11 1914 1160 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>467 1021 570 376 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -312,11 +312,11 @@
 			<key>Ansi 0 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.19607402384281158</real>
+				<real>0.20000000298023224</real>
 				<key>Green Component</key>
-				<real>0.1806582510471344</real>
+				<real>0.18431372940540314</real>
 				<key>Red Component</key>
-				<real>0.16861946880817413</real>
+				<real>0.17254902422428131</real>
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
@@ -460,11 +460,11 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.12388592213392258</real>
+				<real>0.078431375324726105</real>
 				<key>Green Component</key>
-				<real>0.11804278939962387</real>
+				<real>0.074509806931018829</real>
 				<key>Red Component</key>
-				<real>0.10486835986375809</real>
+				<real>0.066666670143604279</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -483,11 +483,11 @@
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.76466917991638184</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.7223970890045166</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.70114260911941528</real>
+				<real>1</real>
 			</dict>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -500,20 +500,20 @@
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.76466917991638184</real>
+				<real>0.73333334922790527</real>
 				<key>Green Component</key>
-				<real>0.7223970890045166</real>
+				<real>0.73333334922790527</real>
 				<key>Red Component</key>
-				<real>0.70114260911941528</real>
+				<real>0.73333334922790527</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.14004544913768768</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.13192172348499298</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.12300890684127808</real>
+				<real>1</real>
 			</dict>
 			<key>Cursor Type</key>
 			<integer>0</integer>
@@ -880,20 +880,20 @@
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.52191841602325439</real>
+				<real>0.0</real>
 				<key>Green Component</key>
-				<real>0.4903055727481842</real>
+				<real>0.0</real>
 				<key>Red Component</key>
-				<real>0.47520142793655396</real>
+				<real>0.0</real>
 			</dict>
 			<key>Selection Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.32427793741226196</real>
+				<real>1</real>
 				<key>Green Component</key>
-				<real>0.2236107736825943</real>
+				<real>0.8353000283241272</real>
 				<key>Red Component</key>
-				<real>0.1212167888879776</real>
+				<real>0.70980000495910645</real>
 			</dict>
 			<key>Semantic History</key>
 			<dict>
@@ -1039,10 +1039,12 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453225834.46828902</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>454863754.93429601</real>
+	<real>457301260.26248401</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1106,7 +1108,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-06-01T15:01:42Z</date>
+	<date>2015-06-29T20:07:17Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
