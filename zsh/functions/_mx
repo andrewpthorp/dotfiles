@@ -1,4 +1,3 @@
 #compdef mx
 
-compadd `ls $DOTFILES/tmux/layouts`
-
+compadd `tmux ls -F "#S"`
