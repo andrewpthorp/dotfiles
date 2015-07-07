@@ -1,5 +1,5 @@
-" Vim Config
-" ==========
+  " Vim Config
+  " ==========
 
 " Just because I will definitely forget this:
 " za toggles a fold
@@ -47,6 +47,7 @@ set sidescrolloff=15
 set sidescroll=1
 
 " custom mappings
+nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -69,11 +70,13 @@ endif
 " wrap autocmd in a group to prevent duplicates
 augroup personal
   autocmd!
-
   autocmd! BufWritePost vimrc.symlink :source ~/.vimrc
-  autocmd BufWritePre * :%s/\s\+$//e
+
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldenable
+
+  " Don't strip trailing whitespace for flat files
+  autocmd BufWritePre * if &ft != 'text' | :%s/\s\+$//e
 augroup END
 " }}}
 
@@ -121,6 +124,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'jimenezrick/vimerl'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
 " }}}
