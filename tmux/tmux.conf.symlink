@@ -86,13 +86,14 @@ set-option -g status-left-length 120
 ## highlight inactive windows
 set-option -g window-status-fg colour246
 set-option -g window-status-bg default
-set-option -g window-status-attr dim
+set-option -g window-status-format '#I #W'
+set-option -g window-status-attr bold
 
 ## highlight active window
 set-option -g window-status-current-fg colour232
 set-option -g window-status-current-bg colour192
 set-option -g window-status-current-attr bright
-set-option -g window-status-current-format ' #I #W '
+set-option -g window-status-current-format ' #I #W #[fg=colour192,bg=colour232]'
 
 ## set window notifications
 set-option -g visual-activity on
@@ -109,8 +110,7 @@ set-option -g automatic-rename off
 set-option -g set-titles on
 set-option -g set-titles-string '#W'
 set-option -g automatic-rename on
-set-option -g window-status-format '#I #W'
-set-option -g window-status-attr bold
+
 # starts windows at 1 not 0
 set-option -g base-index 1
 set-option -g pane-base-index 1
