@@ -53,8 +53,8 @@ unbind }
 bind-key }      swap-pane -D
 
 ## messages
-set-option -g message-fg colour2
-set-option -g message-bg colour0
+set-option -g message-fg colour192
+set-option -g message-bg colour234
 set-option -g message-attr bright
 set-option -g display-time 1500
 
@@ -62,7 +62,7 @@ set-option -g display-time 1500
 set-option -g status on
 set-option -g status-utf8 on
 set-option -g status-interval 60
-set-option -g status-fg colour0
+set-option -g status-fg colour250
 set-option -g status-bg default
 
 # "I' == current window index
@@ -77,22 +77,22 @@ set-option -g status-bg default
 # number to specify the maximum length, in this line "#10W'.
 
 # Set status
-set-option -g status-left ' #[fg=white]⚒'
-set-option -g status-right '#[fg=colour12] Do not let your hearts be troubled... John 14:27  #[fg=white]♆  #[fg=colour12]#(weather)  #[fg=white]♆  #[fg=colour75]#S#[fg=white]  ♆  #[fg=colour9]%Y-%m-%d %H:%M  #[fg=white]♆  #(battery -o tmux)'
+set-option -g status-left '#[bg=colour255,fg=colour232] #S #[bg=default,fg=default] ⚒'
+set-option -g status-right '#[fg=default] Do not let your hearts be troubled... John 14:27 #[fg=colour244]][ #[fg=default]#(weather) #[fg=colour244]][ #[fg=colour192]%Y-%m-%d %H:%M #[fg=colour244]][ #(battery -o tmux -g colour192 -m colour192 -w colour196)'
 
 set-option -g status-right-length 200
 set-option -g status-left-length 120
 
 ## highlight inactive windows
-set-option -g window-status-fg colour4
+set-option -g window-status-fg colour246
 set-option -g window-status-bg default
 set-option -g window-status-attr dim
 
 ## highlight active window
-set-option -g window-status-current-fg colour0
-set-option -g window-status-current-bg colour4
+set-option -g window-status-current-fg colour232
+set-option -g window-status-current-bg colour192
 set-option -g window-status-current-attr bright
-set-option -g window-status-current-format '#[bold] #I #W '
+set-option -g window-status-current-format ' #I #W '
 
 ## set window notifications
 set-option -g visual-activity on
