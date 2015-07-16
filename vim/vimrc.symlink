@@ -59,6 +59,7 @@ map <Right> <nop>
 map <Up> <nop>
 map <Down> <nop>
 " imap <esc> <nop>
+inoremap jk <esc>
 
 " keep undo history across sessions, by storing in file
 " only works in MacVim (gui) mode
@@ -70,7 +71,6 @@ endif
 " wrap autocmd in a group to prevent duplicates
 augroup personal
   autocmd!
-  autocmd! BufWritePost vimrc.symlink :source ~/.vimrc
 
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim setlocal foldenable
@@ -96,8 +96,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/L9'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/ZoomWin'
-"Plugin 'altercation/vim-colors-solarized'
-"Plugin 'carlson-erik/wolfpack'
 Plugin 'ajh17/Spacegray.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
@@ -111,7 +109,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'mattn/webapi-vim'
 Plugin 'gregsexton/gitv'
 Plugin 'tpope/vim-commentary'
-Plugin 'vim-scripts/php.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'bling/vim-airline'
 Plugin 'slim-template/vim-slim'
@@ -125,6 +122,9 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'jimenezrick/vimerl'
 Plugin 'majutsushi/tagbar'
+Plugin 'janko-m/vim-test'
+Plugin 'tpope/vim-dispatch'
+Plugin 'benmills/vimux'
 
 call vundle#end()
 " }}}
@@ -169,7 +169,6 @@ au BufRead,BufNewFile *.jeco setf html
 au BufRead,BufNewFile *.jss set filetype=css
 au BufRead,BufNewFile *.hbs set filetype=mustache
 au BufRead,BufNewFile *.go set filetype=go
-au BufRead,BufNewFile *.jade set filetype=jade
 " }}}
 
 " Mouse {{{
