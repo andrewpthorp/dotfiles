@@ -78,7 +78,7 @@ function git_time_since_commit() {
 export PROMPT='%F{239}%~ \
 $(git_prompt_info)\
 $(git_time_since_commit)%{$reset_color%} \
-%F{31}%(!.#.∴)%{$reset_color%} '
+%F{31}%(!.#.→)%{$reset_color%} '
 
 set_prompt () {
   export RPROMPT=""
