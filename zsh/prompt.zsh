@@ -1,17 +1,17 @@
 autoload colors && colors
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+local return_code="%(?..%F{196]%}%? ↵%{$reset_color%})"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}) "
-ZSH_THEME_GIT_PROMPT_DIRTY=": %{$fg[red]%}dirty"
-ZSH_THEME_GIT_PROMPT_CLEAN=": %{$fg[green]%}clean"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{239}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{239}) "
+ZSH_THEME_GIT_PROMPT_DIRTY=": %F{196}d"
+ZSH_THEME_GIT_PROMPT_CLEAN=": %F{28}c"
 
 # Colors vary depending on time lapsed.
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[cyan]%}"
-ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[yellow]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%F{239}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%F{239}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%F{239}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%F{239}"
 
 # get the name of the branch we are on
 function git_prompt_info() {
@@ -75,10 +75,10 @@ function git_time_since_commit() {
 }
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-export PROMPT='%{$fg[blue]%}%~ \
+export PROMPT='%F{239}%~ \
 $(git_prompt_info)\
 $(git_time_since_commit)%{$reset_color%} \
-%{$fg_bold[green]%}%(!.#.∴)%{$reset_color%} '
+%F{31}%(!.#.∴)%{$reset_color%} '
 
 set_prompt () {
   export RPROMPT=""
