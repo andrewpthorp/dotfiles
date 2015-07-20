@@ -53,17 +53,10 @@ unbind }
 bind-key }      swap-pane -D
 
 ## messages
-set-option -g message-fg colour255
-set-option -g message-bg colour29
+set-option -g message-fg colour233
+set-option -g message-bg colour31
 set-option -g message-attr bright
 set-option -g display-time 1500
-
-## set status bar
-set-option -g status on
-set-option -g status-utf8 on
-set-option -g status-interval 60
-set-option -g status-fg colour250
-set-option -g status-bg default
 
 # "I' == current window index
 # 'H' == Hostname
@@ -76,24 +69,30 @@ set-option -g status-bg default
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
 
-# Set status
-set-option -g status-left '#[bg=colour192,fg=colour234] #S #[bg=default,fg=colour29] ⚒'
-set-option -g status-right '#[fg=default] Do not let your hearts be troubled... John 14:27 #[fg=colour244]][ #[fg=default]#(weather) #[fg=colour244]][ #[fg=colour29]%Y-%m-%d %H:%M #[fg=colour244]][ #(battery -o tmux -g colour29 -m colour29 -w colour196)'
+## set status bar
+set-option -g status on
+set-option -g status-utf8 on
+set-option -g status-interval 60
+set-option -g status-fg colour237
+set-option -g status-bg colour233
 
+# Set status
+set-option -g status-left '#[bg=colour31,fg=colour234] #S #[bg=default,fg=colour39] ⚒'
+set-option -g status-right '#[fg=default] Do not let your hearts be troubled... John 14:27 #[fg=colour234] ✪  #[fg=default]#(weather) #[fg=colour234] ✪  #[fg=default]%Y-%m-%d %H:%M #[fg=colour234] ✪  #(battery -o tmux -g colour31 -m colour31 -w colour196)'
 set-option -g status-right-length 200
 set-option -g status-left-length 120
 
-## highlight inactive windows
-set-option -g window-status-fg colour246
-set-option -g window-status-bg default
-set-option -g window-status-format '#I #W'
-set-option -g window-status-attr bold
-
 ## highlight active window
-set-option -g window-status-current-fg colour255
-set-option -g window-status-current-bg colour29
+set-option -g window-status-current-fg colour233
+set-option -g window-status-current-bg colour31
 set-option -g window-status-current-attr bright
-set-option -g window-status-current-format ' #I #W #[fg=colour29,bg=colour232]'
+set-option -g window-status-current-format ' #I #W '
+
+## highlight inactive windows
+set-option -g window-status-fg colour239
+set-option -g window-status-bg colour233
+set-option -g window-status-format ' #I #W '
+set-option -g window-status-attr bold
 
 ## set window notifications
 set-option -g visual-activity on
