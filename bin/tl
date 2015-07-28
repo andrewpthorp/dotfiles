@@ -120,12 +120,6 @@ if [[ ! -z "$TMUX" ]]; then
   exit 1
 fi
 
-# Make sure PROJECT_DIRS is set.
-if [[ ! -z "$PROJECT_DIRS" ]]; then
-  _error "You must set $PROJECT_DIRS"
-  exit 1
-fi
-
 _parse_session $1
 _parse_dir $2
 _try_create_session
