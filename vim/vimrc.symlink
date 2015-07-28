@@ -72,11 +72,14 @@ endif
 augroup personal
   autocmd!
 
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim setlocal foldenable
+  " Folding with my vimrc
+  autocmd FileType vim setlocal foldmethod=marker foldenable
 
   " Don't strip trailing whitespace for flat files
   autocmd BufWritePre * if &ft != 'text' | :%s/\s\+$//e
+
+  " Fix java spaces (well, fix according to java)
+  autocmd FileType java setlocal shiftwidth=8 softtabstop=8 tabstop=8 noexpandtab
 augroup END
 " }}}
 
