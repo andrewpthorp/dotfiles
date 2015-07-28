@@ -1,0 +1,134 @@
+#!/usr/bin/env sh
+
+# tl
+# version 0.1
+
+# Contributors:
+#   Andrew Thorp - https://github.com/andrewpthorp
+
+# Heavily influenced by bin/mx, from Wynn Netherland
+# (https://github.com/pengwynn) and Adam Yonk (https://github.com/adamyonk)
+
+# Usage:
+#   tl [session [path]]
+
+# To 'auto-launch' projects, you'll need a $PROJECT_DIRS array which holds a
+# number of paths that contain your projects, like so:
+#   PROJECT_DIRS=( ~/code/personal/ ~/code/work/ )
+# where the repos would be inside of either of the paths in $PROJECT_DIRS.
+
+# If `tl` is called with a <session> that meets the following criteria
+#   - <session> does not already exist
+#   - <path> was not passed, *or* is not valid
+#   - <session> is not the name of a directory in one of $PROJECT_DIRS
+# it will create a new tmux session (aptly named <session>) in your current dir.
+
+# If the directory you end up in has a .tmux file, which is executable, that
+# file will be executed (and sent <session> as $1) and no default layout will
+# be setup. You might have something like the following in the .tmux:
+#
+#  #!/usr/bin/env sh
+#
+#  cd ~/.dotfiles
+#  tmux new-session -s "$1" -n editor -d
+#  tmux send-keys "$EDITOR" C-m
+#  tmux new-window -n shell -t "$1"
+#  tmux select-window -t "$1":1
+#
+# If there is no .tmux (or it is not executable), the default layout will be
+# used, which you can see in `_set_default_layout` below.
+
+set -e
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+DEFAULT='\033[0m'
+
+PROJECT_DIRS=(
+  ~/stripe/
+  ~/Development/elixir/
+  ~/Development/personal/
+  ~/Development/go/src/github.com/andrewpthorp/
+)
+
+# Utility function to pretty print errors.
+_error() {
+  echo "${RED}ERROR: ${DEFAULT}$1"
+}
+
+# Set the default layout for tmux:
+_set_default_layout() {
+  tmux new-session -s "$SESSION" -n editor -d
+  tmux send-keys "$EDITOR" C-m
+  tmux new-window -n shell -t "$SESSION"
+  tmux new-window -n tests -t "$SESSION"
+  tmux new-window -n server -t "$SESSION"
+  tmux select-window -t "$SESSION":1
+}
+
+# Parse the session name. This will tke the last fragment of the cwd by default,
+# but can take a string. It will replace all dots with underscores, as tmux
+# doesn't like dots in session names.
+_parse_session() {
+  if [[ -z "$1" ]]; then
+    SESSION="${PWD##*/}"
+  else
+    SESSION="$1"
+  fi
+
+  SESSION="${SESSION//./_}"
+}
+
+# Parse the directory of the code. It will just set DIR if you pass valid string
+# to the function.
+_parse_dir() {
+  if [[ ! -z "$1" && -d "$1" ]]; then
+    DIR="$1"
+  fi
+}
+
+# If there is not already a session named "$SESSION", create it. This will also
+# set your tmux layout up.
+_try_create_session() {
+  if !(tmux list-sessions -F "#{session_name}" | grep -q ^"$SESSION"\$); then
+
+    # If you pased the second argument and it was valid, that is the directory.
+    if [[ ! -z "$DIR" ]]; then
+      cd "$DIR"
+    else
+      # Check if $SESSION is a directory in one of $PROJECT_DIRS directories.
+      for path in "${PROJECT_DIRS[@]}"; do
+        if [[ -d "$path"/"$SESSION" ]]; then
+          cd "$path"/"$SESSION"
+        fi
+      done
+    fi
+
+    # If .tmux exists in the directory (and is executable), run it.
+    if [ -x "$PWD"/.tmux ]; then
+      "$PWD"/.tmux "$SESSION"
+    # If .tmux does not exist (or is not executable), use the default format.
+    else
+      _set_default_layout
+    fi
+  fi
+}
+
+# Don't allow us to nest TMUX sessions.
+if [[ ! -z "$TMUX" ]]; then
+  _error "Can't nest TMUX sessions"
+  exit 1
+fi
+
+# Make sure PROJECT_DIRS is set.
+if [[ ! -z "$PROJECT_DIRS" ]]; then
+  _error "You must set $PROJECT_DIRS"
+  exit 1
+fi
+
+_parse_session $1
+_parse_dir $2
+_try_create_session
+
+# Attach to the session.
+tmux attach -t "$SESSION"
