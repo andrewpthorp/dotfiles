@@ -61,15 +61,15 @@ function git_time_since_commit() {
       fi
 
       if [ "$HOURS" -gt 24 ]; then
-          echo "$COLOR${DAYS}d"
+          echo "$COLOR${DAYS}d "
       elif [ "$MINUTES" -gt 60 ]; then
-          echo "$COLOR${HOURS}h${SUB_MINUTES}m"
+          echo "$COLOR${HOURS}h${SUB_MINUTES}m "
       else
-          echo "$COLOR${MINUTES}m"
+          echo "$COLOR${MINUTES}m "
       fi
     else
       COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-      echo "$COLOR"
+      echo "$COLOR "
     fi
   fi
 }
@@ -77,7 +77,7 @@ function git_time_since_commit() {
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 export PROMPT='%F{239}%~ \
 $(git_prompt_info)\
-$(git_time_since_commit)%{$reset_color%} \
+$(git_time_since_commit)%{$reset_color%}\
 %F{31}%(!.#.→)%{$reset_color%} '
 
 set_prompt () {

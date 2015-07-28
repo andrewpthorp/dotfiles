@@ -287,7 +287,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>756 195 678 278 0 0 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>861 471 924 485 0 0 1920 1177 </string>
+	<string>954 624 924 485 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1088 967 384 129 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
@@ -295,7 +295,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>227 829 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3 8 1914 1166 0 0 1920 1177 </string>
+	<string>3 23 1914 1151 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>3 795 570 376 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -483,11 +483,11 @@
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>1</real>
+				<real>0.0</real>
 				<key>Green Component</key>
-				<real>1</real>
+				<real>0.0</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.0</real>
 			</dict>
 			<key>Character Encoding</key>
 			<integer>4</integer>
@@ -500,11 +500,11 @@
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.0</real>
 				<key>Green Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.0</real>
 				<key>Red Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.0</real>
 			</dict>
 			<key>Cursor Text Color</key>
 			<dict>
@@ -913,7 +913,7 @@
 			<key>Silence Bell</key>
 			<true/>
 			<key>Smart Cursor Color</key>
-			<false/>
+			<true/>
 			<key>Smart Selection Rules</key>
 			<array>
 				<dict>
@@ -1044,7 +1044,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453225834.46828902</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>457554317.54320699</real>
+	<real>459706249.30662298</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1108,7 +1108,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-07-02T18:07:33Z</date>
+	<date>2015-07-27T15:29:19Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
