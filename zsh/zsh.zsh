@@ -12,6 +12,7 @@ alias cls='clear'
 alias reload!='. ~/.zshrc'
 alias update-keys="gpg --keyserver pgp.mit.edu --refresh-keys andrewpthorp@gmail.com apt@stripe.com"
 alias irb='pry'
+alias simulator="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
 
 # COMPLETION
 # matches case insensitive for lowercase
