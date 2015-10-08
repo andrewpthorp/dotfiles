@@ -1,3 +1,5 @@
 #compdef tl
 
-compadd `tmux ls -F "#S"`
+if tmux info &> /dev/null; then
+  compadd `tmux ls -F "#S"`
+fi
