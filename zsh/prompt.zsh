@@ -26,6 +26,8 @@ function git_time_since_last_commit() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
     last_commit=`git log --format="format:%ad" --date=relative -1 2>/dev/null`
     echo "${last_commit}"
+  else
+    echo "N/A"
   fi
 }
 

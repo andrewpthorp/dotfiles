@@ -14,6 +14,7 @@ alias update-keys="gpg --keyserver pgp.mit.edu --refresh-keys andrewpthorp@gmail
 alias irb='pry'
 alias simulator="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
 alias takeover="tmux detach -a"
+alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
 
 # COMPLETION
 # matches case insensitive for lowercase
