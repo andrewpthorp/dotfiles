@@ -38,6 +38,8 @@ Inspiration came from the following:
     * tmux
     * wget
 
+Use the following for a quick install:
+
     brew install git ack curl elasticsearch elixir gist git hub irssi macvim mongodb mysql node postgresql pwgen rabbitmq reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget
 
 ## Problems
