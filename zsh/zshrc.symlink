@@ -1,4 +1,4 @@
-export PATH=/Users/andrewpthorp/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/usr/local/mysql/bin:/usr/local/share/python
+export PATH="$HOME/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/usr/local/mysql/bin:/usr/local/share/python"
 export PATH="$PATH:$HOME/stripe/password-vault/bin"
 export PATH="$PATH:$HOME/stripe/space-commander/bin"
 export PATH="$PATH:$HOME/stripe/henson/bin"
