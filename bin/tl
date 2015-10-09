@@ -46,9 +46,9 @@ DEFAULT='\033[0m'
 
 PROJECT_DIRS=(
   ~/stripe/
-  ~/Development/elixir/
-  ~/Development/personal/
-  ~/Development/go/src/github.com/andrewpthorp/
+  ~/code/elixir/
+  ~/code/personal/
+  ~/code/go/src/github.com/andrewpthorp/
 )
 
 # Utility function to pretty print errors.

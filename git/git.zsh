@@ -1,5 +1,3 @@
-export GIT_SANDBOX=~/Development/sandbox
-
 hub_path=$(which hub)
 if [[ -f $hub_path ]]
 then
