@@ -2,10 +2,11 @@ export PATH="$HOME/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/u
 export PATH="$PATH:$HOME/stripe/password-vault/bin"
 export PATH="$PATH:$HOME/stripe/space-commander/bin"
 export PATH="$PATH:$HOME/stripe/henson/bin"
-export PATH="$PATH:$HOME/code/go/bin"
-export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/code/bin"
+
+# Go stuff
 export GOPATH="$HOME/code/go"
+export PATH="$PATH:$GOPATH/bin"
 
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
