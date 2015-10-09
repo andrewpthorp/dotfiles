@@ -16,27 +16,27 @@ Inspiration came from the following:
 
 ## Homebrew Formulae
 
-    * ack
-    * curl
-    * elasticsearch
-    * elixir
-    * gist
-    * git
-    * hub
-    * irssi
-    * macvim
-    * mongodb
-    * mysql
-    * node
-    * postgresql
-    * pwgen
-    * rabbitmq
-    * reattach-to-user-namespace
-    * redis
-    * sqlite
-    * the_silver_searcher
-    * tmux
-    * wget
+* ack
+* curl
+* elasticsearch
+* elixir
+* gist
+* git
+* hub
+* irssi
+* macvim
+* mongodb
+* mysql
+* node
+* postgresql
+* pwgen
+* rabbitmq
+* reattach-to-user-namespace
+* redis
+* sqlite
+* the_silver_searcher
+* tmux
+* wget
 
 Use the following for a quick install:
 
