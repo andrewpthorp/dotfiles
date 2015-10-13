@@ -95,6 +95,9 @@ _try_create_session() {
     # If you pased the second argument and it was valid, that is the directory.
     if [[ ! -z "$DIR" ]]; then
       cd "$DIR"
+    # HACK: Handle `df` for dotfiles easily.
+    elif [ $SESSION == "df" ]; then
+      cd "$HOME"/".dotfiles"
     else
       # Check if $SESSION is a directory in one of $PROJECT_DIRS directories.
       for path in "${PROJECT_DIRS[@]}"; do
