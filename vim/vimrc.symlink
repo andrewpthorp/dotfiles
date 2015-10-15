@@ -83,53 +83,56 @@ augroup personal
 augroup END
 " }}}
 
-" Vundle {{{
+" NeoBundle {{{
 " ==========
 
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set the runtime path to include NeoBundle and initialize
+set rtp+=~/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" let NeoBundle manage NeoBundle, required
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " additional plugins
-Plugin 'vim-scripts/L9'
-Plugin 'vim-scripts/FuzzyFinder'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'andrewpthorp/colors'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'mattn/gist-vim'
-Plugin 'tpope/vim-surround'
-Plugin 'mattn/webapi-vim'
-Plugin 'gregsexton/gitv'
-Plugin 'tpope/vim-commentary'
-Plugin 'bling/vim-airline'
-Plugin 'slim-template/vim-slim'
-Plugin 'fatih/vim-go'
-Plugin 'kien/ctrlp.vim'
-Plugin 'JazzCore/ctrlp-cmatcher'
-Plugin 'scrooloose/syntastic'
-Plugin 'mileszs/ack.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'jimenezrick/vimerl'
-Plugin 'majutsushi/tagbar'
-Plugin 'janko-m/vim-test'
-Plugin 'tpope/vim-dispatch'
-Plugin 'benmills/vimux'
+NeoBundle 'vim-scripts/L9'
+NeoBundle 'vim-scripts/FuzzyFinder'
+NeoBundle 'vim-scripts/ZoomWin'
+NeoBundle 'andrewpthorp/colors'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'JazzCore/ctrlp-cmatcher'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'junegunn/goyo.vim'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'elixir-lang/vim-elixir'
+NeoBundle 'jimenezrick/vimerl'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'janko-m/vim-test'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'benmills/vimux'
 
-call vundle#end()
+call neobundle#end()
+
+" prompt to install uninstalled bundles
+NeoBundleCheck
 " }}}
 
 " Display (Syntax, Indentation, Filetypes, etc) {{{

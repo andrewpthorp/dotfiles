@@ -54,9 +54,9 @@ Any problems I encounter will be documented in `PROBLEMS.md` so I can recall the
     cd ~/.dotfiles
     rake install
 
-    # Install vundle (https://github.com/VundleVim/Vundle.vim.git)
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
+    # Install NeoBundle (https://github.com/Shougo/neobundle.vim)
+    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    vim +NeoBundleInstall +qall
 
     # Install ctrlp-cmatcher (https://github.com/JazzCore/ctrlp-cmatcher/)
     export CFLAGS=-Qunused-arguments
