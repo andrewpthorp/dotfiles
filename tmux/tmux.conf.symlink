@@ -77,7 +77,7 @@ set-option -g status-fg colour237
 set-option -g status-bg colour233
 
 # Set status
-set-option -g status-left '#[bg=colour33,fg=colour234] #S #[bg=default,fg=colour214] 9¾'
+set-option -g status-left '#[bg=colour33,fg=colour234] #S #[bg=default,fg=colour214] 9¾ ↯'
 set-option -g status-right '#[fg=default] Do not let your hearts be troubled... John 14:27 #[fg=colour234] ✪  #[fg=default]#(weather) #[fg=colour234] ✪  #[fg=default]%Y-%m-%d %H:%M #[fg=colour234] ✪  #(battery -o tmux -g colour32 -m colour32 -w colour196)'
 set-option -g status-right-length 200
 set-option -g status-left-length 120
