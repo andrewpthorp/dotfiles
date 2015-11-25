@@ -127,6 +127,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'janko-m/vim-test'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'benmills/vimux'
+NeoBundle 'kshenoy/vim-signature'
 
 call neobundle#end()
 
