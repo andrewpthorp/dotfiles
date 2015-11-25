@@ -34,10 +34,10 @@ function git_time_since_last_commit() {
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 export PROMPT='%F{239}%~ \
 $(git_prompt_info)%{$reset_color%}\
-%F{31}%(!.#.→)%{$reset_color%} '
+%F{32}%(!.#.→)%{$reset_color%} '
 
 set_prompt () {
-  export RPROMPT="%F{239}(%F{31}$(git_time_since_last_commit)%F{239})%{$reset_color%}"
+  export RPROMPT="%F{239}(%F{32}$(git_time_since_last_commit)%F{239})%{$reset_color%}"
 }
 
 precmd() {
