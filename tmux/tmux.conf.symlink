@@ -89,7 +89,7 @@ set-option -g window-status-current-format ' #I #W '
 
 ## highlight inactive windows
 set-option -g window-status-fg colour239
-set-option -g window-status-bg colour233
+set-option -g window-status-bg colour234
 set-option -g window-status-format ' #I #W '
 
 ## set window notifications
