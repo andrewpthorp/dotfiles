@@ -7,12 +7,13 @@
   filenames = show --name-only
   addall = add -A
   pretty = log --oneline --first-parent
+  wtf = "! git log --pretty=tformat:\"%C(auto,yellow)%h%C(auto)%d%C(auto,reset) by %C(auto,blue)%cn%C(auto,reset), %C(auto,cyan)%ar%C(auto,reset)%n %s%n\" --stat"
 [github]
   user = andrewpthorp
 [color]
   ui = auto
 [web]
-	browser = googlechrome
+	browser = open
 [browser "googlechrome"]
 	cmd = "open -a /Applications/Google\\ Chrome.app"
 [push]
@@ -21,3 +22,5 @@
   rebase = true
 [init]
 	templatedir = ~/.git_template
+[url "git@github.com:"]
+	insteadOf = https://github.com/

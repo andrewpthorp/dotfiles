@@ -1,9 +1,9 @@
 autoload colors && colors
 
-local return_code="%(?..%F{196]%}%? ↵%{$reset_color%})"
+#local return_code="%(?..%F{196]%}%? ↵%{$reset_color%})"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{239}("
-ZSH_THEME_GIT_PROMPT_SUFFIX="%F{239}) "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{7}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{7}) "
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{196}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%F{28}"
 
@@ -32,12 +32,10 @@ function git_time_since_last_commit() {
 }
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-export PROMPT='%F{239}%~ \
-$(git_prompt_info)%{$reset_color%}\
-%F{32}%(!.#.→)%{$reset_color%} '
+export PROMPT="%F{7}%~ $(git_prompt_info)%f%F{32}%(!.#.→)%f "
 
 set_prompt () {
-  export RPROMPT="%F{239}(%F{32}$(git_time_since_last_commit)%F{239})%{$reset_color%}"
+  export RPROMPT="%F{7}(%F{32}$(git_time_since_last_commit)%F{7})%f"
 }
 
 precmd() {
