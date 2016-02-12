@@ -32,12 +32,12 @@ function git_time_since_last_commit() {
 }
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-export PROMPT="%F{7}%~ $(git_prompt_info)%f%F{32}%(!.#.→)%f "
-
-set_prompt () {
-  export RPROMPT="%F{7}(%F{32}$(git_time_since_last_commit)%F{7})%f"
-}
-
-precmd() {
-  set_prompt
-}
+# export PROMPT="%F{7}%~ $(git_prompt_info)%f%F{32}%(!.#.→)%f "
+#
+#set_prompt () {
+#  export RPROMPT="%F{7}(%F{32}$(git_time_since_last_commit)%F{7})%f"
+#}
+#
+#precmd() {
+#  set_prompt
+#}

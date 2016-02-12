@@ -35,6 +35,11 @@ fi
 autoload -U compinit
 compinit
 
+# initialize promptinit
+autoload -U promptinit
+promptinit
+prompt pure
+
 # load every completion after autocomplete loads
 for config_file ($ZSH/**/completion.sh) source $config_file
 
