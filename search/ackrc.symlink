@@ -9,6 +9,7 @@
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
+--ignore-dir=Godeps
 --pager=less -R
 --sort-files
 --color
