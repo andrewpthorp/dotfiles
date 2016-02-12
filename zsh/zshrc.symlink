@@ -36,7 +36,7 @@ autoload -U compinit
 compinit
 
 # initialize promptinit
-autoload -U promptinit
+autoload -Uz promptinit
 promptinit
 prompt pure
 
