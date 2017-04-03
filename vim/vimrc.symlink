@@ -83,6 +83,10 @@ augroup personal
 augroup END
 " }}}
 
+" enable golint
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
 " NeoBundle {{{
 " ==========
 
@@ -117,7 +121,7 @@ NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'JazzCore/ctrlp-cmatcher'
-NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'airblade/vim-gitgutter'
@@ -125,6 +129,10 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'jimenezrick/vimerl'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'wavded/vim-stylus'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
 "NeoBundle 'janko-m/vim-test'
 "NeoBundle 'tpope/vim-dispatch'
 "NeoBundle 'benmills/vimux'
@@ -142,6 +150,8 @@ NeoBundleCheck
 syntax on
 syntax enable
 set t_Co=256
+"colorscheme solarized
+"set background=light
 colorscheme Tomorrow-Night
 "set background=dark
 "call togglebg#map("<F5>")
@@ -189,7 +199,10 @@ set mouse=a
 
 " set this to the name of your terminal that supports mouse codes.
 " must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-set ttymouse=xterm2
+" don't set this if we are using Neovim
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 " }}}
 
 " Completion {{{
