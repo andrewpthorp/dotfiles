@@ -8,6 +8,9 @@ export PATH="$PATH:$HOME/code/bin"
 export GOPATH="$HOME/code/go"
 export PATH="$PATH:$GOPATH/bin"
 
+# Stripe SSH
+alias ssh=sc-ssh-wrapper
+
 #[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 # shortcut to this dotfiles path is $ZSH

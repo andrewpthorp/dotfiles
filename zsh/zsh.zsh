@@ -1,4 +1,4 @@
-export EDITOR="vim"
+export EDITOR="nvim"
 
 function colours() {
   for i in {0..255} ; do
