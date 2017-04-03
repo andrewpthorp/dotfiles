@@ -19,7 +19,8 @@ let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:25,results:25'
 " set wildignore+=*/tmp/*,*/.git/*,*/log/*,*.jpg,*.png,*/.gitkeep,*/.DS_STORE,*.ttf,*/.asset-cache*
 " let g:ctrlp_custom_ignore = 'tmp\/|sass_cache\/|*/.DS_Store\|.git|.sassc'
 "
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+" let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+let g:ctrlp_match_func = { 'match' : 'pymatcher#PyMatch' }
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 

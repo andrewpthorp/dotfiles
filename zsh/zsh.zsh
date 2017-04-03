@@ -16,6 +16,10 @@ alias simulator="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhon
 alias takeover="tmux detach -a"
 alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
 
+# Use neovim by default, but save support for opening vim if needed
+alias vim="nvim"
+alias vvim="/usr/bin/vim"
+
 # COMPLETION
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
