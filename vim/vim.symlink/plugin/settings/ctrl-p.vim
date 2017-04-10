@@ -7,28 +7,22 @@ let g:ctrlp_open_multiple_files  = '1t'
 let g:ctrlp_max_height           = 8
 let g:ctrlp_show_hidden          = 1
 
-" Not used because I am using ctrlp_user_command
-"let g:ctrlp_max_depth     = 40
-let g:ctrlp_max_files     = 10000
-let g:ctrlp_use_caching   = 1
 let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:25,results:25'
 
-" Use git's knowledge of files
-" let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files -cdo']
-
-" set wildignore+=*/tmp/*,*/.git/*,*/log/*,*.jpg,*.png,*/.gitkeep,*/.DS_STORE,*.ttf,*/.asset-cache*
-" let g:ctrlp_custom_ignore = 'tmp\/|sass_cache\/|*/.DS_Store\|.git|.sassc'
-"
-" let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
-let g:ctrlp_match_func = { 'match' : 'pymatcher#PyMatch' }
+if !has('python')
+  echo 'In order to use pymatcher plugin, you need +python compiled vim'
+else
+  let g:ctrlp_match_func = { 'match' : 'pymatcher#PyMatch' }
+endif
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore .asset-cache
-      \ --ignore .sass-cache
-      \ -g ""'
+" The following were found in the ctrlp-py-matcher documentation
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_use_caching   = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_files = 0
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --ignore ''.asset-cache'' --ignore ''.sass-cache'' --hidden -g ""'
+endif

@@ -6,7 +6,6 @@ function colours() {
   done
 }
 
-
 # ALIASES
 alias cls='clear'
 alias reload!='source ~/.zshrc'

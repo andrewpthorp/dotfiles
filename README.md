@@ -8,7 +8,6 @@ Inspiration came from the following:
 
 ## Apps to Remember
 
-* Alfred (https://www.alfredapp.com/)
 * Dropbox (https://www.dropbox.com/)
 * iTerm2 (http://www.iterm2.com/)
 * Slack (https://www.slack.com)
@@ -16,36 +15,29 @@ Inspiration came from the following:
 
 ## Homebrew Formulae
 
+* git
 * ack
 * ctags-exuberant
 * curl
-* elasticsearch
 * elixir
 * gist
-* git
-* hub
 * irssi
 * macvim
-* mongodb
-* mysql
 * node
 * postgresql
 * pwgen
-* rabbitmq
 * reattach-to-user-namespace
 * redis
 * sqlite
 * the_silver_searcher
 * tmux
 * wget
+* zsh
+* zsh-syntax-highlighting
 
 Use the following for a quick install:
 
-    brew install git ack ctags-exuberant curl elasticsearch elixir gist git hub irssi macvim mongodb mysql node postgresql pwgen rabbitmq reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget
-
-## Problems
-
-Any problems I encounter will be documented in `PROBLEMS.md` so I can recall them next time.
+    brew install git ack ctags-exuberant curl elixir gist irssi macvim node postgresql pwgen reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget zsh zsh-syntax-highlighting
 
 ## Installation
 
@@ -58,8 +50,15 @@ Any problems I encounter will be documented in `PROBLEMS.md` so I can recall the
     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     vim +NeoBundleInstall +qall
 
-    # Install ctrlp-cmatcher (https://github.com/JazzCore/ctrlp-cmatcher/)
-    export CFLAGS=-Qunused-arguments
-    export CPPFLAGS=-Qunused-arguments
-    cd ~/.vim/bundle/ctrlp-cmatcher
-    ./install.sh
+    # Install neovim python support
+    pip2 install neovim
+
+## Other things to install
+
+    # pure-prompt (https://github.com/sindresorhus/pure)
+    npm install --global pure-prompt
+
+## Problems
+
+Any problems I encounter will be documented in `PROBLEMS.md` so I can recall them next time.
+
