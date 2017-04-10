@@ -1,4 +1,4 @@
-export EDITOR="nvim"
+export EDITOR='nvim'
 
 function colours() {
   for i in {0..255} ; do
@@ -10,15 +10,20 @@ function colours() {
 # ALIASES
 alias cls='clear'
 alias reload!='source ~/.zshrc'
-alias update-keys="gpg --keyserver pgp.mit.edu --refresh-keys andrewpthorp@gmail.com apt@stripe.com"
+alias update-keys='gpg --keyserver pgp.mit.edu --refresh-keys andrewpthorp@gmail.com apt@stripe.com'
 alias irb='pry'
-alias simulator="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
-alias takeover="tmux detach -a"
+alias iirb='/usr/bin/irb'
+alias simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
+alias takeover='tmux detach -a'
 alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
 
+# STRIPE ALIASES
+alias db="ssh qa-dev19.nw -t 'cd dev-apt/pay-server; cat /etc/motd; exec bash -l'"
+alias dbs="ssh qa-dev19.nw -t 'cd /home/apt/go/src/git.corp.stripe.com/stripe-internal/sources; exec bash -l'"
+
 # Use neovim by default, but save support for opening vim if needed
-alias vim="nvim"
-alias vvim="/usr/bin/vim"
+alias vim='nvim'
+alias vvim='/usr/bin/vim'
 
 # COMPLETION
 # matches case insensitive for lowercase
