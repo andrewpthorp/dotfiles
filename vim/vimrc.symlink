@@ -138,6 +138,7 @@ NeoBundle 'mxw/vim-jsx'
 "NeoBundle 'tpope/vim-dispatch'
 "NeoBundle 'benmills/vimux'
 "NeoBundle 'kshenoy/vim-signature'
+NeoBundle 'christianrondeau/vim-base64'
 
 call neobundle#end()
 
@@ -247,4 +248,14 @@ function! DoPrettyXML()
 endfunction
 
 command! PrettyXML call DoPrettyXML()
+
+" Super simple function to make URL Decoding easier (for where I need it).
+" This might already exist in vim, but I couldn't find it.
+function! URLDecode()
+  exe "s/%2B/+/g"
+  exe "s/%3D/=/g"
+  exe "s/%0A//g"
+endfunction
+
+command! URLDecode call URLDecode()
 " }}}

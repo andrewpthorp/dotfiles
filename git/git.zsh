@@ -42,4 +42,4 @@ alias gps='git push'
 alias gpl='git pull'
 alias gfp='git fetch --prune'
 alias gpr='git remote prune origin'
-
+alias gclean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
