@@ -60,6 +60,9 @@ Use the following for a quick install:
 
     # pure-prompt (https://github.com/sindresorhus/pure)
     npm install --global pure-prompt
+    
+    # powerline patched fonts (https://powerline.readthedocs.io/en/master/installation.html#patched-fonts)
+    # iterm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
 
 ## Problems
 
