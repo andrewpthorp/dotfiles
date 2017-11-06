@@ -22,7 +22,7 @@ Inspiration came from the following:
 * elixir
 * gist
 * irssi
-* macvim
+* neovim
 * node
 * postgresql
 * pwgen
@@ -37,7 +37,7 @@ Inspiration came from the following:
 
 Use the following for a quick install:
 
-    brew install git ack ctags-exuberant curl elixir gist irssi macvim node postgresql pwgen reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget zsh zsh-syntax-highlighting
+    brew install git ack ctags-exuberant curl elixir gist irssi neovim node postgresql pwgen reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget zsh zsh-syntax-highlighting
 
 ## Installation
 
@@ -45,13 +45,16 @@ Use the following for a quick install:
     git clone git@github.com:andrewpthorp/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
     rake install
+    
+    # Change Shell to zsh
+    chsh -s /bin/zsh
 
     # Install NeoBundle (https://github.com/Shougo/neobundle.vim)
     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     vim +NeoBundleInstall +qall
 
     # Install neovim python support
-    pip2 install neovim
+    pip2 install --user --upgrade neovim
 
 ## Other things to install
 
