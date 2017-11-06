@@ -61,8 +61,8 @@ Use the following for a quick install:
     # pure-prompt (https://github.com/sindresorhus/pure)
     npm install --global pure-prompt
     
-    # powerline patched fonts (https://powerline.readthedocs.io/en/master/installation.html#patched-fonts)
-    # iterm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
+- powerline patched fonts (https://powerline.readthedocs.io/en/master/installation.html#patched-fonts) for iTerm2. Font: 10pt Droid Sans Mono, Non-ASCII Font: 13pt Literation Mono Powerline
+- iTerm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
 
 ## Problems
 
