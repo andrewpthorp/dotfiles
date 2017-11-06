@@ -18,6 +18,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
@@ -717,11 +719,11 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1178 622 400 129 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>970 787 620 392 0 0 2560 1440 </string>
+	<string>1730 -140 700 622 1440 -540 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 122 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2 12 1702 1405 0 0 2560 1417 </string>
+	<string>0 0 1680 1027 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1708 8 850 1405 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -1472,7 +1474,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>1BDEF5FD-514F-49DF-BC44-4EEBB59AE18F</string>
 	<key>NoSyncLastTipTime</key>
-	<real>485219049.50906497</real>
+	<real>526867019.38481098</real>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncPermissionToShowTip</key>
@@ -1554,6 +1556,12 @@
 		<string>0063</string>
 		<string>0064</string>
 		<string>0065</string>
+		<string>0066</string>
+		<string>0067</string>
+		<string>0068</string>
+		<string>0069</string>
+		<string>0070</string>
+		<string>0071</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1622,7 +1630,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-20T16:20:19Z</date>
+	<date>2017-10-23T20:17:44Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -1672,6 +1680,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.5</string>
+	<string>3.1.5.beta.1</string>
 </dict>
 </plist>
