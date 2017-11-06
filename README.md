@@ -30,14 +30,19 @@ Inspiration came from the following:
 * redis
 * sqlite
 * the_silver_searcher
-* tmux
+* tmux (2.4)
 * wget
-* zsh
+* zsh (5.3.1)
 * zsh-syntax-highlighting
 
 Use the following for a quick install:
 
-    brew install git ack ctags-exuberant curl elixir gist irssi neovim node postgresql pwgen reattach-to-user-namespace redis sqlite the_silver_searcher tmux wget zsh zsh-syntax-highlighting
+    brew install git ack ctags-exuberant curl elixir gist irssi neovim node postgresql pwgen reattach-to-user-namespace redis sqlite the_silver_searcher wget zsh-syntax-highlighting
+    
+For now, install old versions of tmux and zsh
+
+    brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/2a5be78174f527bc906ddc4fab728dc96cb883d0/Formula/zsh.rb
+    brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/2d2034afc6e4dfab0a1c48f5edd2c5478576293b/Formula/tmux.rb
 
 ## Installation
 
