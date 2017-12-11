@@ -1,0 +1,6 @@
+#!/bin/sh
+# kill all processes running on a given port
+# usage: killport PORT
+
+set -e
+lsof -n -i tcp:"$@" | grep LISTEN | awk '{ print $2 }' | xargs kill
