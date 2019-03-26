@@ -13,13 +13,41 @@ if key == '' || key.nil?
   exit(1)
 end
 
-ForecastIO.api_key = key
+class Forecaster
+  attr_accessor :forecast
 
-begin
-  currently = ForecastIO.forecast(36.0893, -87.0026).currently
-rescue Exception => e
-  puts e.message
-  exit(1)
+  def initialize(api_key)
+    ForecastIO.api_key = api_key
+
+    begin
+      @forecast = ForecastIO.forecast(36.0, -87.0)
+    rescue Exception => e
+      puts "Could not get the current forecast."
+      exit(1)
+    end
+  end
+
+  def print
+    currently = @forecast.currently
+    forecast_string = "#{currently.summary} - #{currently.temperature.to_i}°"
+
+    daily = get_daily_forecast
+    if daily
+      forecast_string = "#{forecast_string} (High #{daily.temperatureHigh.to_i}°)"
+    end
+
+    puts forecast_string
+  end
+
+  private def get_daily_forecast
+    today = Time.now
+    beginning_of_day = Time.new(today.year, today.month, today.day).to_i
+    end_of_day = Time.new(today.year, today.month, today.day, 23, 59, 59).to_i
+    range = beginning_of_day..end_of_day
+
+    @forecast.daily.data.find {|f| range.include?(f.time)}
+  end
+
 end
 
-puts "#{currently.summary} - #{currently.temperature.to_i}°"
+Forecaster.new(key).print
