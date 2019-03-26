@@ -3,6 +3,7 @@ export PATH="$PATH:$HOME/stripe/password-vault/bin"
 export PATH="$PATH:$HOME/stripe/space-commander/bin"
 export PATH="$PATH:$HOME/stripe/henson/bin"
 export PATH="$PATH:$HOME/code/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Go stuff
 export GOPATH="$HOME/code/go"

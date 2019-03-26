@@ -76,6 +76,9 @@ set-option -g status-interval 60
 set-option -g status-fg colour245
 set-option -g status-bg colour235
 
+set-option -g window-style 'bg=colour236'
+set-option -g window-active-style 'bg=colour235'
+
 # Set status
 set-option -g status-left '#[bg=colour35,fg=colour255] #S #[bg=default,fg=colour214] 9¾ ↯ '
 set-option -g status-right '#[fg=default] Do not let your hearts be troubled... John 14:27 #[fg=colour250] ✪  #[fg=default]#(weather) #[fg=colour250] ✪  #[fg=default]%Y-%m-%d %H:%M #[fg=colour250] ✪  #(battery -o tmux -g colour2 -m colour2 -w colour196)'
@@ -87,7 +90,7 @@ set-option -g window-status-current-fg colour255
 set-option -g window-status-current-bg colour35
 set-option -g window-status-current-format ' #I #W '
 
-## highlight inactive windows
+## highlight inactive colour243
 set-option -g window-status-fg colour245
 set-option -g window-status-bg default
 set-option -g window-status-format ' #I #W '

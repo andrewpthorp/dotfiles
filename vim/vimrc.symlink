@@ -190,6 +190,22 @@ au BufRead,BufNewFile *.hbs set filetype=mustache
 au BufRead,BufNewFile *.go set filetype=go
 " }}}
 
+" Copy filename to clipboard {{{
+" ==============================
+"
+" ,cs copies filename
+" ,cl copies the full path + filename
+"
+" Convert slashes to backslashes for Windows.
+if has('win32')
+  nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+  nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+else
+  nmap ,cs :let @*=expand("%")<CR>
+  nmap ,cl :let @*=expand("%:p")<CR>
+endif
+" }}}
+
 " Mouse {{{
 " =========
 
