@@ -1,5 +1,7 @@
 *_private.zsh
 *_creds.zsh
 .netrwhist
+.logs/**
+.tmp/**
 vim/vim.symlink/bundle/**
 tags

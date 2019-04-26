@@ -52,6 +52,7 @@ nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
+nnoremap <c-p> :Files<CR>
 
 " force my brain to stop using arrows and esc
 map <Left> <nop>
@@ -87,6 +88,9 @@ augroup END
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
+" enable fzf
+set rtp+=/usr/local/opt/fzf
+
 " NeoBundle {{{
 " ==========
 
@@ -119,8 +123,10 @@ NeoBundle 'tpope/vim-commentary'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'fatih/vim-go'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'FelikZ/ctrlp-py-matcher'
+NeoBundle '/usr/local/opt/fzf'
+NeoBundle 'junegunn/fzf.vim'
+"NeoBundle 'kien/ctrlp.vim'
+"NeoBundle 'FelikZ/ctrlp-py-matcher'
 "NeoBundle 'JazzCore/ctrlp-cmatcher'
 "NeoBundle 'scrooloose/syntastic'
 NeoBundle 'mileszs/ack.vim'

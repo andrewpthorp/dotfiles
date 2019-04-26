@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+require 'logger'
+require 'open-uri'
+
+begin
+  require 'nokogiri'
+  require 'bitly'
+rescue LoadError
+  system("gem install nokogiri")
+  system("gem install bitly")
+  Gem.clear_paths
+end
+
+# setup bitly just in case we use it
+Bitly.configure do |config|
+  config.api_version = 3
+  config.access_token = ENV['BITLY_ACCESS_TOKEN']
+end
+
+# Get Phillies News
+html = Nokogiri::HTML(open('http://www.espn.com/mlb/team/_/name/phi/philadelphia-phillies'))
+
+selector = '#news-feed #news-feed-content article .item-info-wrap h1 a'
+stories = []
+
+html.search(selector).each do |link|
+  stories << {
+    url: link.attributes['href'].value,
+    text: link.content,
+  }
+end
+
+# Figure out how to handle a ticker index.
+idx = 0
+
+str = "#{stories[idx][:text]}"
+
+def show_url?
+  true
+end
+
+if show_url?
+  if !stories[idx][:url].match(/http/)
+    url = "http://www.espn.com#{stories[idx][:url]}"
+  else
+    url = stories[idx][:url]
+  end
+  short = Bitly.client.lookup(url)
+  short = Bitly.client.shorten(url) unless short
+
+  str += " (#{short.short_url})"
+end
+
+puts str
+

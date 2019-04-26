@@ -43,7 +43,7 @@ bind-key >      swap-window -t :+
 bind-key n      command-prompt 'rename-window %%'
 bind-key N      command-prompt 'rename-session %%'
 bind-key Escape copy-mode -u
-bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded!"
+bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded! Go Phillies!"
 bind-key R      refresh-client
 bind-key a      send-key C-a
 
@@ -72,7 +72,7 @@ set-option -g display-time 1500
 ## set status bar
 set-option -g status on
 # set-option -g status-utf8 on
-set-option -g status-interval 100
+set-option -g status-interval 300
 set-option -g status-fg colour245
 set-option -g status-bg colour235
 
@@ -81,7 +81,7 @@ set-option -g window-active-style 'bg=colour235'
 
 # Set status
 set-option -g status-left '#[bg=colour35,fg=colour255] #S #[bg=default,fg=colour214] 9¾ ↯ '
-set-option -g status-right '#[fg=default] #(weather) #[fg=colour250] ✪  #[fg=default]%Y-%m-%d %H:%M #[fg=colour250] ✪  #(battery -o tmux -g colour2 -m colour2 -w colour196)'
+set-option -g status-right '#[fg=colour238] #[fg=colour238] [Sports] #[fg=default] #(sports) #[fg=colour238] [Today] #[fg=default] #(weather today_full) #[fg=colour238] [Date] #[fg=default]%Y-%m-%d %H:%M #(battery -o tmux -g colour35 -m colour35 -w colour196)'
 set-option -g status-right-length 200
 set-option -g status-left-length 120
 

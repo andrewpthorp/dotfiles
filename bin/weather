@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'logger'
 
 begin
   require 'forecast_io'
@@ -13,41 +14,121 @@ if key == '' || key.nil?
   exit(1)
 end
 
+command = 'current'
+if ARGV.length != 0
+  case ARGV[0]
+  when 'today'
+    command = 'today'
+  when 'today_full'
+    command = 'today_full'
+  when 'tomorrow'
+    command = 'tomorrow'
+  else
+    command = 'current'
+  end
+end
+
 class Forecaster
+  CACHE_DIR = "#{Dir.home}/.weather"
   attr_accessor :forecast
 
-  def initialize(api_key)
+  def initialize(api_key, command: 'current')
+    @command = command
+    @logger = Logger.new('/Users/apt/.dotfiles/.logs/weather.log', 'daily')
+    log(:info, "Running command: #{command}")
+
+    init_cache!
     ForecastIO.api_key = api_key
-
-    begin
-      @forecast = ForecastIO.forecast(36.0, -87.0)
-    rescue Exception => e
-      puts "Could not get the current forecast."
-      exit(1)
-    end
   end
 
-  def print
+  def run
+    str = load_from_cache(@command)
+
+    if str.nil?
+      begin
+        @forecast = ForecastIO.forecast(36.0, -87.0)
+      rescue Exception => e
+        log(:fatal, "Could not get the current forecast: #{e.message}")
+        log(:fatal, e.backtrace.join("\n"))
+        exit(1)
+      end
+
+      if @forecast.nil?
+        log(:fatal, "No forecast, probably ran out of API calls.")
+        puts "No forecast. Guess you have to go outside."
+        exit(1)
+      end
+
+      str = self.send(@command)
+      cache!(@command, str)
+    end
+
+    puts str
+  end
+
+  private def today_full
+    "#{current} – #{today}"
+  end
+
+  private def current
     currently = @forecast.currently
-    forecast_string = "#{currently.summary} - #{currently.temperature.to_i}°"
-
-    daily = get_daily_forecast
-    if daily
-      forecast_string = "#{forecast_string} (High #{daily.temperatureHigh.to_i}°)"
-    end
-
-    puts forecast_string
+    "#{currently.summary} - #{currently.temperature.to_i}°"
   end
 
-  private def get_daily_forecast
-    today = Time.now
-    beginning_of_day = Time.new(today.year, today.month, today.day).to_i
-    end_of_day = Time.new(today.year, today.month, today.day, 23, 59, 59).to_i
+  private def today
+    get_daily_forecast(Time.now.to_i)
+  end
+
+  private def tomorrow
+    get_daily_forecast(Time.now.to_i + 24 * 60 * 60)
+  end
+
+  private def get_daily_forecast(time)
+    day = Time.at(time)
+    beginning_of_day = Time.new(day.year, day.month, day.day).to_i
+    end_of_day = Time.new(day.year, day.month, day.day, 23, 59, 59).to_i
     range = beginning_of_day..end_of_day
 
-    @forecast.daily.data.find {|f| range.include?(f.time)}
+    forecast = @forecast.daily.data.find {|f| range.include?(f.time)}
+
+    "#{forecast.summary} High of #{forecast.temperatureHigh.to_i}°"
+  end
+
+  private def log(level, message)
+    @logger.send(level, message) if logs_enabled?
+  end
+
+  private def logs_enabled?
+    ENV['FORECAST_LOGS_ENABLED'] || false
+  end
+
+  # Cache stuff!
+
+  private def init_cache!
+    log(:info, "Initializing Cache: #{CACHE_DIR}")
+    Dir.mkdir(CACHE_DIR) unless Dir.exists?(CACHE_DIR)
+  end
+
+  private def cache!(command, str)
+    log(:info, "Caching forecast (#{str}) into command (#{command})")
+    file = "#{CACHE_DIR}/#{command}"
+    File.open(file, 'w'){|f| f.puts(str)}
+  end
+
+  private def load_from_cache(command)
+    file = "#{CACHE_DIR}/#{command}"
+    log(:info, "Checking cache (#{file})")
+    if File.exist?(file)
+      if File.birthtime(file) < Time.now - 60 * 60
+        log(:info, "Cache exists, but is older than 1 hour, deleting")
+        File.delete(file)
+      else
+        log(:info, "Cache exists, and is more recent than 1 hour, reading")
+        File.read(file)
+      end
+    end
   end
 
 end
 
-Forecaster.new(key).print
+Forecaster.new(key, command: command).run
