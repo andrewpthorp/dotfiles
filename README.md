@@ -35,14 +35,17 @@ Follow then instructions to install Homebrew from https://brew.sh, then
 
     # Install neovim python support
     pip2 install --user --upgrade neovim
+    
+    # Install powerline, follow directions on https://github.com/powerline/powerline
+    # Install powerline fonts (Droid Sans Mono, Liberation Mono)
 
 ## Other things to install
 
     # pure-prompt (https://github.com/sindresorhus/pure)
     npm install --global pure-prompt
 
-- powerline patched fonts (https://powerline.readthedocs.io/en/master/installation.html#patched-fonts) for iTerm2. Font: 10pt Droid Sans Mono, Non-ASCII Font: 13pt Literation Mono Powerline
 - iTerm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
+- Set the profile / fonts for iTerm in Profiles->Colors, Profiles-Text (Droid Sans Mono 10pt, Liberation Mono 13pt for Non-Ascii)
 
 ## Problems
 
