@@ -1,6 +1,7 @@
 " Customization
 "
 let g:airline_theme = 'wombat'
+"let g:airline_theme = 'tender'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}

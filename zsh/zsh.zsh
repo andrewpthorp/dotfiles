@@ -15,6 +15,7 @@ alias iirb='/usr/bin/irb'
 alias simulator='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
 alias takeover='tmux detach -a'
 alias gpgk.='gpg --no-default-keyring --keyring ./pubring.gpg --secret-keyring ./secring.gpg'
+alias gpgconf='/usr/local/MacGPG2/bin/gpgconf'
 
 # STRIPE ALIASES
 alias db="ssh qa-dev19.nw -t 'cd dev-apt/pay-server; cat /etc/motd; exec bash -l'"

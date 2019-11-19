@@ -1,7 +1,7 @@
 [user]
   name = Andrew Thorp
   email = apt@stripe.com
-	signingkey = F049A0DF93479F5398054D7072E6A2EDD763644D
+	signingKey = 55EAA8278004EC36B8F904AB6489806ACBA5FED7
 [alias]
   stat = status
   co = checkout
