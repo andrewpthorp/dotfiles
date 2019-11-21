@@ -1,4 +1,0 @@
-#compdef mix
-
-# TODO: Speed this up (caching, perhaps?)
-compadd `mix help --names`
