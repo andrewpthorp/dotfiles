@@ -14,10 +14,11 @@ let g:airline_inactive_collapse = 0
 
 " Extensions
 "
-let g:airline#extensions#tabline#enabled          = 1
+let g:airline#extensions#tabline#enabled          = 0
 let g:airline#extensions#tabline#buffer_idx_mode  = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#tab_min_count    = 2
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
