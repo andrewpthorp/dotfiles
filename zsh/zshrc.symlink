@@ -66,12 +66,10 @@ prompt pure
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 # enable shims and autocompletion for rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Do this whenever we start a new shell
 fortune | cowsay -f dragon
-
-# Use FZF with Ctrl-R
