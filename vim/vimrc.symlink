@@ -1,10 +1,5 @@
-  " Vim Config
-  " ==========
-
-" Just because I will definitely forget this:
-" za toggles a fold
-" zm closes all folds
-" zr opens all folds
+" map <Leader> away from the default
+let mapleader=','
 
 " source ~/.vimrc.before if it exists
 if filereadable(expand('~/.vimrc.before'))
@@ -13,46 +8,77 @@ endif
 
 " use Vim settings, rather then Vi settings (much better!)
 " this must be first, because it changes other options as a side effect
-set nocompatible
+if &compatible
+  set nocompatible
+endif
 
 " General Config {{{
 " ==================
 
-let mapleader=','
-set encoding=utf-8
-set number                      " Line numbers are good
-set backspace=indent,eol,start  " Allow backspace in insert mode
-set history=1000                " Store lots of :cmdline history
-set showcmd                     " Show incomplete cmds down the bottom
-set showmode                    " Show current mode down the bottom
-set gcr=a:blinkon0              " Disable cursor blink
-set autoread                    " Reload files changed outside vim
-set laststatus=2                " Always show status line
+set mouse=a                     " enable mouse use in all modes
+set lazyredraw
+set splitright                  " opens vertical split right of current window
+set splitbelow                  " opens horizontal split below current window
+set secure                      " see :help secure
+set showmode                    " show current mode down the bottom
+set autoread                    " reload files changed outside vim
 set clipboard=unnamed           " Use system clipboard
-set hidden                      " Buffers can exist in the background
-set splitright                  " Opens vertical split right of current window
-set splitbelow                  " Opens horizontal split below current window
-set colorcolumn=81              " Put a mark at the 81st column for text
-set textwidth=0                 " Hack the textwidth so the colorcolumn won't force us to the next line
-"set shortmess=filnxtToOI       " see :help shortmess
+set hidden                      " buffers can exist in the background
+set shortmess=aoOstTWAI         " list of flags to make messages shorter
+set nofoldenable                " disable folding
+set nobackup                    " dont keep a backup after overwriting a file
+set nowritebackup               " dont write a backup before overwriting a file
+set noswapfile                  " dont use a swap file
+set exrc
 
-" turn off swap files
-set noswapfile
-set nobackup
-set nowritebackup
+if has('nvim')
+  set inccommand=split
+endif
 
-" start scrolling when we're getting close to margins
-set scrolloff=10
-set sidescrolloff=15
-set sidescroll=1
+" Line Numbers, Marks, etc
+set number                      " show line numbers, (relativelinenumber)
+set scrolloff=10                " show 10 lines around cursor (scroll close to margins)
+set sidescrolloff=25            " same as scrolloff, but for horizontal
+set viminfo='100,f1             " save up to 100 marks, enable capital marks
+set textwidth=80
+set colorcolumn=+1,+2           " put a mark at +1,+2 (col 81/82 normally)
+
+" History / Undo
+if isdirectory($HOME . '/.vim_undo') == 0
+  :silent !mkdir -p ~/.vim_undo > /dev/null 2>&1
+endif
+set undodir=~/.vim_undo         " list of directories for undo files
+set undofile                    " save/restore undo history
+
+" Text
+set nowrap                                " don't wrap lines
+set linebreak                             " wrap lines at convenient points (:help breakat)
+set smartindent                           " do clever auto indenting
+set shiftwidth=2                          " use 2 spaces for auto indent
+set tabstop=2                             " number of spaces a <Tab> in the text stands for
+set expandtab                             " expand <Tab> to spaces in insert mode
+set softtabstop=2                         " set <Tab> to 2 spaces in insert mode
+set list                                  " show <Tab> as ^I and EOL as $
+set listchars=tab:\ \ ,trail:·            " list strings used for list mode
+set spellfile=~/.vim/spellfile.utf-8.add  " file that `zg` adds good words to
+
+" Auto Completion
+set dictionary=/usr/share/dict/words    " list of dictionary files for keyword completion
+set wildmode=list:longest               " specifies how command line completion works
+
+" patterns to ignore for file name completion:
+set wildignore=*.o,*.obj,*~,.hg,.git,.svn,.vim-tags,*.swp
+set wildignore+=*.spl,*.DS_Store,*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*/tmp,*/log,*/vendor/bundle,*/vendor/cache
+set wildignore+=*/bin,*.zip,*vim/backups*,*.vim_undo*
+
 
 " custom mappings
-nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
-nnoremap <c-p> :Files<CR>
+nnoremap <c-p> :GFiles<CR>
 
 " force my brain to stop using arrows and esc
 map <Left> <nop>
@@ -62,192 +88,159 @@ map <Down> <nop>
 " imap <esc> <nop>
 inoremap jk <esc>
 
-" keep undo history across sessions, by storing in file
-" only works in MacVim (gui) mode
-if has('gui_running')
-  set undodir=~/.vim/backups
-  set undofile
-endif
-
 " wrap autocmd in a group to prevent duplicates
 augroup personal
   autocmd!
-
-  " Folding with my vimrc
-  autocmd FileType vim setlocal foldmethod=marker foldenable
-
-  " Don't strip trailing whitespace for flat files
+  " flatfiles dont strip trailing white spaces
   autocmd BufWritePre * if &ft != 'text' | :%s/\s\+$//e
-
-  " Fix java spaces (well, fix according to java)
+  " java tab/space config
   autocmd FileType java setlocal shiftwidth=8 softtabstop=8 tabstop=8 noexpandtab
+  " open NERDTree when vim opens
+  " autocmd vimenter * NERDTree
+  " dont open stuff in nerdtree, however, go back to it if it was the focus
+  " autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 augroup END
 " }}}
 
-" enable golint
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-
-" enable fzf
-set rtp+=/usr/local/opt/fzf
-
-" NeoBundle {{{
+" Vim-Plug (replacd neobundle) {{{
 " ==========
 
-if has('vim_starting')
-  " Required:
-  set runtimepath+=/Users/apt/.config/nvim/bundle/neobundle.vim/
+" Automatically install it, if it's not installed yet.
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Required:
-call neobundle#begin(expand('/Users/apt/.config/nvim/bundle'))
+" Run PluginInstall if there are any missing plugins.
+" if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+"   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" endif
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'chriskempson/base16-vim'
+Plug 'liuchengxu/space-vim-theme'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/ZoomWin'
+Plug 'andrewpthorp/colors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'fatih/vim-go'
+" Due to santa, need to brew install fzf. If not at stripe, can use:
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'prettier/vim-prettier'
+
+call plug#end()
 
 
-" additional plugins
-NeoBundle 'vim-scripts/L9'
-NeoBundle 'vim-scripts/ZoomWin'
-NeoBundle 'andrewpthorp/colors'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-rhubarb'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'mattn/gist-vim'
+" No longer used, saving for reference
+"NeoBundle 'kchmck/vim-coffee-script'
+"NeoBundle 'godlygeek/tabular'
+"NeoBundle 'mattn/gist-vim'
 " webapi-vim is for gist-vim
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'fatih/vim-go'
-NeoBundle '/usr/local/opt/fzf'
-NeoBundle 'junegunn/fzf.vim'
+"NeoBundle 'mattn/webapi-vim'
+"NeoBundle 'tpope/vim-surround'
+"NeoBundle 'gregsexton/gitv'
+"NeoBundle 'tpope/vim-commentary'
 "NeoBundle 'kien/ctrlp.vim'
 "NeoBundle 'FelikZ/ctrlp-py-matcher'
 "NeoBundle 'JazzCore/ctrlp-cmatcher'
 "NeoBundle 'scrooloose/syntastic'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'junegunn/goyo.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'jimenezrick/vimerl'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'wavded/vim-stylus'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mxw/vim-jsx'
+"NeoBundle 'mileszs/ack.vim'
+"NeoBundle 'Lokaltog/vim-easymotion'
+"NeoBundle 'elixir-lang/vim-elixir'
+"NeoBundle 'jimenezrick/vimerl'
+"NeoBundle 'majutsushi/tagbar'
+"NeoBundle 'wavded/vim-stylus'
 "NeoBundle 'janko-m/vim-test'
 "NeoBundle 'tpope/vim-dispatch'
 "NeoBundle 'benmills/vimux'
 "NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'christianrondeau/vim-base64'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'jacoborus/tender.vim'
-NeoBundle 'lifepillar/vim-solarized8'
+"NeoBundle 'christianrondeau/vim-base64'
+"NeoBundle 'morhetz/gruvbox'
+"NeoBundle 'jacoborus/tender.vim'
+"NeoBundle 'lifepillar/vim-solarized8'
 
-call neobundle#end()
+" Display (Syntax, Indentation, Filetypes, etc)
+" =============================================
 
-" prompt to install uninstalled bundles
-NeoBundleCheck
-" }}}
-
-" Display (Syntax, Indentation, Filetypes, etc) {{{
-" =================================================
-
-syntax on
+filetype plugin on
+filetype indent on
 syntax enable
-colorscheme Tomorrow-Night
-"let g:gruvbox_invert_selection = '0'
-"let g:gruvbox_contrast_dark = 'soft'
-"let g:gruvbox_contrast_light = 'hard'
-"colorscheme tender
-"set background=dark
-"call togglebg#map("<F5>")
 
-set incsearch        " Find the next match as we type the search
-set hlsearch         " Hilight searches by default
-set viminfo='100,f1  " Save up to 100 marks, enable capital marks
+" if $TERM =~ '256'
+"   let base16colorspace=256
+" endif
+" colorscheme base16-default-dark
+" colorscheme Tomorrow-Night
 
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
+colorscheme space_vim_theme
+set termguicolors
 
-filetype plugin indent on
-
-set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
-set nowrap                            " Don't wrap lines
-set linebreak                         " Wrap lines at convenient points
+hi Comment      cterm=italic
+hi Normal       ctermbg=NONE guibg=NONE
+hi LineNr       ctermbg=NONE guibg=NONE
+hi SignColumn   ctermbg=NONE guibg=NONE
+hi ColorColumn  guibg=#33363b
+hi Comment      guifg=#5C6370 ctermfg=59
 
 " filetype overrides
-autocmd! BufRead,BufNewFile *.jbuilder,Gemfile,Rakefile,Procfile,Guardfile setf ruby
-au BufRead,BufNewFile /^[A-Z]+\w*file$/ setf ruby
-au BufRead,BufNewFile *.thor set filetype=ruby
-au BufRead,BufNewFile Guardfile set filetype=ruby
-au BufRead,BufNewFile */nginx/*.conf set filetype=nginx
-au BufRead,BufNewFile *.zsh-theme set ft=zsh
-au BufRead,BufNewFile *.jbuilder setf ruby
-au BufRead,BufNewFile *.jeco setf html
-au BufRead,BufNewFile *.jss set filetype=css
-au BufRead,BufNewFile *.hbs set filetype=mustache
-au BufRead,BufNewFile *.go set filetype=go
-" }}}
+augroup filetypes
+  autocmd!
+  " autocmd FileType * setlocal formatprg=
+  autocmd BufReadPost * silent! lcd .
+  " Docker
+  autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
+  " Indent-based folding
+  autocmd BufRead,BufNewFile,BufWrite *.{coffee,json,py,yaml,yml} set foldmethod=indent
+  " JavaScript
+  autocmd BufRead,BufNewFile,BufWrite *.{js.asp,es6,jsx,mjs} set filetype=javascript
+  autocmd BufRead,BufNewFile,BufWrite .{babelrc,eslintrc,prettierrc} set filetype=json
+  autocmd BufRead,BufNewFile,BufWrite {*bashrc*,*.bash} set filetype=sh
+  autocmd BufWritePre *.js Prettier
+  autocmd BufWritePre *.jsx Prettier
+  " JSON
+  autocmd BufNewFile,BufRead *.json set filetype=json
+  autocmd FileType json setlocal formatprg=jq\ -sM\ .
+  " Writing
+  autocmd BufRead,BufNewFile,BufWrite *.md set syntax=markdown.vimwiki
+  autocmd Filetype md set wrap linebreak nolist nonumber norelativenumber spell textwidth=80
+  autocmd Filetype txt set wrap linebreak nolist spell textwidth=80
+  " Property lists
+  autocmd BufRead,BufNewFile,BufWrite *.{plist,xml} set filetype=xml
+  " Ruby
+  autocmd BufRead,BufNewFile,BufWrite Brewfile set syntax=ruby
+  autocmd BufRead,BufNewFile,BufWrite {Capfile,Gemfile,Guardfile,Procfile,Rakefile,Thorfile,Vagrantfile,.ru,.caprc,.irbrc,.jbuilder,.rake} set filetype=ruby
+augroup END
 
-" Copy filename to clipboard {{{
-" ==============================
-"
-" ,cs copies filename
-" ,cl copies the full path + filename
-"
-" Convert slashes to backslashes for Windows.
-if has('win32')
-  nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-else
-  nmap ,cs :let @*=expand("%")<CR>
-  nmap ,cl :let @*=expand("%:p")<CR>
-endif
-" }}}
 
-" Mouse {{{
-" =========
+" List Helpful (Custom) Commands:
+" ===============================
 
-" send more characters for redraws
-set ttyfast
+" Copy filename to keyboard
+nmap ,cs :let @*=expand("%")<CR>
 
-" enable mouse use in all modes
-set mouse=a
+" Copy full path + filename to keyboard
+nmap ,cl :let @*=expand("%:p")<CR>
 
-" set this to the name of your terminal that supports mouse codes.
-" must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-" don't set this if we are using Neovim
-if !has('nvim')
-  set ttymouse=xterm2
-endif
-" }}}
-
-" Completion {{{
-" ==============
-
-set wildmode=list:longest
-set wildmenu                    " Enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~     " Stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-" }}}
-
-" Custom Functions {{{
-" ====================
-
+" Pretty XML Indentation, not mapped, use :PrettyXML
 function! DoPrettyXML()
   " save the filetype so we can restore it later
   let l:origft = &ft
@@ -275,19 +268,15 @@ function! DoPrettyXML()
   " restore the filetype
   exe "set ft=" . l:origft
 endfunction
-
 command! PrettyXML call DoPrettyXML()
 
-" Super simple function to make URL Decoding easier (for where I need it).
-" This might already exist in vim, but I couldn't find it.
+" URL Decoding, not mapped, use :URLDecode
 function! URLDecode()
   exe "s/%2B/+/g"
   exe "s/%3D/=/g"
   exe "s/%0A//g"
 endfunction
-
 command! URLDecode call URLDecode()
-" }}}
 
 " Fix the issue where :W doesn't save.
 command! W  write

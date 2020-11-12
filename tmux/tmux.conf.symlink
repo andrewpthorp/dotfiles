@@ -47,15 +47,13 @@ bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded! Go Philli
 bind-key R      refresh-client
 bind-key a      send-key C-a
 
-unbind {
-bind-key {      swap-pane -U
-unbind }
-bind-key }      swap-pane -D
+# unbind {
+# bind-key {      swap-pane -U
+# unbind }
+# bind-key }      swap-pane -D
 
 ## messages
-set-option -g message-fg colour255
-set-option -g message-bg colour35
-set-option -g message-attr bright
+set-option -g message-style fg=colour255,bg=colour35,bright
 set-option -g display-time 1500
 
 # "I' == current window index
@@ -73,8 +71,7 @@ set-option -g display-time 1500
 set-option -g status on
 # set-option -g status-utf8 on
 set-option -g status-interval 300
-set-option -g status-fg colour245
-set-option -g status-bg colour235
+set-option -g status-style fg=colour245,bg=colour235
 
 set-option -g window-style 'bg=colour236'
 set-option -g window-active-style 'bg=colour235'
@@ -86,13 +83,11 @@ set-option -g status-right-length 200
 set-option -g status-left-length 120
 
 ## highlight active window
-set-option -g window-status-current-fg colour255
-set-option -g window-status-current-bg colour35
+set-option -g window-status-current-style fg=colour255,bg=colour35
 set-option -g window-status-current-format ' #I #W '
 
 ## highlight inactive colour243
-set-option -g window-status-fg colour245
-set-option -g window-status-bg default
+set-option -g window-status-style fg=colour245,bg=default
 set-option -g window-status-format ' #I #W '
 
 ## set window notifications
@@ -100,8 +95,7 @@ set-option -g visual-activity on
 # set-option -g visual-content on
 
 # Alerts broken with 1.6
-set-option -g window-status-bell-fg colour226
-set-option -g window-status-bell-bg colour23
+set-option -g window-status-bell-style fg=colour226,bg=colour23
 
 set-option -g monitor-activity off
 set-option -g automatic-rename off
@@ -126,11 +120,12 @@ set-option -g mode-keys vi
 # set-option -g history-limit 4096
 
 ## pane border and colors
-set-option -g pane-active-border-fg colour68
-set-option -g pane-border-fg colour240
+set-option -g pane-active-border-style fg=colour68
+set-option -g pane-border-style fg=colour240
 
 ## Copy/paste
 set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 ## Correct Colors
-set -g default-terminal "screen-256color"
+set -g default-terminal 'tmux-256color'
+set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'

@@ -29,21 +29,17 @@ Follow then instructions to install Homebrew from https://brew.sh, then
     # Change Shell to zsh
     chsh -s $(which zsh)
 
-    # Install NeoBundle (https://github.com/Shougo/neobundle.vim)
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    vim +NeoBundleInstall +qall
-
     # Install neovim python support
     pip2 install --user --upgrade neovim
-    
+    pip3 install --user pynvim
+
+    # Install vim-plug, follow directions on https://github.com/junegunn/vim-plug)
     # Install powerline, follow directions on https://github.com/powerline/powerline
     # Install powerline fonts (Droid Sans Mono, Liberation Mono)
 
 ## Other things to install
 
-    # pure-prompt (https://github.com/sindresorhus/pure)
-    npm install --global pure-prompt
-
+- iTerm2 base16-default-dark theme (https://github.com/martinlindhe/base16-iterm2)
 - iTerm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
 - Set the profile / fonts for iTerm in Profiles->Colors, Profiles-Text (Droid Sans Mono 10pt, Liberation Mono 13pt for Non-Ascii)
 
