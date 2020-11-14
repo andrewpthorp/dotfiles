@@ -78,7 +78,7 @@ nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
-nnoremap <c-p> :GFiles<CR>
+nnoremap <c-p> :Files<CR>
 
 " force my brain to stop using arrows and esc
 map <Left> <nop>
@@ -146,6 +146,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'prettier/vim-prettier'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+Plug 'luochen1990/rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'Lokaltog/vim-easymotion'
 
 call plug#end()
 
@@ -164,7 +169,6 @@ call plug#end()
 "NeoBundle 'JazzCore/ctrlp-cmatcher'
 "NeoBundle 'scrooloose/syntastic'
 "NeoBundle 'mileszs/ack.vim'
-"NeoBundle 'Lokaltog/vim-easymotion'
 "NeoBundle 'elixir-lang/vim-elixir'
 "NeoBundle 'jimenezrick/vimerl'
 "NeoBundle 'majutsushi/tagbar'

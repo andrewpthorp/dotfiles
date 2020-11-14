@@ -1,5 +1,7 @@
-" CtrlP Config
-" ============
+" ctrl-p was very slow, especially for pay-server, so I am no longer using it,
+" and using fzf in it's place. leaving this config here so I can go back.
+
+" ctrl-p config
 
 " Use tabs by default
 let g:ctrlp_open_new_file        = 't'

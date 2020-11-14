@@ -1,7 +1,9 @@
-" Shade out the non-matches by default
-hi EasyMotionShade          ctermbg=none    ctermfg=238
+let g:EasyMotion_smartcase = 1 " turn on case insensitive feature
+let g:EasyMotion_use_smartsign_us = 1 " 1 will match 1 and !
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_enter_jump_first = 1
 
-" Set Target to green, Group Target to Green and Yellow
-hi EasyMotionTarget         ctermbg=none    ctermfg=192
-hi EasyMotionTarget2First   ctermbg=none    ctermfg=192
-hi EasyMotionTarget2Second  ctermbg=none    ctermfg=214
+hi link EasyMotionShade NonText
+hi link EasyMotionTarget Search
