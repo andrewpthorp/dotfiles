@@ -1,4 +1,7 @@
-#># keybindings
+# ############################# #
+#           KEY BINDS           #
+# ############################# #
+
 unbind C-b
 unbind C-a
 unbind C-t
@@ -11,17 +14,17 @@ unbind Left
 unbind Down
 unbind =
 
+# Prefix is ctrl-a
 set-option -g prefix C-a # C-a for prefix just like screen
 
 # Split window 75/25
 bind-key C-t    split-window -p 25
-bind-key |      split-window -h
 bind-key \      split-window -h
+bind-key h      split-window -h
 bind-key -      split-window -v
+bind-key v      split-window -v
 
 # Cycle Panes
-# -r: can be repeated without pressing prefix
-#     again (500ms after last '-r' action or prefix)
 bind-key C-a    select-pane -t :.-
 
 # Resize Panes
@@ -43,18 +46,13 @@ bind-key >      swap-window -t :+
 bind-key n      command-prompt 'rename-window %%'
 bind-key N      command-prompt 'rename-session %%'
 bind-key Escape copy-mode -u
-bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded! Go Phillies!"
+bind-key r      source-file ~/.tmux.conf\; display-message " Reloaded ~/.tmux.conf"
 bind-key R      refresh-client
 bind-key a      send-key C-a
 
-# unbind {
-# bind-key {      swap-pane -U
-# unbind }
-# bind-key }      swap-pane -D
-
-## messages
-set-option -g message-style fg=colour255,bg=colour35,bright
-set-option -g display-time 1500
+# ############################# #
+#       STATUS BAR CONFIG       #
+# ############################# #
 
 # "I' == current window index
 # 'H' == Hostname
@@ -67,66 +65,61 @@ set-option -g display-time 1500
 # Where appropriate, special character sequences may be prefixed with a
 # number to specify the maximum length, in this line "#10W'.
 
-## set status bar
 set-option -g status on
-# set-option -g status-utf8 on
+set-option -g status-utf8 on
 set-option -g status-interval 300
-set-option -g status-style fg=colour245,bg=colour235
+set-option -g status-style fg=colour245,bg=terminal
 
-set-option -g window-style 'bg=colour236'
-set-option -g window-active-style 'bg=colour235'
+# Active Window
+set-option -g window-status-current-style fg=colour0,bg=colour10
+set-option -g window-status-current-format ' #I #W '
 
-# Set status
-set-option -g status-left '#[bg=colour35,fg=colour255] #S #[bg=default,fg=colour214] 9¾ ↯ '
-set-option -g status-right '#[fg=colour238] #[fg=colour238] [Sports] #[fg=default] #(sports) #[fg=colour238] [Today] #[fg=default] #(weather today_full) #[fg=colour238] [Date] #[fg=default]%Y-%m-%d %H:%M #(battery -o tmux -g colour35 -m colour35 -w colour196)'
+# Inactive Window
+set-option -g window-status-style fg=terminal,bg=terminal
+set-option -g window-status-format ' #I #W '
+
+# Variable status info (battery, weather, etc)
+set-option -g status-left '#[bg=terminal,fg=colour10] #S #[bg=terminal,fg=colour6] ↯  '
+set-option -g status-right '#[fg=colour10] [Weather] #[fg=default] #(weather today_full) #[fg=colour10] [Date] #[fg=default]%Y-%m-%d %H:%M #(battery -o tmux -g colour35 -m colour35 -w colour196)'
 set-option -g status-right-length 200
 set-option -g status-left-length 120
 
-## highlight active window
-set-option -g window-status-current-style fg=colour255,bg=colour35
-set-option -g window-status-current-format ' #I #W '
+# Message Bar
+set-option -g message-style fg=colour10,bg=colour237
+set-option -g display-time 1500
 
-## highlight inactive colour243
-set-option -g window-status-style fg=colour245,bg=default
-set-option -g window-status-format ' #I #W '
+# ############################# #
+#         WINDOW CONFIG         #
+# ############################# #
 
-## set window notifications
-set-option -g visual-activity on
-# set-option -g visual-content on
+# Windows (active-style is what you see with only 1 window)
+set-option -g window-style bg=colour236,fg=colour239
+set-option -g window-active-style bg=terminal,fg=terminal
 
-# Alerts broken with 1.6
-set-option -g window-status-bell-style fg=colour226,bg=colour23
+# Pane Borders (only when more than one window)
+set-option -g pane-active-border-style fg=colour10
+set-option -g pane-border-style fg=colour7
 
-set-option -g monitor-activity off
-set-option -g automatic-rename off
+# ############################# #
+#          TMUX CONFIG          #
+# ############################# #
 
-## tmux window titling for X
 set-option -g set-titles on
 set-option -g set-titles-string '#W'
-set-option -g automatic-rename on
-
-# starts windows at 1 not 0
+set-option -g monitor-activity off
+set-option -g automatic-rename off
 set-option -g base-index 1
 set-option -g pane-base-index 1
 
-## enable mouse
-# set-option -g mouse-select-pane on
-# set-option -g mouse-resize-pane on
-# set-option -g mouse-select-window on
 set-option -g mode-keys vi
-# set-option -g monitor-activity off
-# set-option -g monitor-content off
-# set-option -g status-keys vi
-# set-option -g history-limit 4096
 
-## pane border and colors
-set-option -g pane-active-border-style fg=colour68
-set-option -g pane-border-style fg=colour240
+# ############################# #
+#             UTILS             #
+# ############################# #
 
-## Copy/paste
+# Make sure copy/paste work
 set-option -g default-command "reattach-to-user-namespace -l zsh"
 
-## Correct Colors
+# Correct colors, italics, etc.
 set -g default-terminal 'xterm-256color'
 set -as terminal-overrides ',xterm*:RGB'
-# set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'

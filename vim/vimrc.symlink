@@ -112,52 +112,53 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Run PluginInstall if there are any missing plugins.
-" if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-"   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
-
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'mileszs/ack.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
-Plug 'liuchengxu/space-vim-theme'
-Plug 'vim-scripts/L9'
-Plug 'vim-scripts/ZoomWin'
-Plug 'andrewpthorp/colors'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'plasticboy/vim-markdown'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go'
-" Due to santa, need to brew install fzf. If not at stripe, can use:
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'prettier/vim-prettier'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-emoji'
+Plug 'leafgarland/typescript-vim'
+Plug 'lokaltog/vim-easymotion'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
 Plug 'luochen1990/rainbow'
+Plug 'majutsushi/tagbar'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdcommenter'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'prettier/vim-prettier'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/ZoomWin'
+
+" Due to santa, need to brew install fzf. If not at stripe, can use:
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'APZelos/blamer.nvim'
 
 call plug#end()
 
 
 " No longer used, saving for reference
-"NeoBundle 'kchmck/vim-coffee-script'
-"NeoBundle 'godlygeek/tabular'
 "NeoBundle 'mattn/gist-vim'
 " webapi-vim is for gist-vim
 "NeoBundle 'mattn/webapi-vim'
@@ -168,7 +169,6 @@ call plug#end()
 "NeoBundle 'FelikZ/ctrlp-py-matcher'
 "NeoBundle 'JazzCore/ctrlp-cmatcher'
 "NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'mileszs/ack.vim'
 "NeoBundle 'elixir-lang/vim-elixir'
 "NeoBundle 'jimenezrick/vimerl'
 "NeoBundle 'majutsushi/tagbar'
@@ -187,16 +187,19 @@ call plug#end()
 
 filetype plugin on
 filetype indent on
-syntax enable
 
-" if $TERM =~ '256'
-"   let base16colorspace=256
-" endif
-" colorscheme base16-default-dark
-" colorscheme Tomorrow-Night
-
-colorscheme space_vim_theme
 set termguicolors
+if $TERM =~ '256'
+  let base16colorspace=256
+endif
+function LoadColorscheme()
+  if filereadable(expand("~/.vimrc_background"))
+    source ~/.vimrc_background
+  else
+    colorscheme base16-snazzy
+  endif
+endfunction
+exec LoadColorscheme()
 
 hi Comment      cterm=italic
 hi Normal       ctermbg=NONE guibg=NONE
