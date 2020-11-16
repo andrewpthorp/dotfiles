@@ -1,7 +1,6 @@
 " Customization
 "
-let g:airline_theme = 'base16'
-"let g:airline_theme = 'tender'
+let g:airline_theme = 'base16_seti'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -32,7 +31,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " ascii: 11 pt. Fira Mono
 " non-ascii: 13 pt. Literation Mono for Powerline
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 
 " Custom functions
 "
