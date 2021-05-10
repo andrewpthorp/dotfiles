@@ -47,3 +47,8 @@ function title() {
   esac
 }
 
+
+# The default, as of 2020-11-25, is:
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'

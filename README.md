@@ -36,6 +36,7 @@ Follow then instructions to install Homebrew from https://brew.sh, then
     # Install vim-plug, follow directions on https://github.com/junegunn/vim-plug)
     # Install powerline, follow directions on https://github.com/powerline/powerline
     # Install powerline fonts (Droid Sans Mono, Liberation Mono)
+    # Install rust, then `cargo install proximity-sort`
 
 ## Other things to install
 

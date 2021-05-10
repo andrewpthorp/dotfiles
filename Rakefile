@@ -54,3 +54,7 @@ task :uninstall do
 end
 
 task :default => 'install'
+
+task :brew do
+  `brew bundle dump -f`
+end

@@ -1,1 +1,57 @@
-let g:fzf_layout = { 'down': '~40%' }
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_sink = 'e'
+
+" floating window
+let g:fzf_layout = { 'down': '25%' }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+function! g:FzfFilesSource()
+  let l:base = fnamemodify(expand('%'), ':h:.:S')
+  let l:proximity_sort_path = $HOME . '/.cargo/bin/proximity-sort'
+
+  let l:rg_command = "rg --files --hidden --glob '!{node_modules/*,.git/*}'"
+
+  "if base == '.'
+  "  return l:rg_command
+  "else
+  "  return printf('%s | %s %s', l:rg_command, l:proximity_sort_path, expand('%'))
+  "endif
+  return l:rg_command
+endfunction
+
+
+let g:fzf_preview_cmd = g:plug_home . "/fzf.vim/bin/preview.sh {}"
+
+noremap <C-b> :Buffers<CR>
+
+" If in NERD_tree buffer, move and open file elsewhere
+noremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":call fzf#vim#files('', { 'source': g:FzfFilesSource(),
+      \ 'options': [
+      \   '--tiebreak=index', '--preview', g:fzf_preview_cmd
+      \  ]})\<cr>"
+

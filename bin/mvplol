@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+# Get the input
+input = ARGV.join(" ")
+
+# Convert it to cam newtons stupid ass shit
+codes = {
+  'a' => %w{Â À Á Ä â á å},
+  'b' => %w{ß},
+  'c' => %w{Ç ç č},
+  'd' => %w{D d},
+  'e' => %w{è é ê ë £},
+  'f' => %w{f F},
+  'g' => %w{g G},
+  'h' => %w{h H},
+  'i' => %w{í î Î Į},
+  'j' => %w{j J},
+  'k' => %w{k K},
+  'l' => %w{Ł ł},
+  'm' => %w{m M},
+  'n' => %w{Ń ñ},
+  'o' => %w{ø Ø ô ð Ö},
+  'p' => %w{Þ p P},
+  'q' => %w{q Q},
+  'r' => %w{r R},
+  's' => %w{§ ś},
+  't' => %w{t T},
+  'u' => %w{Ü ü },
+  'v' => %w{v V},
+  'w' => %w{w W},
+  'x' => %w{× X x},
+  'y' => %w{¥ ÿ Ý},
+  'z' => %w{z Z},
+}
+
+new_str = ""
+
+input.chars.each do |c|
+  if codes.key?(c.downcase)
+    new_str << codes[c.downcase].sample
+  else
+    new_str << c
+  end
+end
+
+puts "Copied this bullshit to clipboard:"
+puts new_str
+
+system "echo #{new_str} | pbcopy"
+
+exit(0)

@@ -1,1 +1,4 @@
 Pry.config.theme = "inkpot"
+
+USD = Opus::Ops::CardsExpansion::USDirect
+MigrationRecord = USD::Private::Model::MigrationRecord

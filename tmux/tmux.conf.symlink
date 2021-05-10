@@ -107,7 +107,7 @@ set-option -g pane-border-style fg=colour7
 set-option -g set-titles on
 set-option -g set-titles-string '#W'
 set-option -g monitor-activity off
-set-option -g automatic-rename off
+set-option -g automatic-rename on
 set-option -g base-index 1
 set-option -g pane-base-index 1
 

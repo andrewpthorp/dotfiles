@@ -19,7 +19,6 @@ set mouse=a                     " enable mouse use in all modes
 set lazyredraw
 set splitright                  " opens vertical split right of current window
 set splitbelow                  " opens horizontal split below current window
-set secure                      " see :help secure
 set showmode                    " show current mode down the bottom
 set autoread                    " reload files changed outside vim
 set clipboard=unnamed           " Use system clipboard
@@ -30,6 +29,7 @@ set nobackup                    " dont keep a backup after overwriting a file
 set nowritebackup               " dont write a backup before overwriting a file
 set noswapfile                  " dont use a swap file
 set exrc
+set secure                      " see :help secure
 
 if has('nvim')
   set inccommand=split
@@ -78,7 +78,6 @@ nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
-nnoremap <c-p> :Files<CR>
 
 " force my brain to stop using arrows and esc
 map <Left> <nop>
@@ -121,6 +120,7 @@ Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -129,9 +129,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-emoji'
 Plug 'leafgarland/typescript-vim'
 Plug 'lokaltog/vim-easymotion'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
-Plug 'majutsushi/tagbar'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
@@ -150,6 +149,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/ZoomWin'
+
+"Trying CoC instead of ctags
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'majutsushi/tagbar'
 
 " Due to santa, need to brew install fzf. If not at stripe, can use:
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -242,10 +245,8 @@ augroup END
 " ===============================
 
 " Copy filename to keyboard
-nmap ,cs :let @*=expand("%")<CR>
-
-" Copy full path + filename to keyboard
-nmap ,cl :let @*=expand("%:p")<CR>
+nmap <leader><leader>cs :let @*=expand("%")<CR>
+nmap <leader><leader>cl :let @*=expand("%:p")<CR>
 
 " Pretty XML Indentation, not mapped, use :PrettyXML
 function! DoPrettyXML()

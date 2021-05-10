@@ -2,18 +2,20 @@
 "
 let g:airline_theme = 'base16_seti'
 
+set noshowmode " only show the current mode with airline
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
 let g:airline_symbols.linenr    = "L#"
 let g:airline_symbols.paste     = 'ρ'
-let g:airline_detect_modified   = 0
+let g:airline_detect_modified   = 1
 let g:airline_inactive_collapse = 0
 
 " Extensions
 "
-let g:airline#extensions#tabline#enabled          = 1
+let g:airline#extensions#tabline#enabled          = 0
 let g:airline#extensions#tabline#buffer_idx_mode  = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#tab_min_count    = 2
