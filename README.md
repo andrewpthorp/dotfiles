@@ -13,12 +13,6 @@ Inspiration came from the following:
 * Slack (https://www.slack.com)
 * Spectacle (https://www.spectacleapp.com/)
 
-## Homebrew
-
-Follow then instructions to install Homebrew from https://brew.sh, then
-
-    brew bundle
-
 ## Installation
 
     # Install dotfiles
@@ -26,8 +20,19 @@ Follow then instructions to install Homebrew from https://brew.sh, then
     cd ~/.dotfiles
     rake install
 
+    # Follow the instructions to install Homebrew from https://brew.sh, then
+    brew bundle
+
     # Change Shell to zsh
     chsh -s $(which zsh)
+
+    # Install zgen (zsh plugin manager)
+    https://github.com/tarjoilija/zgen
+
+## Configure Neovim
+
+    # Install pip2 (if we don't have it)
+    sudo python2 -m ensurepip --upgrade
 
     # Install neovim python support
     pip2 install --user --upgrade neovim
@@ -36,7 +41,13 @@ Follow then instructions to install Homebrew from https://brew.sh, then
     # Install vim-plug, follow directions on https://github.com/junegunn/vim-plug)
     # Install powerline, follow directions on https://github.com/powerline/powerline
     # Install powerline fonts (Droid Sans Mono, Liberation Mono)
-    # Install rust, then `cargo install proximity-sort`
+
+    cd $HOME/.config/nvim
+    ln -s ~/.vim/plugin plugin
+    ln -s ~/.vimrc init.vim
+
+    # We have rust installed from `brew bundle`
+    cargo install proximity-sort
 
 ## Other things to install
 

@@ -1,7 +1,4 @@
-export PATH="$HOME/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/usr/local/mysql/bin:/usr/local/share/python"
-export PATH="$PATH:$HOME/stripe/password-vault/bin"
-export PATH="$PATH:$HOME/stripe/space-commander/bin"
-export PATH="$PATH:$HOME/stripe/henson/bin"
+export PATH="$HOME/.dotfiles/bin:/opt/homebrew/bin/:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/usr/local/mysql/bin:/usr/local/share/python"
 export PATH="$PATH:$HOME/code/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -67,19 +64,23 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # brew install zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Do this whenever we start a new shell
 fortune | cowsay -f dragon
 
-### Added by Zplugin's installer
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin installer's chunk
+# Zgen (https://github.com/tarjoilija/zgen)
+source "${HOME}/.zgen/zgen.zsh"
 
-### Add zplugin stuff
-zplugin load agkozak/agkozak-zsh-prompt
+# if the init script doesn't exist
+if ! zgen saved; then
+
+  # specify plugins here
+  zgen load agkozak/agkozak-zsh-prompt
+
+  # generate the init script from plugins above
+  zgen save
+fi
 
 # Init nodenv to manage node versions
 eval "$(nodenv init -)"
