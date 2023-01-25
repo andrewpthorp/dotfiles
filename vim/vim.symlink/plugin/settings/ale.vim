@@ -1,20 +1,17 @@
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%] (ALE)'
+let g:ale_echo_msg_format = '(ALE) [%linter%] %s [%severity%]'
 
 if !exists("g:ale_linters")
     let g:ale_linters = {}
 endif
 
-call ale#linter#Define('ruby', {
-\   'name': 'sorbet-payserver',
-\   'lsp': 'stdio',
-\   'executable': 'true',
-\   'command': 'pay exec scripts/bin/typecheck --lsp',
-\   'language': 'ruby',
-\   'project_root': $HOME . '/stripe/pay-server',
-\})
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint'],
+\}
 
-if fnamemodify(getcwd(), ':p') =~ $HOME.'/stripe/pay-server'
-  let g:ale_linters['ruby'] = ['sorbet-payserver']
-end
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1

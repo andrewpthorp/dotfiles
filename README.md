@@ -31,18 +31,14 @@ Inspiration came from the following:
 
 ## Configure Neovim
 
-    # Install pip2 (if we don't have it)
-    sudo python2 -m ensurepip --upgrade
-
     # Install neovim python support
-    pip2 install --user --upgrade neovim
     pip3 install --user pynvim
 
     # Install vim-plug, follow directions on https://github.com/junegunn/vim-plug)
     # Install powerline, follow directions on https://github.com/powerline/powerline
     # Install powerline fonts (Droid Sans Mono, Liberation Mono)
 
-    cd $HOME/.config/nvim
+    cd $HOME/.config/nvim (mkdir `nvim` if it does not exist)
     ln -s ~/.vim/plugin plugin
     ln -s ~/.vimrc init.vim
 

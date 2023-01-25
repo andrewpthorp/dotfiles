@@ -11,11 +11,15 @@ let g:ctrlp_show_hidden          = 1
 
 let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:25,results:25'
 
-if !has('python')
-  echo 'In order to use pymatcher plugin, you need +python compiled vim'
-else
-  let g:ctrlp_match_func = { 'match' : 'pymatcher#PyMatch' }
-endif
+" I'm not sure if `has('python')` is still valid, since AFAICT everythign is on
+" python3 now. So I might just need to swap this to `has('python3')` if I ever
+" go back to Ctrl-P.
+"
+" if !has('python')
+"   echo 'In order to use pymatcher plugin, you need +python compiled vim'
+" else
+"   let g:ctrlp_match_func = { 'match' : 'pymatcher#PyMatch' }
+" endif
 
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
