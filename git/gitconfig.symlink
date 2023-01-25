@@ -1,7 +1,6 @@
 [user]
   name = Andrew Thorp
-  email = apt@stripe.com
-	signingKey = 55EAA8278004EC36B8F904AB6489806ACBA5FED7
+  email = andrewpthorp@gmail.com
 [alias]
   stat = status
   co = checkout
@@ -22,3 +21,5 @@
 	default = current
 [pull]
   rebase = true
+[url "git@github.com:meterup"]
+ insteadOf = https://github.com/meterup
