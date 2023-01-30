@@ -9,9 +9,10 @@ Inspiration came from the following:
 ## Apps to Remember
 
 * Dropbox (https://www.dropbox.com/)
-* iTerm2 (http://www.iterm2.com/)
+* Hyper (https://hyper.is)
 * Slack (https://www.slack.com)
 * Spectacle (https://www.spectacleapp.com/)
+* Logitech GHub (https://www.logitechg.com/)
 
 ## Installation
 
@@ -45,13 +46,6 @@ Inspiration came from the following:
     # We have rust installed from `brew bundle`
     cargo install proximity-sort
 
-## Other things to install
-
-- iTerm2 base16-default-dark theme (https://github.com/martinlindhe/base16-iterm2)
-- iTerm2 Tomorrow Night theme (https://github.com/chriskempson/tomorrow-theme)
-- Set the profile / fonts for iTerm in Profiles->Colors, Profiles-Text (Droid Sans Mono 10pt, Liberation Mono 13pt for Non-Ascii)
-
 ## Problems
 
 Any problems I encounter will be documented in `PROBLEMS.md` so I can recall them next time.
-

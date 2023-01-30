@@ -85,3 +85,8 @@ fi
 # Init nodenv to manage node versions
 eval "$(nodenv init -)"
 
+
+# pnpm
+export PNPM_HOME="/Users/apt/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
