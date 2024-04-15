@@ -45,8 +45,7 @@ GREEN='\033[0;32m'
 DEFAULT='\033[0m'
 
 PROJECT_DIRS=(
-  ~/stripe/
-  ~/code/elixir/
+  ~/code/meter/
   ~/code/personal/
   ~/code/go/src/github.com/andrewpthorp/
 )

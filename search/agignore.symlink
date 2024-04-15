@@ -1,1 +1,8 @@
 Godeps
+dist
+*bundle.js
+bindata.go
+rotunda.css
+*.min.css
+*.min.js
+*.tsbuildinfo
