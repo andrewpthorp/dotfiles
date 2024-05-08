@@ -1,7 +1,6 @@
 #compdef tl
 
 # TODO: Use $PROJECT_PATH or similar to handle these.
-compadd `ls ~/stripe`
 compadd `ls ~/code/personal`
 compadd `ls ~/code/go/src/github.com/andrewpthorp`
 
