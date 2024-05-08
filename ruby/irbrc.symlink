@@ -23,6 +23,7 @@ end
 # load hirb
 
 IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:USE_AUTOCOMPLETE] = false
 
 if ENV.include?('RAILS_ENV')
   if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
