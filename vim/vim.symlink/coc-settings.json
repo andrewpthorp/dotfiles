@@ -1,9 +1,0 @@
-{
-  "languageserver": {},
-  "diagnostic.displayByAle": true,
-  "coc.preferences.previewAutoClose": false,
-  "suggest.triggerCompletionWait": 300,
-  "suggest.echodocSupport": true,
-  "suggest.noselect": true,
-  "suggest.enablePreview": true
-}

@@ -138,8 +138,8 @@ module.exports = {
     //   `@company/project`
     //   `project#1.0.1`
   plugins: [
-    "hyperterm-base16-tomorrow-night",
-    // "hyperpower" // adds fun stuff while you type, `wow` enables wow mode (shakes)
+      // "hyperpower" // adds fun stuff while you type, `wow` enables wow mode (shakes)
+      "hyper-material-theme"
   ],
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here

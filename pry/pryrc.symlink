@@ -1,1 +1,8 @@
+begin
+  require 'awesome_print'
+  AwesomePrint.pry!
+rescue LoadError
+  puts "Add awesome_print to Gemfile for awesome printing"
+end
+
 Pry.config.theme = "inkpot"

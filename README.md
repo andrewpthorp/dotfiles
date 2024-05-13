@@ -2,7 +2,6 @@
 
 Inspiration came from the following:
 
-* http://dotfiles.github.com/
 * https://github.com/holman/dotfiles
 * https://github.com/pengwynn/dotfiles
 
@@ -45,6 +44,14 @@ Inspiration came from the following:
 
     # We have rust installed from `brew bundle`
     cargo install proximity-sort
+
+## Ruby
+
+    # The following gems should be installed whenever a new version of ruby is
+    # installed:
+    #
+    # - awesome_print
+    # - rufo
 
 ## Problems
 

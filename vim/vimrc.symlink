@@ -119,8 +119,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
-Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -147,6 +148,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/ZoomWin'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'github/copilot.vim'
 
 "Trying CoC instead of ctags
 "Plug 'ludovicchabant/vim-gutentags'
@@ -193,7 +199,10 @@ set termguicolors
 if $TERM =~ '256'
   let base16colorspace=256
 endif
+" lightmode
 colorscheme base16-tomorrow-night
+" darkmode
+" colorscheme base16-material
 
 hi Comment      cterm=italic
 hi Normal       ctermbg=NONE guibg=NONE
@@ -279,3 +288,79 @@ command! URLDecode call URLDecode()
 
 " Fix the issue where :W doesn't save.
 command! W  write
+
+" LUA LSP STUFF
+
+lua << EOF
+
+  local lspconfig = require('lspconfig')
+  local lsp_servers = {
+		'eslint', -- https://github.com/hrsh7th/vscode-langservers-extracted
+		'html', -- https://github.com/hrsh7th/vscode-langservers-extracted
+		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
+		'tsserver', -- https://github.com/typescript-language-server/typescript-language-server
+		-- 'denols', -- https://github.com/denoland/deno
+	}
+
+	for _, lsp in ipairs(lsp_servers) do
+		lspconfig[lsp].setup {
+			on_attach = lspconfig_on_attach,
+			capabilities = lspconfig_capabilities,
+		}
+	end
+
+  local luasnip = require 'LuaSnip'
+
+  local has_words_before = function()
+		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+	end
+
+  -- nvim-cmp
+  local cmp = require 'cmp'
+	cmp.setup {
+		snippet = {
+			expand = function(args)
+				luasnip.lsp_expand(args.body)
+			end,
+		},
+		preselect = cmp.PreselectMode.None,
+		mapping = cmp.mapping.preset.insert({
+			['<C-p>'] = cmp.mapping.select_prev_item(),
+			['<C-n>'] = cmp.mapping.select_next_item(),
+			['<C-d>'] = cmp.mapping.scroll_docs(-4),
+			['<C-f>'] = cmp.mapping.scroll_docs(4),
+			['<C-Space>'] = cmp.mapping.complete(),
+			['<C-e>'] = cmp.mapping.close(),
+			['<CR>'] = cmp.mapping.confirm {
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = true,
+			},
+			['<Tab>'] = function(fallback)
+				if cmp.visible() then
+				cmp.select_next_item()
+				elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+				elseif has_words_before() then
+				cmp.complete()
+				else
+				fallback()
+				end
+			end,
+			['<S-Tab>'] = function(fallback)
+				if cmp.visible() then
+				cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+				else
+				fallback()
+				end
+			end,
+		}),
+		sources = {
+			{ name = 'nvim_lsp' },
+			{ name = 'luasnip' },
+		},
+	}
+
+EOF

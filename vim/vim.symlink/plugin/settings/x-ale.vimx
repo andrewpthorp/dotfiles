@@ -1,5 +1,5 @@
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = '(ALE) E'
+let g:ale_echo_msg_warning_str = '(ALE) W'
 let g:ale_echo_msg_format = '(ALE) [%linter%] %s [%severity%]'
 
 if !exists("g:ale_linters")
@@ -8,9 +8,10 @@ endif
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
-\   'typescriptreact': ['prettier', 'eslint'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
+\   'ruby': ['rufo'],
 \}
 
 " Set this variable to 1 to fix files when you save them.
