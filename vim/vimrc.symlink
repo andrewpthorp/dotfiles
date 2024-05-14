@@ -36,7 +36,8 @@ if has('nvim')
 endif
 
 " Line Numbers, Marks, etc
-set number                      " show line numbers, (relativelinenumber)
+set number                      " show line numbers
+set relativenumber              " show relative line numbers
 set scrolloff=10                " show 10 lines around cursor (scroll close to margins)
 set sidescrolloff=25            " same as scrolloff, but for horizontal
 set viminfo='100,f1             " save up to 100 marks, enable capital marks
@@ -78,6 +79,7 @@ nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
+nnoremap <silent> <leader>x :exit<CR>
 
 " force my brain to stop using arrows and esc
 map <Left> <nop>
@@ -118,7 +120,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'chriskempson/base16-vim'
 "Plug 'Quramy/vim-js-pretty-template'
 " Plug 'dense-analysis/ale'
@@ -144,8 +146,6 @@ Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
@@ -155,16 +155,13 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'github/copilot.vim'
-
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': 'latest'}
-
-"Trying CoC instead of ctags
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'majutsushi/tagbar'
-" Due to santa, need to brew install fzf. If not at stripe, can use:
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6'}
 Plug 'APZelos/blamer.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'rose-pine/neovim'
+Plug 'mbbill/undotree'
 
 call plug#end()
 
@@ -178,9 +175,8 @@ set termguicolors
 if $TERM =~ '256'
   let base16colorspace=256
 endif
-colorscheme base16-material
-nmap <leader><leader>d :colorscheme base16-material<CR>
-nmap <leader><leader>l :colorscheme base16-material-lighter<CR>
+nmap <leader><leader>d :colorscheme rose-pine-main<CR>
+nmap <leader><leader>l :colorscheme rose-pine-dawn<CR>
 
 hi Comment      cterm=italic
 hi Normal       ctermbg=NONE guibg=NONE
@@ -268,8 +264,6 @@ command! URLDecode call URLDecode()
 " Fix the issue where :W doesn't save.
 command! W  write
 
-" LUA LSP STUFF
-
 lua << EOF
 
   local lspconfig = require('lspconfig')
@@ -278,6 +272,7 @@ lua << EOF
 		'html', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'tsserver', -- https://github.com/typescript-language-server/typescript-language-server
+    'graphql',
 		-- 'denols', -- https://github.com/denoland/deno
 	}
 
@@ -341,5 +336,143 @@ lua << EOF
 			{ name = 'luasnip' },
 		},
 	}
+
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = "all",
+    ignore_install = { "phpdoc" },
+    highlight = {
+      enable = true, -- false will disable the whole extension
+
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = 'gnn',
+        node_incremental = 'grn',
+        scope_incremental = 'grc',
+        node_decremental = 'grm',
+      },
+    },
+    -- indent = {
+    -- enable = true,
+    -- },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']m'] = '@function.outer',
+          [']]'] = '@class.outer',
+        },
+        goto_next_end = {
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
+        },
+        goto_previous_start = {
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
+        },
+        goto_previous_end = {
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
+        },
+      },
+    },
+    -- nvim-ts-rainbow
+    rainbow = {
+      enable = false,
+      extended_mode = true,
+    },
+    -- nvim-ts-autotag
+    autotag = {
+      enable = true,
+      enable_close_on_slash = false,
+    },
+  }
+
+  require("rose-pine").setup({
+  variant = "auto", -- auto, main, moon, or dawn
+  dark_variant = "main", -- main, moon, or dawn
+  dim_inactive_windows = false,
+  extend_background_behind_borders = true,
+
+  enable = {
+    terminal = true,
+    legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+    migrations = true, -- Handle deprecated options automatically
+  },
+
+  styles = {
+    bold = true,
+    italic = true,
+    transparency = false,
+  },
+
+  groups = {
+    border = "muted",
+    link = "iris",
+    panel = "surface",
+
+    error = "love",
+    hint = "iris",
+    info = "foam",
+    note = "pine",
+    todo = "rose",
+    warn = "gold",
+
+    git_add = "foam",
+    git_change = "rose",
+    git_delete = "love",
+    git_dirty = "rose",
+    git_ignore = "muted",
+    git_merge = "iris",
+    git_rename = "pine",
+    git_stage = "iris",
+    git_text = "rose",
+    git_untracked = "subtle",
+
+    h1 = "iris",
+    h2 = "foam",
+    h3 = "rose",
+    h4 = "gold",
+    h5 = "pine",
+    h6 = "foam",
+  },
+
+  highlight_groups = {
+    -- Comment = { fg = "foam" },
+    -- VertSplit = { fg = "muted", bg = "muted" },
+  },
+
+  before_highlight = function(group, highlight, palette)
+  -- Disable all undercurls
+  -- if highlight.undercurl then
+  --     highlight.undercurl = false
+  -- end
+  --
+  -- Change palette colour
+  -- if highlight.fg == palette.pine then
+  --     highlight.fg = palette.foam
+  -- end
+  end,
+  })
+
+  vim.cmd("colorscheme rose-pine")
 
 EOF

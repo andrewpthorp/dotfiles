@@ -35,7 +35,7 @@ module.exports = {
         // terminal selection color
         selectionColor: 'rgba(248,28,229,0.3)',
         // border color (window, tabs)
-        borderColor: '#333',
+        borderColor: '#f0f0f0',
         // custom CSS to embed in the main window
         css: '',
         // custom CSS to embed in the terminal window
@@ -50,7 +50,7 @@ module.exports = {
         // default: `true` (without backticks and without quotes) on Windows and Linux, ignored on macOS
         showWindowControls: '',
         // custom padding (CSS format, i.e.: `top right bottom left`)
-        padding: '6px 8px',
+        padding: '8px 16px',
         // the full list. if you're going to provide the full color palette,
         // including the 6 x 6 color cubes and the grayscale map, just provide
         // an array here instead of a color map object
@@ -139,7 +139,7 @@ module.exports = {
     //   `project#1.0.1`
   plugins: [
       // "hyperpower" // adds fun stuff while you type, `wow` enables wow mode (shakes)
-      "hyper-material-theme"
+      "hyper-rose-pine"
   ],
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here
