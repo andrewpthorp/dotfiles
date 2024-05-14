@@ -118,7 +118,9 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
+" Plug 'sheerun/vim-polyglot'
 Plug 'chriskempson/base16-vim'
+"Plug 'Quramy/vim-js-pretty-template'
 " Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
@@ -176,10 +178,9 @@ set termguicolors
 if $TERM =~ '256'
   let base16colorspace=256
 endif
-" lightmode
 colorscheme base16-material
-" darkmode
-" colorscheme base16-material
+nmap <leader><leader>d :colorscheme base16-material<CR>
+nmap <leader><leader>l :colorscheme base16-material-lighter<CR>
 
 hi Comment      cterm=italic
 hi Normal       ctermbg=NONE guibg=NONE
@@ -199,6 +200,7 @@ augroup filetypes
   autocmd BufRead,BufNewFile,BufWrite *.{coffee,json,py,yaml,yml} set foldmethod=indent
   " JavaScript
   autocmd BufRead,BufNewFile,BufWrite *.{js.asp,es6,jsx,mjs} set filetype=javascript
+  autocmd BufRead,BufNewFile,BufWrite *.{js.asp,es6,jsx,mjs}.symlink set filetype=javascript
   autocmd BufRead,BufNewFile,BufWrite .{babelrc,eslintrc,prettierrc} set filetype=json
   autocmd BufRead,BufNewFile,BufWrite {*bashrc*,*.bash} set filetype=sh
   autocmd BufWritePre *.js Prettier
