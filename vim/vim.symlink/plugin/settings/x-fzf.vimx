@@ -47,11 +47,11 @@ endfunction
 
 let g:fzf_preview_cmd = g:plug_home . "/fzf.vim/bin/preview.sh {}"
 
-noremap <C-b> :Buffers<CR>
+" noremap <C-b> :Buffers<CR>
 
 " If in NERD_tree buffer, move and open file elsewhere
-noremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":call fzf#vim#files('', { 'source': g:FzfFilesSource(),
-      \ 'options': [
-      \   '--tiebreak=index', '--preview', g:fzf_preview_cmd
-      \  ]})\<cr>"
+" noremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":call fzf#vim#files('', { 'source': g:FzfFilesSource(),
+"      \ 'options': [
+"      \   '--tiebreak=index', '--preview', g:fzf_preview_cmd
+"      \  ]})\<cr>"
 

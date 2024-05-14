@@ -61,3 +61,4 @@ brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "heroku/brew/heroku"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+brew "ripgrep"

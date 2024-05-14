@@ -18,8 +18,8 @@ unbind =
 set-option -g prefix C-a # C-a for prefix just like screen
 
 # Split window 75/25
-bind-key C-t    split-window -p 25
-bind-key \      split-window -h # This does not work?
+bind-key C-t    split-window -p 25%
+bind-key \\     split-window -h
 bind-key h      split-window -h
 bind-key -      split-window -v
 bind-key v      split-window -v
@@ -79,7 +79,7 @@ set-option -g window-status-format ' #I #W '
 
 # Variable status info (battery, weather, etc)
 set-option -g status-left '#[bg=terminal,fg=colour10] #S #[bg=terminal,fg=colour6] ↯  '
-set-option -g status-right '#[fg=colour10] [Date] #[fg=default]%Y-%m-%d %H:%M #(battery -o tmux -g colour35 -m colour35 -w colour196)'
+set-option -g status-right '#[fg=colour10] #[fg=default]%Y-%m-%d %H:%M #(battery -o tmux -g colour35 -m colour35 -w colour196)'
 set-option -g status-right-length 200
 set-option -g status-left-length 120
 

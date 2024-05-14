@@ -19,7 +19,7 @@ set mouse=a                     " enable mouse use in all modes
 set lazyredraw
 set splitright                  " opens vertical split right of current window
 set splitbelow                  " opens horizontal split below current window
-set showmode                    " show current mode down the bottom
+set noshowmode                  " don't show current mode down the bottom
 set autoread                    " reload files changed outside vim
 set clipboard=unnamed           " Use system clipboard
 set hidden                      " buffers can exist in the background
@@ -116,19 +116,18 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 " Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'fatih/vim-go'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-emoji'
-Plug 'leafgarland/typescript-vim'
 Plug 'lokaltog/vim-easymotion'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
@@ -143,8 +142,9 @@ Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/ZoomWin'
@@ -154,40 +154,17 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'github/copilot.vim'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': 'latest'}
+
 "Trying CoC instead of ctags
 "Plug 'ludovicchabant/vim-gutentags'
 "Plug 'majutsushi/tagbar'
-
 " Due to santa, need to brew install fzf. If not at stripe, can use:
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'APZelos/blamer.nvim'
+Plug 'APZelos/blamer.nvim'
 
 call plug#end()
-
-
-" No longer used, saving for reference
-"NeoBundle 'mattn/gist-vim'
-" webapi-vim is for gist-vim
-"NeoBundle 'mattn/webapi-vim'
-"NeoBundle 'tpope/vim-surround'
-"NeoBundle 'gregsexton/gitv'
-"NeoBundle 'tpope/vim-commentary'
-"NeoBundle 'kien/ctrlp.vim'
-"NeoBundle 'FelikZ/ctrlp-py-matcher'
-"NeoBundle 'JazzCore/ctrlp-cmatcher'
-"NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'elixir-lang/vim-elixir'
-"NeoBundle 'jimenezrick/vimerl'
-"NeoBundle 'majutsushi/tagbar'
-"NeoBundle 'wavded/vim-stylus'
-"NeoBundle 'janko-m/vim-test'
-"NeoBundle 'tpope/vim-dispatch'
-"NeoBundle 'benmills/vimux'
-"NeoBundle 'kshenoy/vim-signature'
-"NeoBundle 'christianrondeau/vim-base64'
-"NeoBundle 'morhetz/gruvbox'
-"NeoBundle 'jacoborus/tender.vim'
-"NeoBundle 'lifepillar/vim-solarized8'
 
 " Display (Syntax, Indentation, Filetypes, etc)
 " =============================================
@@ -200,7 +177,7 @@ if $TERM =~ '256'
   let base16colorspace=256
 endif
 " lightmode
-colorscheme base16-tomorrow-night
+colorscheme base16-material
 " darkmode
 " colorscheme base16-material
 
