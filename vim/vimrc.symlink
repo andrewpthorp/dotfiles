@@ -177,6 +177,7 @@ if $TERM =~ '256'
 endif
 nmap <leader><leader>d :colorscheme rose-pine-main<CR>
 nmap <leader><leader>l :colorscheme rose-pine-dawn<CR>
+nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
 hi Comment      cterm=italic
 hi Normal       ctermbg=NONE guibg=NONE

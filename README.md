@@ -5,14 +5,6 @@ Inspiration came from the following:
 * https://github.com/holman/dotfiles
 * https://github.com/pengwynn/dotfiles
 
-## Apps to Remember
-
-* Dropbox (https://www.dropbox.com/)
-* Hyper (https://hyper.is)
-* Slack (https://www.slack.com)
-* Spectacle (https://www.spectacleapp.com/)
-* Logitech GHub (https://www.logitechg.com/)
-
 ## Installation
 
     # Install dotfiles
