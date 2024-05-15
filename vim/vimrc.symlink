@@ -201,6 +201,8 @@ augroup filetypes
   autocmd BufRead,BufNewFile,BufWrite {*bashrc*,*.bash} set filetype=sh
   autocmd BufWritePre *.js Prettier
   autocmd BufWritePre *.jsx Prettier
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
   " JSON
   autocmd BufNewFile,BufRead *.json set filetype=json
   autocmd FileType json setlocal formatprg=jq\ -sM\ .
@@ -273,6 +275,7 @@ lua << EOF
 		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'tsserver', -- https://github.com/typescript-language-server/typescript-language-server
     'graphql',
+    'ruby_lsp',
 		-- 'denols', -- https://github.com/denoland/deno
 	}
 

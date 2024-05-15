@@ -1,5 +1,5 @@
-nnoremap <C-p> <cmd>Telescope git_files theme=dropdown<cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <C-p> <cmd>Telescope git_files theme=ivy<cr>
+nnoremap <leader>ff <cmd>Telescope find_files theme=ivy<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep theme=ivy<cr>
+nnoremap <leader>fb <cmd>Telescope buffers theme=ivy<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags theme=ivy<cr>
