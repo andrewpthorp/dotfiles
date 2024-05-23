@@ -125,7 +125,6 @@ Plug 'chriskempson/base16-vim'
 "Plug 'Quramy/vim-js-pretty-template'
 " Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lspconfig'
 Plug 'fatih/vim-go'
 " Plug 'junegunn/fzf'
 " Plug 'junegunn/fzf.vim'
@@ -150,10 +149,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/ZoomWin'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6'}
@@ -162,6 +158,13 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'rose-pine/neovim'
 Plug 'mbbill/undotree'
+
+" LSP Stuff
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
 
 call plug#end()
 
@@ -269,6 +272,14 @@ command! URLDecode call URLDecode()
 command! W  write
 
 lua << EOF
+  local lsp_zero = require('lsp-zero')
+  lsp_zero.extend_lspconfig()
+
+  lsp_zero.on_attach(function(client, bufnr)
+    -- see :help lsp-zero-keybindings
+    -- to learn the available actions
+    lsp_zero.default_keymaps({buffer = bufnr})
+  end)
 
   local lspconfig = require('lspconfig')
   local lsp_servers = {
@@ -479,5 +490,14 @@ lua << EOF
   })
 
   vim.cmd("colorscheme rose-pine")
+
+  -- Open help window in a vertical split to the right.
+  vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = vim.api.nvim_create_augroup("help_window_right", {}),
+    pattern = { "*.txt" },
+    callback = function()
+    if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
+      end
+  })
 
 EOF
