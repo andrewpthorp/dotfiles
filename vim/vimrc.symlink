@@ -43,6 +43,7 @@ set sidescrolloff=25            " same as scrolloff, but for horizontal
 set viminfo='100,f1             " save up to 100 marks, enable capital marks
 set textwidth=80
 set colorcolumn=+1,+2           " put a mark at +1,+2 (col 81/82 normally)
+set cursorline                  " show line on current cursor
 
 " History / Undo
 if isdirectory($HOME . '/.vim_undo') == 0
@@ -156,15 +157,14 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6'}
 Plug 'APZelos/blamer.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'rose-pine/neovim'
 Plug 'mbbill/undotree'
 
 " LSP Stuff
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
-Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
 
 call plug#end()
 
@@ -178,8 +178,8 @@ set termguicolors
 if $TERM =~ '256'
   let base16colorspace=256
 endif
-nmap <leader><leader>d :colorscheme rose-pine-main<CR>
-nmap <leader><leader>l :colorscheme rose-pine-dawn<CR>
+nmap <leader><leader>d :colorscheme base16-onedark<CR>
+nmap <leader><leader>l :colorscheme base16-one-light<CR>
 nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
 hi Comment      cterm=italic
@@ -272,15 +272,6 @@ command! URLDecode call URLDecode()
 command! W  write
 
 lua << EOF
-  local lsp_zero = require('lsp-zero')
-  lsp_zero.extend_lspconfig()
-
-  lsp_zero.on_attach(function(client, bufnr)
-    -- see :help lsp-zero-keybindings
-    -- to learn the available actions
-    lsp_zero.default_keymaps({buffer = bufnr})
-  end)
-
   local lspconfig = require('lspconfig')
   local lsp_servers = {
 		'eslint', -- https://github.com/hrsh7th/vscode-langservers-extracted
@@ -288,9 +279,38 @@ lua << EOF
 		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'tsserver', -- https://github.com/typescript-language-server/typescript-language-server
     'graphql',
-    'ruby_lsp',
+    'ruby_lsp', -- https://github.com/Shopify/ruby-lsp
+    'vimls', -- https://github.com/iamcco/vim-language-server
+    'lua_ls', -- https://github.com/LuaLS/lua-language-server
+    'gopls', -- https://cs.opensource.google/go/x/tools/+/refs/tags/gopls/v0.15.3:gopls/doc/vim.md
 		-- 'denols', -- https://github.com/denoland/deno
 	}
+
+  lspconfig_on_attach = function(client, buffer)
+    local opts = { noremap=true, silent=true, buffer=buffer }
+		vim.keymap.set('n', ']e', vim.diagnostic.goto_next, opts)
+		vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, opts)
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+		vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
+		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+		vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+		vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format, opts)
+		vim.keymap.set('n', '<leader><leader>h', vim.lsp.buf.hover, opts)
+		vim.keymap.set('n', '<leader><leader>a', vim.lsp.buf.code_action, opts)
+		vim.keymap.set('n', '<leader><leader>f', function() vim.lsp.buf.code_action({ context = { only = {"source.fixAll"} }, apply = true }) end, opts)
+		vim.keymap.set('n', '<leader><leader>r', vim.lsp.buf.rename, opts)
+		vim.keymap.set('n', '<A-q>', function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, opts)
+
+		vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
+		vim.cmd [[ command! LSPInfo execute 'lua print(vim.inspect(vim.lsp.buf_get_clients()))' ]]
+
+		vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"}) ]]
+
+		require'lsp_signature'.on_attach()
+  end
+
+  lspconfig_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 	for _, lsp in ipairs(lsp_servers) do
 		lspconfig[lsp].setup {
@@ -422,75 +442,6 @@ lua << EOF
     },
   }
 
-  require("rose-pine").setup({
-    variant = "auto", -- auto, main, moon, or dawn
-    dark_variant = "moon", -- main, moon, or dawn
-    dim_inactive_windows = false,
-    extend_background_behind_borders = true,
-
-    enable = {
-      terminal = true,
-      legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-      migrations = true, -- Handle deprecated options automatically
-    },
-
-    styles = {
-      bold = true,
-      italic = true,
-      transparency = false,
-    },
-
-    groups = {
-      border = "muted",
-      link = "iris",
-      panel = "surface",
-
-      error = "love",
-      hint = "iris",
-      info = "foam",
-      note = "pine",
-      todo = "rose",
-      warn = "gold",
-
-      git_add = "foam",
-      git_change = "rose",
-      git_delete = "love",
-      git_dirty = "rose",
-      git_ignore = "muted",
-      git_merge = "iris",
-      git_rename = "pine",
-      git_stage = "iris",
-      git_text = "rose",
-      git_untracked = "subtle",
-
-      h1 = "iris",
-      h2 = "foam",
-      h3 = "rose",
-      h4 = "gold",
-      h5 = "pine",
-      h6 = "foam",
-    },
-
-    highlight_groups = {
-      -- Comment = { fg = "foam" },
-      -- VertSplit = { fg = "muted", bg = "muted" },
-    },
-
-    before_highlight = function(group, highlight, palette)
-    -- Disable all undercurls
-    -- if highlight.undercurl then
-    --     highlight.undercurl = false
-    -- end
-    --
-    -- Change palette colour
-    -- if highlight.fg == palette.pine then
-    --     highlight.fg = palette.foam
-    -- end
-    end,
-  })
-
-  vim.cmd("colorscheme rose-pine")
-
   -- Open help window in a vertical split to the right.
   vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("help_window_right", {}),
@@ -501,3 +452,5 @@ lua << EOF
   })
 
 EOF
+
+colorscheme base16-onedark
