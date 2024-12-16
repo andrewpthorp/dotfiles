@@ -120,9 +120,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'chriskempson/base16-vim'
+Plug 'navarasu/onedark.nvim'
 "Plug 'Quramy/vim-js-pretty-template'
 " Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -175,19 +177,16 @@ filetype plugin on
 filetype indent on
 
 set termguicolors
-if $TERM =~ '256'
-  let base16colorspace=256
-endif
 nmap <leader><leader>d :colorscheme base16-onedark<CR>
 nmap <leader><leader>l :colorscheme base16-one-light<CR>
 nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
-hi Comment      cterm=italic
-hi Normal       ctermbg=NONE guibg=NONE
-hi LineNr       ctermbg=NONE guibg=NONE
-hi SignColumn   ctermbg=NONE guibg=NONE
-hi ColorColumn  guibg=#33363b
-hi Comment      guifg=#5C6370 ctermfg=59
+" hi Comment      cterm=italic
+" hi Normal       ctermbg=NONE guibg=NONE
+" hi LineNr       ctermbg=NONE guibg=NONE
+" hi SignColumn   ctermbg=NONE guibg=NONE
+" hi ColorColumn  guibg=#33363b
+" hi Comment      guifg=#5C6370 ctermfg=59
 
 " filetype overrides
 augroup filetypes
@@ -343,7 +342,8 @@ lua << EOF
 			['<C-Space>'] = cmp.mapping.complete(),
 			['<C-e>'] = cmp.mapping.close(),
 			['<CR>'] = cmp.mapping.confirm {
-				behavior = cmp.ConfirmBehavior.Replace,
+        -- use Insert, which is the default, for now
+				-- behavior = cmp.ConfirmBehavior.Replace,
 				select = true,
 			},
 			['<Tab>'] = function(fallback)
@@ -451,6 +451,50 @@ lua << EOF
       end
   })
 
-EOF
+  oneday = require('onedark')
+  oneday.setup  {
+    -- Main options --
+    style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = false,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
-colorscheme base16-onedark
+    -- toggle theme style ---
+    toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+    toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
+
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none'
+    },
+
+    -- Lualine options --
+    lualine = {
+        transparent = false, -- lualine center bar transparency
+    },
+
+    -- Custom Highlights --
+    colors = {}, -- Override default colors
+    highlights = {
+      ["@keyword.import"] = {fg = '$light_grey'},
+      ["@keyword.return"] = {fg = '$cyan'},
+      ["@tag"] = {fg = '$bg_yellow'}
+    }, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+  }
+  oneday.load()
+
+EOF
