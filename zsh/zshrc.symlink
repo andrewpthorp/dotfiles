@@ -1,6 +1,11 @@
 export PATH="$HOME/.dotfiles/bin:/opt/homebrew/bin/:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/share/npm/bin:/usr/local/mysql/bin:/usr/local/share/python"
 export PATH="$PATH:$HOME/code/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+# These are from debugging a postgres issue, idk if needed.
+# export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
 
 # Go stuff
 export GOPATH="$HOME/code/go"
@@ -120,3 +125,6 @@ load-nvmrc
 
 bindkey "\e[1;3D" backward-word
 bindkey "\e[1;3C" forward-word
+
+export PATH="/opt/homebrew/opt/icu4c@77/bin:$PATH"
+export PATH="/opt/homebrew/opt/icu4c@77/sbin:$PATH"

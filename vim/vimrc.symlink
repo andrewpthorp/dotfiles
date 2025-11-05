@@ -76,8 +76,8 @@ set wildignore+=*/bin,*.zip,*vim/backups*,*.vim_undo*
 
 
 " custom mappings
-nnoremap <F6> :set invpaste paste?<CR>
-set pastetoggle=<F6>
+" nnoremap <F6> :set invpaste paste?<CR>
+" set pastetoggle=<F6>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 nnoremap <silent> <leader>x :exit<CR>
@@ -122,13 +122,13 @@ call plug#begin('~/.vim/plugged')
 " Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'chriskempson/base16-vim'
 Plug 'navarasu/onedark.nvim'
 "Plug 'Quramy/vim-js-pretty-template'
 " Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 " Plug 'junegunn/fzf'
 " Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
@@ -137,9 +137,9 @@ Plug 'junegunn/vim-emoji'
 Plug 'lokaltog/vim-easymotion'
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'mxw/vim-jsx'
+" Plug 'pangloss/vim-javascript'
+" Plug 'peitalin/vim-jsx-typescript'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier'
@@ -155,9 +155,9 @@ Plug 'vim-scripts/ZoomWin'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6'}
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'APZelos/blamer.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'mbbill/undotree'
 
@@ -203,8 +203,7 @@ augroup filetypes
   autocmd BufRead,BufNewFile,BufWrite hyper.js.symlink set filetype=javascript
   autocmd BufRead,BufNewFile,BufWrite .{babelrc,eslintrc,prettierrc} set filetype=json
   autocmd BufRead,BufNewFile,BufWrite {*bashrc*,*.bash} set filetype=sh
-  autocmd BufWritePre *.js Prettier
-  autocmd BufWritePre *.jsx Prettier
+  autocmd BufWritePre *.{js,jsx,ts,tsx} Prettier
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
   " JSON
@@ -271,19 +270,19 @@ command! URLDecode call URLDecode()
 command! W  write
 
 lua << EOF
-  local lspconfig = require('lspconfig')
   local lsp_servers = {
 		'eslint', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'html', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
-		'tsserver', -- https://github.com/typescript-language-server/typescript-language-server
+		'ts_ls', -- https://github.com/typescript-language-server/typescript-language-server
     'graphql',
     'ruby_lsp', -- https://github.com/Shopify/ruby-lsp
     'vimls', -- https://github.com/iamcco/vim-language-server
     'lua_ls', -- https://github.com/LuaLS/lua-language-server
     'gopls', -- https://cs.opensource.google/go/x/tools/+/refs/tags/gopls/v0.15.3:gopls/doc/vim.md
 		-- 'denols', -- https://github.com/denoland/deno
-	}
+    'terraformls' -- https://github.com/hashicorp/terraform-ls
+  }
 
   lspconfig_on_attach = function(client, buffer)
     local opts = { noremap=true, silent=true, buffer=buffer }
@@ -302,7 +301,7 @@ lua << EOF
 		vim.keymap.set('n', '<A-q>', function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, opts)
 
 		vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
-		vim.cmd [[ command! LSPInfo execute 'lua print(vim.inspect(vim.lsp.buf_get_clients()))' ]]
+		-- vim.cmd [[ command! LSPInfo execute 'lua print(vim.inspect(vim.lsp.get_clients({buf=buffer})))' ]]
 
 		vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"}) ]]
 
@@ -311,12 +310,95 @@ lua << EOF
 
   lspconfig_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-	for _, lsp in ipairs(lsp_servers) do
-		lspconfig[lsp].setup {
-			on_attach = lspconfig_on_attach,
-			capabilities = lspconfig_capabilities,
-		}
-	end
+  local per_server = {
+    gopls = {
+      settings = {
+        gopls = {
+          gofumpt = true,
+          staticcheck = true,
+          analyses = {
+            unusedparams = true,
+            nilness = true,
+            shadow = true,
+            unusedwrite = true,
+          },
+          directoryFilters = { '-.git', '-node_modules', '-vendor' },
+          completion = { unimported = true, usePlaceholders = true },
+          completeUnimported = true,
+          usePlaceholders = true,
+        },
+      },
+      on_attach = function(client, bufnr)
+      -- run default mappings
+      lspconfig_on_attach(client, bufnr)
+
+      -- enable format on save for Go only
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        callback = function()
+        vim.lsp.buf.code_action({
+          context = { only = { "source.organizeImports" } },
+          apply = true,
+        })
+        vim.lsp.buf.format({ async = false })
+        end,
+      })
+      end,
+    },
+    lua_ls = {
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file('', true) },
+          diagnostics = { globals = { 'vim' } },
+          telemetry = { enable = false },
+        },
+      },
+    },
+    ts_ls = {
+      -- keep TS formatter off if prettier/eslint own formatting
+      settings = {
+        typescript = { format = { enable = false } },
+        javascript = { format = { enable = false } },
+      },
+      on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      lspconfig_on_attach(client, bufnr)
+      end,
+    },
+    eslint = {
+      on_attach = function(client, bufnr)
+      -- optional: fix on save
+      --vim.api.nvim_create_autocmd('BufWritePre', {
+      --  buffer = bufnr,
+      --  callback = function()
+      --  vim.lsp.buf.code_action({ context = { only = { 'source.fixAll.eslint' } }, apply = true })
+      --  end,
+      --})
+      lspconfig_on_attach(client, bufnr)
+      end,
+    },
+  }
+
+  local function setup_server(name, extra)
+    opts = vim.tbl_deep_extend('force', {
+      on_attach = lspconfig_on_attach,
+      capabilities = lspconfig_capabilities,
+    }, extra or {})
+    vim.lsp.config(name, opts)
+  end
+
+  for _, name in ipairs(lsp_servers) do
+    setup_server(name, per_server[name])
+  end
+
+  -- Make LspInfo floating
+  pcall(function()
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
+  end)
+
+  -- Actually enable the LSP servers
+  vim.lsp.enable(lsp_servers)
 
   local luasnip = require 'LuaSnip'
 
@@ -373,9 +455,13 @@ lua << EOF
 		},
 	}
 
+  local ts_install = require('nvim-treesitter.install')
+  ts_install.prefer_git = true
+  ts_install.compilers = { "clang", "gcc" }
+
   require('nvim-treesitter.configs').setup {
     ensure_installed = "all",
-    ignore_install = { "phpdoc" },
+    ignore_install = { "phpdoc", "ipkg", "norg" },
     highlight = {
       enable = true, -- false will disable the whole extension
 
