@@ -302,8 +302,7 @@ lua << EOF
 
 		vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 		-- vim.cmd [[ command! LSPInfo execute 'lua print(vim.inspect(vim.lsp.get_clients({buf=buffer})))' ]]
-
-		vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"}) ]]
+		-- vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"}) ]]
 
 		require'lsp_signature'.on_attach()
   end
@@ -336,10 +335,6 @@ lua << EOF
       vim.api.nvim_create_autocmd("BufWritePre", {
         buffer = bufnr,
         callback = function()
-        vim.lsp.buf.code_action({
-          context = { only = { "source.organizeImports" } },
-          apply = true,
-        })
         vim.lsp.buf.format({ async = false })
         end,
       })
@@ -537,6 +532,22 @@ lua << EOF
       end
   })
 
+  -- Make diagnostics faster and configure when they open.
+  vim.o.updatetime = 200
+
+  local diag_float_grp = vim.api.nvim_create_augroup("DiagFloat", { clear = true })
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = diag_float_grp,
+    callback = function()
+    vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+    end,
+  })
+
+  vim.diagnostic.config({
+    float = { border = "rounded", source = "always" },
+    update_in_insert = false,
+  })
+
   oneday = require('onedark')
   oneday.setup  {
     -- Main options --
@@ -583,4 +594,6 @@ lua << EOF
   }
   oneday.load()
 
+  -- Disable EditorConfig
+  vim.g.editorconfig = false
 EOF
