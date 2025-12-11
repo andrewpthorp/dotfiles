@@ -135,7 +135,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-emoji'
 Plug 'lokaltog/vim-easymotion'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 " Plug 'mxw/vim-jsx'
 " Plug 'pangloss/vim-javascript'
@@ -595,7 +595,4 @@ lua << EOF
 
   -- Disable EditorConfig
   vim.g.editorconfig = false
-
-  -- Disable vista log file (annoying warnings)
-  vim.g.vista_log_file = '/dev/null'
 EOF
