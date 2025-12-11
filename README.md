@@ -23,12 +23,7 @@ Inspiration came from the following:
 
 ## Configure Neovim
 
-    # Install neovim python support
-    pip3 install --user pynvim
-
-    # Install vim-plug, follow directions on https://github.com/junegunn/vim-plug)
-    # Install powerline, follow directions on https://github.com/powerline/powerline
-    # Install powerline fonts (Droid Sans Mono, Liberation Mono)
+    # Install font from https://www.nerdfonts.com/font-downloads
 
     cd $HOME/.config/nvim (mkdir `nvim` if it does not exist)
     ln -s ~/.vim/plugin plugin
