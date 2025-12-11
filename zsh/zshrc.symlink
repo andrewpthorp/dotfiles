@@ -44,7 +44,7 @@ then
 fi
 
 # initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
+autoload -Uz compinit
 compinit
 
 # Base16 Shell
@@ -133,3 +133,6 @@ export PATH="/opt/homebrew/opt/icu4c@77/bin:$PATH"
 export PATH="/opt/homebrew/opt/icu4c@77/sbin:$PATH"
 
 eval "$(direnv hook zsh)"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/andrewthorp/.docker/completions $fpath)
