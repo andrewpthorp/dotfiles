@@ -71,7 +71,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Do this whenever we start a new shell
-fortune | cowsay -f dragon
+if command -v ground &> /dev/null; then
+  ground prompt --decorate
+fi
 
 # Zgen (https://github.com/tarjoilija/zgen)
 source "${HOME}/.zgen/zgen.zsh"

@@ -193,8 +193,6 @@ augroup filetypes
   autocmd!
   " autocmd FileType * setlocal formatprg=
   autocmd BufReadPost * silent! lcd .
-  " Docker
-  autocmd BufNewFile,BufRead Dockerfile* set filetype=Dockerfile
   " Indent-based folding
   autocmd BufRead,BufNewFile,BufWrite *.{coffee,json,py,yaml,yml} set foldmethod=indent
   " JavaScript
@@ -597,4 +595,7 @@ lua << EOF
 
   -- Disable EditorConfig
   vim.g.editorconfig = false
+
+  -- Disable vista log file (annoying warnings)
+  vim.g.vista_log_file = '/dev/null'
 EOF
