@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # meter-services
-# version 0.1
+# version 0.2
 
 # Contributors:
 #   Andrew Thorp - https://github.com/andrewpthorp
@@ -12,13 +12,15 @@
 # This will spawn a new tmux-session (if it does not exist), which will do the
 # following tasks:
 #
-# Create 4 windows, which I have organized into what makes logical sense in my
-# brain, but probably makes no sense at all:
+# Create 7 windows:
 #
-# Window 1: Vim (Even though I am using Intellij, thanks Austin)
-# Window 2: Terminal
-# Window 3: Dashboard/Noc services
-# Window 4: Portal/API services
+# Window 1: Vim in frontends
+# Window 2: Shell at ~/code/meter/frontends
+# Window 3: pnpm i && pnpm run dev dashboard
+# Window 4: Vim in api
+# Window 5: Shell at ~/code/meter/api
+# Window 6: Claude at ~/code/meter
+# Window 7: Atto
 
 set -e
 
@@ -26,35 +28,47 @@ SESSION='meter-services'
 
 _launch_services() {
 
-  # Start in the `frontends` dir and launch $EDITOR (vim, most likely)
-  tmux new-session -s "$SESSION" -n editor -d -c "/Users/apt/code/meter/frontends"
+  # Window 1: Vim in frontends
+  tmux new-session -s "$SESSION" -n vim-frontends -d -c "$HOME/code/meter/frontends"
   tmux send-keys "$EDITOR" C-m
 
-  # Create the terminal window
-  tmux new-window -n shell -t "$SESSION"
+  # Window 2: Shell at ~/code/meter/frontends
+  tmux new-window -n shell-frontends -t "$SESSION" -c "$HOME/code/meter/frontends"
 
-  # Create and spawn the services for Dashboard and NOC
-  tmux new-window -n dashboard-noc -t "$SESSION" -c "/Users/apt/code/meter/frontends"
-  tmux send-keys "pnpm run dev dashboard" C-m
+  # Window 3: pnpm i && pnpm run dev dashboard
+  tmux new-window -n dashboard -t "$SESSION" -c "$HOME/code/meter/frontends"
+  tmux send-keys "sleep 1 && pnpm i && pnpm run dev dashboard" C-m
 
-  # Create and spawn the services for Portal and API
-  tmux new-window -n portal-api -t "$SESSION" -c "/Users/apt/code/meter/portal"
-  tmux send-keys "make serve-devlocal" C-m
-  tmux split-window -h -c "/Users/apt/code/meter/api"
-  tmux send-keys "make serve-dev" C-m
+  # Window 4: Vim in api
+  tmux new-window -n vim-api -t "$SESSION" -c "$HOME/code/meter/api"
+  tmux send-keys "$EDITOR" C-m
 
-  # Create and spawn atto
-  tmux new-window -n atto -t "$SESSION" -c "/Users/apt/code/meter/frontends"
-  tmux send-keys "pnpm run dev @meterup/atto" C-m
+  # Window 5: Shell at ~/code/meter/api
+  tmux new-window -n shell-api -t "$SESSION" -c "$HOME/code/meter/api"
+
+  # Window 6: Claude at ~/code/meter
+  tmux new-window -n claude -t "$SESSION" -c "$HOME/code/meter"
+  tmux send-keys "sleep 1 && claude" C-m
+
+  # Window 7: Atto
+  tmux new-window -n atto -t "$SESSION" -c "$HOME/code/meter/frontends"
+  tmux send-keys "sleep 2 && pnpm run dev @meterup/atto" C-m
 
 }
 
-_try_create_session() {
-  if !(tmux list-sessions -F "#{session_name}" | grep -q ^"$SESSION"\$); then
-    _launch_services
-  fi
+_session_exists() {
+  tmux has-session -t "$SESSION" 2>/dev/null
 }
 
-_try_create_session
+# If session exists, attach to it
+if _session_exists; then
+  tmux attach -t "$SESSION"
+  exit 0
+fi
 
+# Otherwise, create a new session
+_launch_services
+
+# Select the first window and attach
+tmux select-window -t "$SESSION:1"
 tmux attach -t "$SESSION"
