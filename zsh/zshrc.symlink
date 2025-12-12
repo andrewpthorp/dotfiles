@@ -4,6 +4,7 @@ export PATH="$PATH:$HOME/code/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 # These are from debugging a postgres issue, idk if needed.
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
@@ -70,9 +71,14 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # brew install zsh-syntax-highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Do this whenever we start a new shell
-if command -v ground &> /dev/null; then
+# Only run ground prompt if not in tmux (prompt is already set up)
+if [[ -z "$TMUX" ]] && command -v ground &> /dev/null; then
   ground prompt --decorate
+fi
+
+# Show Philly sports info when opening new shells in tmux
+if [[ -n "$TMUX" ]] && command -v philly-sports &> /dev/null; then
+  philly-sports eagles
 fi
 
 # Zgen (https://github.com/tarjoilija/zgen)
@@ -93,7 +99,7 @@ eval "$(nodenv init -)"
 
 
 # pnpm
-export PNPM_HOME="/Users/apt/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -134,5 +140,5 @@ export PATH="/opt/homebrew/opt/icu4c@77/sbin:$PATH"
 
 eval "$(direnv hook zsh)"
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+# The following line has been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/andrewthorp/.docker/completions $fpath)

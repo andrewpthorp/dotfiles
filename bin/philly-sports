@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+# Philly Sports Info
+# Usage: philly-sports [eagles|phillies|sixers]
+# If no team specified, picks random
+
+get_ascii_header() {
+  local team=$1
+
+  case $team in
+    eagles)
+      cat << 'EOF'
+  _____ ____    ____ ___ ____ _____  ____
+ / ____|  _ \  | __ )_ _|  _ \   _ \/ ___|
+ | |  _| | | | |  _ \| || |_) | | | \___ \
+ | |_| | |_| | | |_) | ||  _ <| |_| |___) |
+  \____|____/  |____/___|_| \_\____/|____/
+EOF
+      ;;
+    phillies)
+      cat << 'EOF'
+  _____ ____    ____  _   _ ___ _     _     ___ _____ ____
+ / ____|  _ \  |  _ \| | | |_ _| |   | |   |_ _| ____/ ___|
+ | |  _| | | | | |_) | |_| || || |   | |    | ||  _| \___ \
+ | |_| | |_| | |  __/|  _  || || |___| |___ | || |___ ___) |
+  \____|____/  |_|   |_| |_|___|_____|_____|___|_____|____/
+EOF
+      ;;
+    sixers)
+      cat << 'EOF'
+  _____ ____    ____ _____  _______ ____  ____
+ / ____|  _ \  / ___|_ _\ \/ / ____|  _ \/ ___|
+ | |  _| | | | \___ \| | \  /|  _| | |_) \___ \
+ | |_| | |_| |  ___) | | /  \| |___|  _ < ___) |
+  \____|____/  |____/___/_/\_\_____|_| \_\____/
+EOF
+      ;;
+  esac
+}
+
+get_team_info() {
+  local sport=$1
+  local league=$2
+  local team=$3
+  local emoji=$4
+  local team_name=$5
+
+  get_ascii_header "$team_name"
+  echo ""
+
+  local url="https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team}"
+  local data=$(curl -s "$url" 2>/dev/null)
+
+  if [[ -z "$data" ]]; then
+    return
+  fi
+
+  local name=$(echo "$data" | jq -r '.team.displayName' 2>/dev/null)
+  local record=$(echo "$data" | jq -r '.team.record.items[0].summary' 2>/dev/null)
+  local next_event=$(echo "$data" | jq -r '.team.nextEvent[0].name' 2>/dev/null)
+  local next_date=$(echo "$data" | jq -r '.team.nextEvent[0].date' 2>/dev/null)
+
+  if [[ "$name" != "null" ]] && [[ -n "$name" ]]; then
+    echo -n "$emoji $name"
+    [[ "$record" != "null" ]] && echo -n " ($record)"
+    echo ""
+
+    if [[ "$next_event" != "null" ]] && [[ -n "$next_event" ]]; then
+      local schedule_url="https://www.espn.com/${league}/team/schedule/_/name/${team}"
+      echo "   Next: $next_event"
+      echo "      ${schedule_url}"
+    fi
+
+    local news_url="https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/news?team=${team}"
+    local news_data=$(curl -s "$news_url" 2>/dev/null)
+    local headline=$(echo "$news_data" | jq -r '.articles[0].headline' 2>/dev/null)
+    local article_url=$(echo "$news_data" | jq -r '.articles[0].links.web.href' 2>/dev/null)
+
+    if [[ "$headline" != "null" ]] && [[ -n "$headline" ]]; then
+      echo "   📰 $headline"
+      if [[ "$article_url" != "null" ]] && [[ -n "$article_url" ]]; then
+        echo "      ${article_url}"
+      fi
+    fi
+
+    echo ""
+  fi
+}
+
+# Team definitions: name:sport:league:abbrev:emoji
+declare -A teams
+teams[eagles]="eagles:football:nfl:phi:🦅"
+teams[phillies]="phillies:baseball:mlb:phi:⚾"
+teams[sixers]="sixers:basketball:nba:phi:🏀"
+
+if [[ -n "$1" ]] && [[ -n "${teams[$1]}" ]]; then
+  selected_team="$1"
+else
+  team_names=(eagles phillies sixers)
+  selected_team=${team_names[$RANDOM % ${#team_names[@]}]}
+fi
+
+IFS=':' read -r team_name sport league team emoji <<< "${teams[$selected_team]}"
+
+get_team_info "$sport" "$league" "$team" "$emoji" "$team_name"
