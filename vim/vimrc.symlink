@@ -201,6 +201,9 @@ augroup filetypes
   autocmd BufRead,BufNewFile,BufWrite hyper.js.symlink set filetype=javascript
   autocmd BufRead,BufNewFile,BufWrite .{babelrc,eslintrc,prettierrc} set filetype=json
   autocmd BufRead,BufNewFile,BufWrite {*bashrc*,*.bash} set filetype=sh
+  " Env files and rc files
+  autocmd BufRead,BufNewFile,BufWrite .env.* set filetype=sh
+  autocmd BufRead,BufNewFile,BufWrite .*rc set filetype=sh
   autocmd BufWritePre *.{js,jsx,ts,tsx} Prettier
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
@@ -274,7 +277,7 @@ lua << EOF
 		'html', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'jsonls', -- https://github.com/hrsh7th/vscode-langservers-extracted
 		'ts_ls', -- https://github.com/typescript-language-server/typescript-language-server
-    'apollo-language-server',
+    'graphql',
     'ruby_lsp', -- https://github.com/Shopify/ruby-lsp
     'vimls', -- https://github.com/iamcco/vim-language-server
     'lua_ls', -- https://github.com/LuaLS/lua-language-server
