@@ -1,0 +1,97 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Timeout for commands
+command_timeout = 1000
+
+# Configure what gets shown and in what order
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$ruby\
+$golang\
+$rust\
+$python\
+$elixir\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+
+[git_branch]
+format = "on [$symbol$branch]($style) "
+symbol = "git:"
+style = "bold purple"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold yellow"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[nodejs]
+format = "via [$symbol$version ]($style)"
+symbol = "node:"
+style = "bold green"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[ruby]
+format = "via [$symbol$version ]($style)"
+symbol = "ruby:"
+style = "bold red"
+detect_files = ["Gemfile", ".ruby-version"]
+
+[golang]
+format = "via [$symbol$version ]($style)"
+symbol = "go:"
+style = "bold cyan"
+detect_files = ["go.mod", "go.sum"]
+
+[rust]
+format = "via [$symbol$version ]($style)"
+symbol = "rust:"
+style = "bold red"
+detect_files = ["Cargo.toml"]
+
+[python]
+format = "via [$symbol$version ]($style)"
+symbol = "py:"
+style = "bold yellow"
+detect_files = [".python-version", "Pipfile", "requirements.txt", "pyproject.toml"]
+
+[elixir]
+format = "via [$symbol$version ]($style)"
+symbol = "elixir:"
+style = "bold purple"
+detect_files = ["mix.exs"]
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true

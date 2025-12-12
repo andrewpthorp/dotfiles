@@ -204,6 +204,7 @@ augroup filetypes
   " Env files and rc files
   autocmd BufRead,BufNewFile,BufWrite .env.* set filetype=sh
   autocmd BufRead,BufNewFile,BufWrite .*rc set filetype=sh
+  autocmd BufRead,BufNewFile,BufWrite *.toml.symlink set filetype=toml
   autocmd BufWritePre *.{js,jsx,ts,tsx} Prettier
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear

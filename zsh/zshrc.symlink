@@ -18,6 +18,9 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 export ZSH=$HOME/.dotfiles
 export DOTFILES=$HOME/.dotfiles
 
+# move the starship config from its normal path
+export STARSHIP_CONFIG=$HOME/.starship.toml
+
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/code/
 
@@ -82,17 +85,17 @@ if [[ -n "$TMUX" ]] && command -v philly-sports &> /dev/null; then
 fi
 
 # Zgen (https://github.com/tarjoilija/zgen)
-source "${HOME}/.zgen/zgen.zsh"
+# source "${HOME}/.zgen/zgen.zsh"
 
 # if the init script doesn't exist
-if ! zgen saved; then
+# if ! zgen saved; then
 
   # specify plugins here
-  zgen load agkozak/agkozak-zsh-prompt
+  # zgen load agkozak/agkozak-zsh-prompt
 
   # generate the init script from plugins above
-  zgen save
-fi
+  # zgen save
+# fi
 
 # Init nodenv to manage node versions
 eval "$(nodenv init -)"
@@ -142,3 +145,6 @@ eval "$(direnv hook zsh)"
 
 # The following line has been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/andrewthorp/.docker/completions $fpath)
+
+# Initialize Starship prompt
+eval "$(starship init zsh)"
