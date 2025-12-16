@@ -283,6 +283,7 @@ lua << EOF
     'vimls', -- https://github.com/iamcco/vim-language-server
     'lua_ls', -- https://github.com/LuaLS/lua-language-server
     'gopls', -- https://cs.opensource.google/go/x/tools/+/refs/tags/gopls/v0.15.3:gopls/doc/vim.md
+    'rust_analyzer', -- https://rust-analyzer.github.io/
 		-- 'denols', -- https://github.com/denoland/deno
     'terraformls' -- https://github.com/hashicorp/terraform-ls
   }
@@ -374,6 +375,20 @@ lua << EOF
       --  end,
       --})
       lspconfig_on_attach(client, bufnr)
+      end,
+    },
+    rust_analyzer = {
+      on_attach = function(client, bufnr)
+        -- run default mappings
+        lspconfig_on_attach(client, bufnr)
+
+        -- enable format on save for Rust
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.format({ async = false })
+          end,
+        })
       end,
     },
   }
