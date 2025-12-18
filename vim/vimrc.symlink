@@ -317,7 +317,7 @@ lua << EOF
     gopls = {
       settings = {
         gopls = {
-          gofumpt = true,
+          gofumpt = false,
           staticcheck = true,
           analyses = {
             unusedparams = true,
