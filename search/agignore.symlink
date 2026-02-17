@@ -6,3 +6,5 @@ rotunda.css
 *.min.css
 *.min.js
 *.tsbuildinfo
+gql/graphql.ts
+gql/gql.ts

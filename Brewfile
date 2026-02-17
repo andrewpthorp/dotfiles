@@ -73,6 +73,7 @@ brew "zsh-syntax-highlighting"
 
 # Casks
 cask "1password-cli"
+cask "ghosttty"
 cask "claude-code"
 cask "codex"
 cask "discord"

@@ -326,7 +326,6 @@ lua << EOF
             unusedwrite = true,
           },
           directoryFilters = { '-.git', '-node_modules', '-vendor' },
-          completion = { unimported = true, usePlaceholders = true },
           completeUnimported = true,
           usePlaceholders = true,
         },
