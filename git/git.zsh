@@ -43,3 +43,20 @@ alias gpl='git pull'
 alias gfp='git fetch --prune'
 alias gpr='git remote prune origin'
 alias gclean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+
+function copr {
+  local -r pr="$1"
+  local -r branch="pr$pr"
+
+  if [[ -z $pr ]]; then
+    cat << DONE >&2
+Usage: $(basename "$0") pr-num
+
+pr-num          - The number of the pr
+checkout-branch - The branch you wish to check out to
+DONE
+    return 1
+  fi
+  git fetch origin "pull/$pr/head:pr$pr" && \
+  git checkout "$branch"
+}
