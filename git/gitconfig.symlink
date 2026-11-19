@@ -2,14 +2,24 @@
   name = Andrew Thorp
   email = andrewpthorp@gmail.com
 [alias]
+  # git status
   stat = status
+  # git checkout
   co = checkout
+  # list files changed in a commit (default HEAD): filenames [rev]
   filenames = show --name-only
+  # stage everything, including untracked files and deletions
   addall = add -A
+  # one-line log of this branch, first-parent only (hides merged-in commits)
   pretty = log --oneline --first-parent
+  # log with hash, refs, committer, relative date, subject, and per-file stats
   wtf = "! git log --pretty=tformat:\"%C(auto,yellow)%h%C(auto)%d%C(auto,reset) by %C(auto,blue)%cn%C(auto,reset), %C(auto,cyan)%ar%C(auto,reset)%n %s%n\" --stat"
+  # git cherry-pick
   cp = cherry-pick
+  # fold staged changes into an older commit, keeping unstaged ones: amend-to <rev>
   amend-to = "!f() { SHA=`git rev-parse \"$1\"`; git stash -k && git commit --fixup \"$SHA\" && GIT_SEQUENCE_EDITOR=true git rebase --interactive --autosquash \"$SHA^\" && git stash pop; }; f"
+  # commit with subject + body args, body wrapped at 72: cm [flags] <subject> [body]
+	cm = "!f() { opts=\"\"; while [ \"${1#-}\" != \"$1\" ]; do opts=\"$opts $1\"; shift; done; git commit $opts -m \"$1\" -m \"$(printf \"%s\" \"$2\" | fmt -w 72)\"; }; f"
 [github]
   user = andrewpthorp
 [color]

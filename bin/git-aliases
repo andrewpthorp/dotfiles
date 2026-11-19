@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+# git aliases
+#
+# Usage:
+#   git aliases
+#
+# Lists the aliases in ~/.gitconfig along with the `#` comment above each one.
+# Aliases without a comment fall back to showing their definition.
+
+if [ -t 1 ]; then
+  YELLOW='\033[33m'
+  DEFAULT='\033[0m'
+fi
+
+awk -v yellow="$YELLOW" -v reset="$DEFAULT" '
+  /^\[/ { in_alias = ($0 ~ /^\[alias\]/); desc = ""; next }
+  !in_alias { next }
+  /^[ \t]*[#;]/ {
+    sub(/^[ \t]*[#;][ \t]*/, "")
+    desc = desc ? desc " " $0 : $0
+    next
+  }
+  /=/ {
+    name = $0
+    sub(/[ \t]*=.*/, "", name)
+    gsub(/^[ \t]+/, "", name)
+    if (desc == "") { desc = $0; sub(/^[^=]*=[ \t]*/, "", desc) }
+    printf "  %s%-10s%s %s\n", yellow, name, reset, desc
+    desc = ""
+  }
+' "$HOME/.gitconfig"
