@@ -1,8 +1,10 @@
 #compdef tl
 
-# TODO: Use $PROJECT_PATH or similar to handle these.
-compadd `ls ~/code/personal`
-compadd `ls ~/code/go/src/github.com/andrewpthorp`
+# Keep in sync with PROJECT_DIRS in bin/tl. The (N/:t) glob qualifiers skip
+# missing dirs silently and only complete directory names.
+compadd ~/code/meter/*(N/:t)
+compadd ~/code/personal/*(N/:t)
+compadd ~/code/go/src/github.com/andrewpthorp/*(N/:t)
 
 if tmux info &> /dev/null; then
   compadd `tmux ls -F "#S"`
