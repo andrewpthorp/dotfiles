@@ -348,6 +348,19 @@ lua << EOF
       })
       end,
     },
+    graphql = {
+      -- Prefer an untracked .graphqlrc.local.yml in the project root, for repos
+      -- whose shared config points at schemas that can't load locally.
+      on_init = function(client)
+        local local_config = (client.root_dir or '') .. '/.graphqlrc.local.yml'
+        if vim.uv.fs_stat(local_config) then
+          client.settings = vim.tbl_deep_extend('force', client.settings or {}, {
+            -- rootDir is required: the server crashes reading load.rootDir.length
+            ['graphql-config'] = { load = { rootDir = client.root_dir, filepath = local_config } },
+          })
+        end
+      end,
+    },
     lua_ls = {
       settings = {
         Lua = {
