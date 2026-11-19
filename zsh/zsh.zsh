@@ -17,6 +17,10 @@ alias gpgconf='/usr/local/MacGPG2/bin/gpgconf'
 alias db="ssh qa-dev19.nw -t 'cd dev-apt/pay-server; cat /etc/motd; exec bash -l'"
 alias dbs="ssh qa-dev19.nw -t 'cd /home/apt/go/src/git.corp.stripe.com/stripe-internal/sources; exec bash -l'"
 
+# MAKE CLAUDE DIRTY
+alias claude="claude --dangerously-skip-permissions"
+alias claude-safe="command claude"
+
 # Use neovim by default, but save support for opening vim if needed
 alias vim='nvim'
 alias vvim='/usr/bin/vim'
