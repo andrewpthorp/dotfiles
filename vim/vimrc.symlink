@@ -82,6 +82,9 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <silent> <Leader>r :source ~/.vimrc<CR>:echo 'Reloaded ~/.vimrc'<CR>
 nnoremap <silent> <leader>x :exit<CR>
 
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+
 " force my brain to stop using arrows and esc
 map <Left> <nop>
 map <Right> <nop>
@@ -141,6 +144,7 @@ Plug 'luochen1990/rainbow'
 " Plug 'pangloss/vim-javascript'
 " Plug 'peitalin/vim-jsx-typescript'
 Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'preservim/nerdcommenter'
 Plug 'prettier/vim-prettier'
 Plug 'scrooloose/nerdtree'
@@ -213,8 +217,8 @@ augroup filetypes
   autocmd FileType json setlocal formatprg=jq\ -sM\ .
   " Writing
   autocmd BufRead,BufNewFile,BufWrite *.md set syntax=markdown.vimwiki
-  autocmd Filetype md set wrap linebreak nolist nonumber norelativenumber spell textwidth=80
-  autocmd Filetype txt set wrap linebreak nolist spell textwidth=80
+  autocmd FileType markdown setlocal wrap linebreak nolist nonumber norelativenumber spell textwidth=80
+  autocmd FileType text setlocal wrap linebreak nolist spell textwidth=80
   "" Property lists
   autocmd BufRead,BufNewFile,BufWrite *.{plist,xml} set filetype=xml
   " Ruby
@@ -280,7 +284,6 @@ lua << EOF
 		'ts_ls', -- https://github.com/typescript-language-server/typescript-language-server
     'graphql',
     'ruby_lsp', -- https://github.com/Shopify/ruby-lsp
-    'vimls', -- https://github.com/iamcco/vim-language-server
     'lua_ls', -- https://github.com/LuaLS/lua-language-server
     'gopls', -- https://cs.opensource.google/go/x/tools/+/refs/tags/gopls/v0.15.3:gopls/doc/vim.md
     'rust_analyzer', -- https://rust-analyzer.github.io/
@@ -288,11 +291,13 @@ lua << EOF
     'terraformls' -- https://github.com/hashicorp/terraform-ls
   }
 
-  lspconfig_on_attach = function(client, buffer)
+  local lspconfig_on_attach = function(client, buffer)
     local opts = { noremap=true, silent=true, buffer=buffer }
-		vim.keymap.set('n', ']e', vim.diagnostic.goto_next, opts)
-		vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, opts)
+		vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+		vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
 		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+		-- async, unlike the default tagfunc which times out after 1s on big projects
+		vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, opts)
 		vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
 		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -302,7 +307,7 @@ lua << EOF
 		vim.keymap.set('n', '<leader><leader>a', vim.lsp.buf.code_action, opts)
 		vim.keymap.set('n', '<leader><leader>f', function() vim.lsp.buf.code_action({ context = { only = {"source.fixAll"} }, apply = true }) end, opts)
 		vim.keymap.set('n', '<leader><leader>r', vim.lsp.buf.rename, opts)
-		vim.keymap.set('n', '<A-q>', function() vim.lsp.stop_client(vim.lsp.get_active_clients()) end, opts)
+		vim.keymap.set('n', '<A-q>', function() vim.lsp.stop_client(vim.lsp.get_clients()) end, opts)
 
 		vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 		-- vim.cmd [[ command! LSPInfo execute 'lua print(vim.inspect(vim.lsp.get_clients({buf=buffer})))' ]]
@@ -311,7 +316,7 @@ lua << EOF
 		require'lsp_signature'.on_attach()
   end
 
-  lspconfig_capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local lspconfig_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   local per_server = {
     gopls = {
@@ -354,6 +359,7 @@ lua << EOF
       },
     },
     ts_ls = {
+      init_options = { hostInfo = 'neovim', maxTsServerMemory = 8192 },
       -- keep TS formatter off if prettier/eslint own formatting
       settings = {
         typescript = { format = { enable = false } },
@@ -393,7 +399,7 @@ lua << EOF
   }
 
   local function setup_server(name, extra)
-    opts = vim.tbl_deep_extend('force', {
+    local opts = vim.tbl_deep_extend('force', {
       on_attach = lspconfig_on_attach,
       capabilities = lspconfig_capabilities,
     }, extra or {})
@@ -561,11 +567,11 @@ lua << EOF
   })
 
   vim.diagnostic.config({
-    float = { border = "rounded", source = "always" },
+    float = { border = "rounded", source = true },
     update_in_insert = false,
   })
 
-  oneday = require('onedark')
+  local oneday = require('onedark')
   oneday.setup  {
     -- Main options --
     style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
